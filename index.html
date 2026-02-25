@@ -8,6 +8,8 @@
 
   <!-- Fonts: Clash Display + Cabinet Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Three.js -->
@@ -1403,6 +1405,13 @@
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
       .container { padding: 0 20px; }
     }
+
+    @media (max-width: 900px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+      body::after { animation: none; opacity: 0.015; }
+      body::before { opacity: 0.35; }
+    }
   </style>
 </head>
 <body>
@@ -2293,8 +2302,8 @@
   </div>
 
     <!-- Three.js (must load before script.js) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- External JS -->
-  <script src="script.js"></script>
+  <script defer src="script.js"></script>
 </body>
 </html>
