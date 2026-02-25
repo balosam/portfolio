@@ -6,9 +6,11 @@
   <title>Balogun Abd'samad — Developer, Designer & Builder</title>
   <meta name="description" content="Portfolio of Balogun Abd'samad Adeniyi — Software Developer, UI/UX Designer, Digital Creative & Computer Engineer based in Lagos, Nigeria." />
 
-  <!-- Fonts: Clash Display + Cabinet Grotesk -->
+  <!-- Performance hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Three.js -->
 
@@ -1298,7 +1300,7 @@
     .wa-float {
       position: fixed;
       bottom: 28px; right: 28px;
-      z-index: 90;
+      z-index: 1000;
       width: 52px; height: 52px;
       border-radius: 50%;
       background: #25d366;
@@ -1310,6 +1312,8 @@
       text-decoration: none;
       box-shadow: 0 4px 20px rgba(37,211,102,0.4);
       transition: transform 0.3s, box-shadow 0.3s;
+      pointer-events: auto !important;
+      cursor: pointer;
     }
 
     .wa-float:hover {
@@ -1375,6 +1379,22 @@
     @keyframes statusPulse {
       0%, 100% { box-shadow: 0 0 8px var(--green); }
       50% { box-shadow: 0 0 16px var(--green); }
+    }
+
+    /* ---- MOBILE PERFORMANCE ---- */
+    @media (max-width: 768px) {
+      /* Kill grain animation - huge CPU drain on mobile */
+      body::after { display: none; }
+      /* Kill scanlines */
+      body::before { display: none; }
+      /* Hide custom cursor on touch devices */
+      .cursor, .cursor-ring { display: none; }
+      body { cursor: auto; }
+      /* Disable glass hover transforms on mobile (janky on touch) */
+      .glass:hover { transform: none; }
+      .proj-card:hover .proj-thumb-icon { transform: none; }
+      /* Reduce transitions */
+      .glass { transition: border-color 0.2s; }
     }
 
     /* ---- RESPONSIVE ---- */
@@ -1483,7 +1503,7 @@
             </div>
 
             <div class="hero-links">
-              <a href="mailto:balogunabdsamad@gmail.com">📩 Email</a>
+              <a href="mailto:balogunabdsamad6@gmail.com">📩 Email</a>
               <a href="tel:+2349114007286">📞 Call</a>
               <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank">🔗 LinkedIn</a>
               <a href="https://wa.me/2349114007286" target="_blank">💬 WhatsApp</a>
@@ -1562,7 +1582,7 @@
 
           <div class="glass info-block">
             <div class="info-key">Email</div>
-            <div class="info-val" style="font-size:0.85rem"><a href="mailto:balogunabdsamad@gmail.com">balogunabdsamad@gmail.com</a></div>
+            <div class="info-val" style="font-size:0.85rem">balogunabdsamad6@gmail.com</div>
           </div>
 
           <div class="glass info-block">
@@ -2020,11 +2040,11 @@
 
             <div class="contact-options">
 
-              <a href="mailto:balogunabdsamad@gmail.com" class="contact-opt">
+              <a href="mailto:balogunabdsamad6@gmail.com" class="contact-opt">
                 <span class="contact-opt-icon">📩</span>
                 <div class="contact-opt-info">
                   <div class="contact-opt-key">Email</div>
-                  <div class="contact-opt-val"><span class="__cf_email__" data-cfemail="f092919c9f97859e91929483919d9194c6b0979d91999cde939f9d">[email&#160;protected]</span></div>
+                  <div class="contact-opt-val">balogunabdsamad6@gmail.com</div>
                 </div>
               </a>
 
@@ -2063,7 +2083,7 @@
                 Let's talk about your idea. Whether it's a startup web app, business website, UI design, or branding — I'm here and I deliver.
               </p>
               <div class="cta-btns">
-                <a href="mailto:balogunabdsamad@gmail.com" class="cta-btn primary">📩 Send Me an Email</a>
+                <a href="mailto:balogunabdsamad6@gmail.com" class="cta-btn primary">📩 Send Me an Email</a>
                 <a href="https://wa.me/2349114007286" target="_blank" class="cta-btn secondary">💬 Chat on WhatsApp</a>
                 <button onclick="openCVModal()" class="cta-btn ghost">📄 Request My CV</button>
               </div>
@@ -2156,7 +2176,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
 
         <!-- Email option -->
-        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%20would%20like%20to%20request%20a%20copy%20of%20your%20CV%20for%20review.%0A%0AThank%20you." style="
+        <a href="mailto:balogunabdsamad6@gmail.com" style="
           display:flex;
           align-items:center;
           gap:16px;
@@ -2167,10 +2187,7 @@
           background:rgba(255,255,255,0.02);
           transition:all 0.25s;
           cursor:pointer;
-        "
-        onmouseover="this.style.borderColor='#00d4ff';this.style.background='rgba(0,212,255,0.06)';this.style.transform='translateX(4px)'"
-        onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.02)';this.style.transform='translateX(0)'"
-        >
+        " onmouseover="this.style.borderColor='#00d4ff';this.style.background='rgba(0,212,255,0.06)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.02)';this.style.transform='translateX(0)'">
           <span style="font-size:1.6rem;width:44px;text-align:center;flex-shrink:0;">📩</span>
           <div>
             <div style="
@@ -2254,45 +2271,50 @@
   </div>
 
   <!-- WhatsApp Float -->
-  <a href="https://wa.m  <a href="https://wa.me/2349114007286" target="_blank" class="wa-float" title="WhatsApp">💬</a>
+  <a href="https://wa.me/2349114007286" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
 
   <!-- Back to Top -->
   <button id="backToTop" title="Back to top">↑</button>
+
 
   <!-- ===== CV REQUEST MODAL ===== -->
   <div class="cv-modal-overlay" id="cvModal" onclick="handleOverlayClick(event)">
     <div class="cv-modal">
       <button class="cv-modal-close" onclick="closeCVModal()">[ ✕ ]</button>
 
-      <div class="cv-modal-tag">CV Request</div>
-      <div class="cv-modal-title">How would you like to reach me?</div>
-      <p class="cv-modal-sub">Choose your preferred channel and I'll send my CV straight to you.</p>
+      <div class="cv-modal-tag">Request CV</div>
+      <div class="cv-modal-title">How would you like to reach out?</div>
+      <p class="cv-modal-sub">Choose your preferred channel — I'll send my CV right over.</p>
 
       <div class="cv-modal-options">
 
-        <a href="/cdn-cgi/l/email-protection#d6b4b7bab9b1a3b8b7b4b2a5b7bbb7b2e096b1bbb7bfbaf8b5b9bbe9a5a3b4bcb3b5a2eb9580f3e4e684b3a7a3b3a5a2f0b4b9b2afeb9ebff3e4e685b7bbf3e495f3e697f3e6979ff3e4e6b5b7bbb3f3e4e6b7b5a4b9a5a5f3e4e6afb9a3a4f3e4e6a6b9a4a2b0b9babfb9f3e4e6b7b8b2f3e4e69ff3e4e1b2f3e4e6bab9a0b3f3e4e6a2b9f3e4e6a5b3b3f3e4e6afb9a3a4f3e4e69580f8f3e4e695b9a3bab2f3e4e6afb9a3f3e4e6a6bab3b7a5b3f3e4e6a5b3b8b2f3e4e6bfa2f3e4e6a2b9f3e4e6bbb3f3e590f3e697f3e69782beb7b8bda5f7" class="cv-modal-opt email">
+        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV%20for%20review.%0A%0AThank%20you." class="cv-modal-opt email">
           <span class="cv-modal-opt-icon">📩</span>
           <div class="cv-modal-opt-text">
             <div class="cv-modal-opt-label">Via Email</div>
-            <div class="cv-modal-opt-val"><span class="__cf_email__" data-cfemail="9bf9faf7f4fceef5faf9ffe8faf6faffaddbfcf6faf2f7b5f8f4f6">[email&#160;protected]</span></div>
+            <div class="cv-modal-opt-val">balogunabdsamad6@gmail.com</div>
+            <div class="cv-modal-opt-hint">Formal request — preferred by companies</div>
           </div>
+          <span class="cv-modal-arrow">→</span>
         </a>
 
-        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%20I%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%20Thanks!"
-           target="_blank"
-           class="cv-modal-opt whatsapp">
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%0A%0AThanks!" target="_blank" class="cv-modal-opt whatsapp">
           <span class="cv-modal-opt-icon">💬</span>
           <div class="cv-modal-opt-text">
             <div class="cv-modal-opt-label">Via WhatsApp</div>
             <div class="cv-modal-opt-val">+234 911 400 7286</div>
+            <div class="cv-modal-opt-hint">Quick & direct — fastest response</div>
           </div>
+          <span class="cv-modal-arrow">→</span>
         </a>
 
       </div>
+
+      <p class="cv-modal-note">I typically respond within a few hours · Lagos, Nigeria 🇳🇬</p>
     </div>
   </div>
 
-    <!-- Three.js (must load before script.js) -->
+  <!-- Three.js (must load before script.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- External JS -->
   <script src="script.js"></script>
