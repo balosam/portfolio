@@ -13,12 +13,21 @@ if (!isMobile) {
   const cursor     = document.getElementById('cursor');
   const cursorRing = document.getElementById('cursorRing');
 
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    cursorRing.style.left = e.clientX + 'px';
-    cursorRing.style.top  = e.clientY + 'px';
-  });
+  if (cursor && cursorRing) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left     = e.clientX + 'px';
+      cursor.style.top      = e.clientY + 'px';
+      cursorRing.style.left = e.clientX + 'px';
+      cursorRing.style.top  = e.clientY + 'px';
+    });
+  }
+} else {
+  // Hide cursor elements on mobile
+  const c = document.getElementById('cursor');
+  const r = document.getElementById('cursorRing');
+  if (c) c.style.display = 'none';
+  if (r) r.style.display = 'none';
+  document.body.style.cursor = 'auto';
 }
 
 
@@ -27,21 +36,28 @@ if (!isMobile) {
 // -------------------------------------------------------
 if (!isMobile) {
   (function () {
-    const canvas   = document.getElementById('bg-canvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'low-power' });
-    renderer.setPixelRatio(1); // never go above 1 for bg scene
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: false,
+      alpha: true,
+      powerPreference: 'low-power'
+    });
+    renderer.setPixelRatio(1);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
     camera.position.z = 30;
 
-    // Fewer particles on smaller screens
+    // Fewer particles on smaller desktop screens
     const count     = window.innerWidth > 1200 ? 1200 : 700;
     const positions = new Float32Array(count * 3);
     const colors    = new Float32Array(count * 3);
     const palette   = [
-      [0.0, 0.83, 1.0],
+      [0.0,  0.83, 1.0 ],
       [0.49, 0.23, 0.93],
       [0.06, 0.73, 0.51],
       [0.96, 0.62, 0.27],
@@ -66,9 +82,13 @@ if (!isMobile) {
     scene.add(points);
 
     // Wireframe shapes
-    const shapes        = [];
-    const geometries    = [new THREE.DodecahedronGeometry(5.5, 0), new THREE.IcosahedronGeometry(4.5, 0), new THREE.OctahedronGeometry(5, 0)];
-    const cols          = [0x00d4ff, 0x7c3aed, 0x10b981];
+    const shapes         = [];
+    const geometries     = [
+      new THREE.DodecahedronGeometry(5.5, 0),
+      new THREE.IcosahedronGeometry(4.5, 0),
+      new THREE.OctahedronGeometry(5, 0)
+    ];
+    const cols           = [0x00d4ff, 0x7c3aed, 0x10b981];
     const shapePositions = [[16, -6, -5], [-18, 10, -8], [8, 18, -10]];
 
     geometries.forEach((g, i) => {
@@ -91,13 +111,18 @@ if (!isMobile) {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
+    // Pause when tab is hidden — saves battery
+    let isVisible = true;
+    document.addEventListener('visibilitychange', () => { isVisible = !document.hidden; });
+
     const clock = new THREE.Clock();
     let   frame = 0;
 
     function animateBG() {
       requestAnimationFrame(animateBG);
+      if (!isVisible) return;
       frame++;
-      // Skip every other frame on smaller desktops to save GPU
+      // Skip every other frame on smaller desktops
       if (window.innerWidth < 1024 && frame % 2 !== 0) return;
 
       const t = clock.getElapsedTime();
@@ -112,7 +137,7 @@ if (!isMobile) {
     animateBG();
   })();
 } else {
-  // On mobile hide the canvas entirely to free GPU
+  // Hide canvas on mobile to free GPU
   const bgCanvas = document.getElementById('bg-canvas');
   if (bgCanvas) bgCanvas.style.display = 'none';
 }
@@ -127,15 +152,20 @@ if (!isMobile) {
     const wrap   = document.getElementById('hero-canvas-wrap');
     if (!canvas || !wrap) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !isLowEnd, alpha: true, powerPreference: 'low-power' });
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: !isLowEnd,
+      alpha: true,
+      powerPreference: 'low-power'
+    });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
     const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
     camera.position.z = 6;
 
-    // Simpler geometry on low-end
-    const segments = isLowEnd ? 80 : 200;
+    // Simpler geometry on low-end devices
+    const segments = isLowEnd ? 80 : 150;
     const geo = new THREE.TorusKnotGeometry(1.8, 0.42, segments, 24, 3, 5);
 
     const mat = new THREE.MeshPhongMaterial({
@@ -151,17 +181,9 @@ if (!isMobile) {
 
     scene.add(new THREE.AmbientLight(0x00d4ff, 0.3));
 
-    const pt1 = new THREE.PointLight(0x00d4ff, 3, 20);
-    pt1.position.set(5, 5, 5);
-    scene.add(pt1);
-
-    const pt2 = new THREE.PointLight(0x7c3aed, 2, 20);
-    pt2.position.set(-5, -5, 3);
-    scene.add(pt2);
-
-    const pt3 = new THREE.PointLight(0x10b981, 1.5, 15);
-    pt3.position.set(0, 7, -2);
-    scene.add(pt3);
+    const pt1 = new THREE.PointLight(0x00d4ff, 3,   20); pt1.position.set(5,  5, 5);  scene.add(pt1);
+    const pt2 = new THREE.PointLight(0x7c3aed, 2,   20); pt2.position.set(-5,-5, 3);  scene.add(pt2);
+    const pt3 = new THREE.PointLight(0x10b981, 1.5, 15); pt3.position.set(0,  7, -2); scene.add(pt3);
 
     function resize() {
       const w = wrap.clientWidth, h = wrap.clientHeight;
@@ -179,10 +201,14 @@ if (!isMobile) {
       my = ((e.clientY - r.top)  / r.height - 0.5) * 2;
     });
 
+    let heroVisible = true;
+    document.addEventListener('visibilitychange', () => { heroVisible = !document.hidden; });
+
     const clock = new THREE.Clock();
 
     function animateHero() {
       requestAnimationFrame(animateHero);
+      if (!heroVisible) return;
       const t = clock.getElapsedTime();
       knot.rotation.x  = t * 0.18 + my * 0.4;
       knot.rotation.y  = t * 0.28 + mx * 0.4;
@@ -194,14 +220,15 @@ if (!isMobile) {
     animateHero();
   })();
 } else {
-  // Hide hero canvas on mobile — show a static gradient instead
-  const heroWrap = document.getElementById('hero-canvas-wrap');
+  // Hide hero canvas on mobile — show a clean gradient instead
+  const heroCanvas = document.getElementById('hero-canvas');
+  const heroWrap   = document.getElementById('hero-canvas-wrap');
+  if (heroCanvas) heroCanvas.style.display = 'none';
   if (heroWrap) {
-    const heroCanvas = document.getElementById('hero-canvas');
-    if (heroCanvas) heroCanvas.style.display = 'none';
-    heroWrap.style.background = 'linear-gradient(135deg, #080c1a 0%, #0d1628 50%, #050810 100%)';
-    heroWrap.style.borderRadius = '8px';
-    heroWrap.style.border = '1px solid rgba(0,212,255,0.1)';
+    heroWrap.style.background    = 'linear-gradient(135deg, #080c1a 0%, #0d1628 50%, #050810 100%)';
+    heroWrap.style.borderRadius  = '8px';
+    heroWrap.style.border        = '1px solid rgba(0,212,255,0.1)';
+    heroWrap.style.minHeight     = '260px';
   }
 }
 
@@ -210,33 +237,39 @@ if (!isMobile) {
 // NAV SCROLL EFFECT
 // -------------------------------------------------------
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+}
 
 
 // -------------------------------------------------------
 // MOBILE MENU
 // -------------------------------------------------------
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.add('open');
-});
-document.getElementById('closeMenu').addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.remove('open');
-});
+const hamburgerBtn = document.getElementById('hamburger');
+const closeMenuBtn = document.getElementById('closeMenu');
+const mobileMenuEl = document.getElementById('mobileMenu');
+
+if (hamburgerBtn) hamburgerBtn.addEventListener('click', () => mobileMenuEl.classList.add('open'));
+if (closeMenuBtn) closeMenuBtn.addEventListener('click', () => mobileMenuEl.classList.remove('open'));
+
 function closeMM() {
-  document.getElementById('mobileMenu').classList.remove('open');
+  if (mobileMenuEl) mobileMenuEl.classList.remove('open');
 }
 
 
 // -------------------------------------------------------
 // SCROLL REVEAL
+// Mobile: instant (no stagger delay)
+// Desktop: staggered fade-up
 // -------------------------------------------------------
 const reveals     = document.querySelectorAll('.reveal');
 const revObserver = new IntersectionObserver(entries => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('show'), i * 60);
+      const delay = isMobile ? 0 : i * 60;
+      setTimeout(() => entry.target.classList.add('show'), delay);
       revObserver.unobserve(entry.target);
     }
   });
@@ -244,7 +277,7 @@ const revObserver = new IntersectionObserver(entries => {
 
 reveals.forEach(el => revObserver.observe(el));
 
-// Hero always visible on load
+// Hero always visible immediately
 document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('show'));
 
 
@@ -270,12 +303,12 @@ filterBtns.forEach(btn => {
 // BACK TO TOP
 // -------------------------------------------------------
 const backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-  if (!backToTop) return;
-  backToTop.classList.toggle('visible', window.scrollY > 500);
-}, { passive: true });
 
 if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -287,25 +320,24 @@ if (backToTop) {
 // -------------------------------------------------------
 function openCVModal() {
   const modal = document.getElementById('cvModal');
+  if (!modal) return;
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
 function closeCVModal() {
   const modal = document.getElementById('cvModal');
+  if (!modal) return;
   modal.style.display = 'none';
   document.body.style.overflow = '';
 }
 
-// Close on backdrop click
-const cvModal = document.getElementById('cvModal');
-if (cvModal) {
-  cvModal.addEventListener('click', function (e) {
-    if (e.target === this) closeCVModal();
-  });
+// Called by onclick="handleOverlayClick(event)" on the modal backdrop
+function handleOverlayClick(e) {
+  if (e.target === e.currentTarget) closeCVModal();
 }
 
-// Close on Escape key
+// Also close on Escape key
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeCVModal();
 });

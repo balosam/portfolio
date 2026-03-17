@@ -1382,29 +1382,28 @@
     }
 
     /* ---- MOBILE PERFORMANCE ---- */
-    @media (max-width: 768px) {
-      /* Kill grain animation - huge CPU drain on mobile */
-      body::after { display: none; }
-      /* Kill scanlines */
-      body::before { display: none; }
-      /* Hide custom cursor on touch devices */
-      .cursor, .cursor-ring { display: none; }
-      body { cursor: auto; }
-      /* Disable glass hover transforms on mobile (janky on touch) */
-      .glass:hover { transform: none; }
-      .proj-card:hover .proj-thumb-icon { transform: none; }
-      /* Reduce transitions */
-      .glass { transition: border-color 0.2s; }
-    }
-
-    /* ---- RESPONSIVE ---- */
+    /* ============================================================
+       TABLET — max 1024px
+    ============================================================ */
     @media (max-width: 1024px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
       .proj-card.featured { grid-column: span 1; }
+      .proj-card.featured .proj-thumb { height: 220px; }
+      .proj-card.featured .proj-name { font-size: 1.15rem; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ============================================================
+       TABLET PORTRAIT — max 900px
+       Stack all grids, hide desktop nav
+    ============================================================ */
     @media (max-width: 900px) {
+      /* Nav */
+      .nav-links,
+      .nav-right .btn-cv { display: none; }
+      .hamburger { display: flex; }
+
+      /* Grids → single column */
       .hero-grid,
       .about-grid,
       .contact-layout,
@@ -1412,17 +1411,347 @@
       .exp-grid { grid-template-columns: 1fr; }
 
       .about-main { grid-row: auto; }
-      #hero-canvas-wrap { height: 320px; }
 
-      .nav-links, .nav-right .btn-cv { display: none; }
-      .hamburger { display: flex; }
+      /* Hero */
+      #hero { padding: 100px 0 60px; }
+      .hero-grid { gap: 36px; }
+      #hero-canvas-wrap { height: 280px; }
+      .hero-hud { padding: 14px 18px; }
+      .hud-val { font-size: 1.2rem; }
+
+      /* Sections */
+      section { padding: 72px 0; }
+      .sec-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+
+      /* Experience grid */
+      .exp-grid { gap: 40px; }
     }
 
-    @media (max-width: 600px) {
-      .projects-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .container { padding: 0 20px; }
+    /* ============================================================
+       MOBILE — max 768px
+       Performance + layout fixes
+    ============================================================ */
+    @media (max-width: 768px) {
+      /* --- Performance: kill expensive paint ops --- */
+      body::after  { display: none; } /* grain animation */
+      body::before { display: none; } /* scanlines */
+      .cursor, .cursor-ring { display: none; }
+      body { cursor: auto; }
+
+      /* Disable hover transforms — janky on touch */
+      .glass:hover { transform: none; box-shadow: none; }
+      .glass:hover::before { opacity: 0; }
+      .proj-card:hover .proj-thumb-icon { transform: none; filter: none; }
+      .glass { transition: border-color 0.15s; }
+      .contact-opt:hover { transform: none; }
+      .btn-primary:hover,
+      .btn-outline:hover { transform: none; }
+      .nav-cta:hover { transform: none; }
+
+      /* --- Container --- */
+      .container { padding: 0 18px; }
+
+      /* --- Nav --- */
+      nav { padding: 16px 0; }
+      .logo { font-size: 1rem; }
+
+      /* --- Hero --- */
+      #hero { padding: 90px 0 52px; min-height: auto; }
+      .hero-eyebrow { font-size: 0.65rem; margin-bottom: 14px; }
+      .hero-name { font-size: clamp(2.4rem, 11vw, 3.8rem); line-height: 0.92; margin-bottom: 10px; }
+      .hero-tagline { font-size: 0.75rem; margin-bottom: 20px; }
+      .hero-desc { font-size: 0.92rem; margin-bottom: 28px; }
+      .hero-actions { gap: 10px; margin-bottom: 32px; }
+      .btn-primary { padding: 12px 24px; font-size: 0.78rem; }
+      .btn-outline  { padding: 11px 20px; font-size: 0.78rem; }
+      .hero-links { gap: 16px; flex-wrap: wrap; }
+      .hero-links a { font-size: 0.65rem; }
+
+      /* Hero canvas wrap: show a gradient, no 3D */
+      #hero-canvas-wrap { height: 220px; border-radius: 8px; }
+      #hero-canvas { display: none; }
+
+      /* HUD */
+      .hud-row { gap: 16px; flex-wrap: wrap; }
+      .hud-val { font-size: 1.1rem; }
+      .hud-label { font-size: 0.52rem; }
+
+      /* --- Sections --- */
+      section { padding: 56px 0; }
+      .sec-tag { font-size: 0.62rem; margin-bottom: 8px; }
+      .sec-title { font-size: clamp(1.6rem, 8vw, 2.4rem); margin-bottom: 10px; }
+      .sec-sub { font-size: 0.88rem; margin-bottom: 40px; }
+      .divider { margin: 0 18px; }
+
+      /* --- About --- */
+      .about-main { padding: 24px; }
+      .about-text { font-size: 0.92rem; line-height: 1.75; }
+      .chips { gap: 6px; margin-top: 20px; }
+      .chip { font-size: 0.62rem; padding: 4px 10px; }
+      .info-block { padding: 18px 22px; }
+      .info-key { font-size: 0.58rem; }
+      .info-val { font-size: 0.9rem; }
+
+      /* --- Services --- */
+      .services-grid { gap: 12px; }
+      .service-card { padding: 26px 22px; }
+      .service-num { font-size: 0.6rem; margin-bottom: 12px; }
+      .service-name { font-size: 1.1rem; margin-bottom: 8px; }
+      .service-desc { font-size: 0.85rem; }
+
+      /* --- Skills --- */
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .skill-group { padding: 20px; }
+      .skill-group-name { font-size: 0.6rem; margin-bottom: 12px; }
+      .skill-item { font-size: 0.82rem; padding: 5px 0; }
+
+      /* --- Projects --- */
+      .projects-grid { grid-template-columns: 1fr; gap: 14px; }
+      .proj-card.featured { grid-column: span 1; }
+      .proj-card.featured .proj-thumb { height: 200px; }
+      .proj-card.featured .proj-name { font-size: 1.1rem; }
+      .proj-thumb { height: 180px; }
+      .proj-body { padding: 16px 18px 20px; }
+      .proj-cat { font-size: 0.58rem; margin-bottom: 6px; }
+      .proj-name { font-size: 1rem; margin-bottom: 6px; }
+      .proj-desc { font-size: 0.82rem; line-height: 1.6; margin-bottom: 12px; }
+      .proj-tags { gap: 5px; margin-bottom: 10px; }
+      .proj-tag { font-size: 0.58rem; padding: 3px 7px; }
+      .proj-link { font-size: 0.62rem; }
+
+      .filters { gap: 6px; margin-bottom: 28px; }
+      .filter-btn { font-size: 0.6rem; padding: 6px 13px; }
+
+      /* --- Experience / Timeline --- */
+      .timeline::before { left: 0; }
+      .timeline-item { padding: 0 0 32px 24px; }
+      .tl-dot { left: -4px; width: 8px; height: 8px; }
+      .tl-date { font-size: 0.6rem; margin-bottom: 4px; }
+      .tl-role { font-size: 1rem; margin-bottom: 2px; }
+      .tl-org { font-size: 0.72rem; margin-bottom: 10px; }
+      .tl-points li { font-size: 0.82rem; padding-left: 12px; }
+
+      /* Education */
+      .edu-sec-label { font-size: 0.6rem; margin-bottom: 14px; }
+      .edu-cards { gap: 10px; }
+      .edu-card { padding: 16px 20px; }
+      .edu-year { font-size: 0.58rem; margin-bottom: 4px; }
+      .edu-deg { font-size: 0.88rem; margin-bottom: 4px; }
+      .edu-inst { font-size: 0.75rem; }
+
+      /* --- Contact --- */
+      .contact-left { padding: 24px; }
+      .contact-left h3 { font-size: 1.3rem; margin-bottom: 8px; }
+      .contact-left p { font-size: 0.85rem; margin-bottom: 24px; }
+      .contact-options { gap: 8px; }
+      .contact-opt { padding: 12px 16px; border-radius: 6px; }
+      .contact-opt-key { font-size: 0.55rem; }
+      .contact-opt-val { font-size: 0.82rem; }
+
+      .contact-right { padding: 0; }
+      .cta-box { padding: 24px 20px; }
+      .cta-title { font-size: 1.2rem; margin-bottom: 8px; }
+      .cta-text { font-size: 0.82rem; margin-bottom: 20px; }
+      .cta-btns { gap: 8px; }
+      .cta-btn { font-size: 0.7rem; padding: 12px 18px; }
+
+      /* --- Footer --- */
+      footer { padding: 28px 0; }
+      .foot-inner { flex-direction: column; gap: 8px; text-align: center; }
+      .foot-logo { font-size: 0.9rem; }
+      .foot-copy { font-size: 0.58rem; }
+
+      /* --- WhatsApp + Back to top --- */
+      .wa-float { width: 46px; height: 46px; font-size: 1.2rem; bottom: 20px; right: 16px; }
+      #backToTop { width: 38px; height: 38px; font-size: 0.9rem; bottom: 76px; right: 16px; }
+
+      /* --- Mobile menu links --- */
+      .mobile-menu a { font-size: 2rem; }
     }
+
+    /* ============================================================
+       SMALL MOBILE — max 480px
+       Extra tightening for small phones
+    ============================================================ */
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+
+      .hero-name { font-size: clamp(2rem, 12vw, 3rem); }
+      .hero-actions { flex-direction: column; }
+      .btn-primary,
+      .btn-outline { width: 100%; text-align: center; }
+
+      .skills-grid { grid-template-columns: 1fr; }
+
+      .hud-row { gap: 12px; }
+      .hud-val { font-size: 1rem; }
+
+      .sec-title { font-size: clamp(1.5rem, 9vw, 2rem); }
+
+      .filters { gap: 5px; }
+      .filter-btn { font-size: 0.58rem; padding: 5px 11px; }
+
+      /* Stack contact info on very small screens */
+      .contact-opt-val { font-size: 0.75rem; word-break: break-all; }
+
+      .mobile-menu a { font-size: 1.7rem; gap: 28px; }
+      .mobile-menu { gap: 24px; }
+    }
+    /* ============================================================
+       CV REQUEST MODAL
+    ============================================================ */
+    .cv-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(4,6,15,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cv-modal {
+      background: #0a0f1e;
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 12px;
+      padding: 40px 36px;
+      max-width: 460px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 0 60px rgba(0,212,255,0.07), 0 32px 64px rgba(0,0,0,0.5);
+    }
+
+    .cv-modal-close {
+      position: absolute;
+      top: 14px; right: 16px;
+      background: none; border: none;
+      color: rgba(232,234,246,0.35);
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: color 0.2s;
+      line-height: 1;
+    }
+    .cv-modal-close:hover { color: var(--cyan); }
+
+    .cv-modal-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cv-modal-tag::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .cv-modal-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .cv-modal-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      font-weight: 300;
+    }
+
+    .cv-modal-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cv-modal-opt {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .cv-modal-opt:hover { transform: translateX(4px); }
+    .cv-modal-opt.email:hover    { border-color: var(--cyan);  background: rgba(0,212,255,0.05); }
+    .cv-modal-opt.whatsapp:hover { border-color: #25d366;      background: rgba(37,211,102,0.05); }
+
+    .cv-modal-opt-icon { font-size: 1.5rem; width: 40px; text-align: center; flex-shrink: 0; }
+    .cv-modal-opt-body { flex: 1; }
+
+    .cv-modal-opt-type {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 3px;
+    }
+
+    .cv-modal-opt-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .cv-modal-opt-val {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .cv-modal-opt.email    .cv-modal-opt-val { color: var(--cyan); }
+    .cv-modal-opt.whatsapp .cv-modal-opt-val { color: #25d366; }
+
+    .cv-modal-opt-arrow {
+      color: var(--muted2);
+      font-size: 1rem;
+      margin-left: auto;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .cv-modal-opt.email:hover    .cv-modal-opt-arrow { color: var(--cyan); }
+    .cv-modal-opt.whatsapp:hover .cv-modal-opt-arrow { color: #25d366; }
+
+    .cv-modal-note {
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      color: var(--muted2);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Mobile modal adjustments */
+    @media (max-width: 480px) {
+      .cv-modal { padding: 28px 20px; }
+      .cv-modal-title { font-size: 1.15rem; }
+      .cv-modal-opt { padding: 14px 16px; gap: 12px; }
+      .cv-modal-opt-icon { font-size: 1.2rem; width: 32px; }
+      .cv-modal-opt-label { font-size: 0.85rem; }
+      .cv-modal-opt-val { font-size: 0.72rem; }
+      .cv-modal-opt:hover { transform: none; } /* no hover shift on mobile */
+    }
+
   </style>
 </head>
 <body>
@@ -1503,19 +1832,19 @@
             </div>
 
             <div class="hero-links">
-              <a href="mailto:balogunabdsamad6@gmail.com">📩 Email</a>
-              <a href="tel:+2349114007286">📞 Call</a>
-              <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank">🔗 LinkedIn</a>
-              <a href="https://wa.me/2349114007286" target="_blank">💬 WhatsApp</a>
+              <a href="mailto:balogunabdsamad6@gmail.com">Email</a>
+              <a href="tel:+2349114007286">Call</a>
+              <a href="https://github.com/balosam" target="_blank">GitHub</a>
+              <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank">LinkedIn</a>
+              <a href="https://wa.me/2349114007286" target="_blank">WhatsApp</a>
             </div>
-          </div>
 
           <div id="hero-canvas-wrap">
             <canvas id="hero-canvas"></canvas>
             <div class="hero-hud">
               <div class="hud-row">
                 <div class="hud-stat">
-                  <div class="hud-val">7+</div>
+                  <div class="hud-val">8+</div>
                   <div class="hud-label">Projects</div>
                 </div>
                 <div class="hud-stat">
@@ -1607,33 +1936,29 @@
 
           <div class="glass service-card">
             <div class="service-num">01 —</div>
-            <span class="service-icon">🌐</span>
             <div class="service-name">Web Development</div>
-            <p class="service-desc">Responsive, fast, and clean websites and web apps. Next.js, React, TypeScript, HTML/CSS/JS. Built for all devices and optimized for real-world performance.</p>
+            <p class="service-desc">Full-stack web applications built with Next.js, React, TypeScript, and Supabase. From landing pages to complex multi-role platforms — responsive, fast, and production-ready.</p>
             <div class="service-bar"></div>
           </div>
 
           <div class="glass service-card">
             <div class="service-num">02 —</div>
-            <span class="service-icon">🎨</span>
             <div class="service-name">UI/UX Design</div>
-            <p class="service-desc">Wireframes, prototypes, and complete UI designs in Figma — focused on user experience, intuitive flows, and visually compelling interfaces that actually convert.</p>
+            <p class="service-desc">Wireframes, prototypes, and complete UI designs in Figma — focused on user experience, intuitive flows, and interfaces that look great and actually convert.</p>
             <div class="service-bar"></div>
           </div>
 
           <div class="glass service-card">
             <div class="service-num">03 —</div>
-            <span class="service-icon">✨</span>
             <div class="service-name">Digital Creative & Branding</div>
-            <p class="service-desc">Social media graphics, promotional flyers, marketing assets and campaign designs. Delivered for real clients with measurable visual impact and brand consistency.</p>
+            <p class="service-desc">Social media graphics, promotional flyers, and marketing assets. Delivered for real clients with measurable visual impact — from jewellery campaigns to fintech platforms.</p>
             <div class="service-bar"></div>
           </div>
 
           <div class="glass service-card">
             <div class="service-num">04 —</div>
-            <span class="service-icon">🖥️</span>
             <div class="service-name">Computer Engineering</div>
-            <p class="service-desc">Hardware setup, maintenance, troubleshooting, and repairs. Trained hands-on at Computer Village, Ikeja — real experience with real systems, real clients, real results.</p>
+            <p class="service-desc">Hardware setup, maintenance, troubleshooting, and repairs. Hands-on training at Computer Village, Ikeja — working with real systems and real clients daily.</p>
             <div class="service-bar"></div>
           </div>
 
@@ -1652,50 +1977,48 @@
         <div class="skills-grid reveal">
 
           <div class="glass skill-group">
-            <div class="skill-group-name">Programming</div>
+            <div class="skill-group-name">Languages</div>
             <div class="skill-list">
-              <div class="skill-item">Python</div>
-              <div class="skill-item">JavaScript</div>
+              <div class="skill-item">JavaScript (ES6+)</div>
               <div class="skill-item">TypeScript</div>
+              <div class="skill-item">Python</div>
               <div class="skill-item">HTML5 & CSS3</div>
-              <div class="skill-item">React / Next.js</div>
+            </div>
+          </div>
+
+          <div class="glass skill-group">
+            <div class="skill-group-name">Frameworks</div>
+            <div class="skill-list">
+              <div class="skill-item">Next.js 14 / 16</div>
+              <div class="skill-item">React / Vite</div>
               <div class="skill-item">Tailwind CSS</div>
-            </div>
-          </div>
-
-          <div class="glass skill-group">
-            <div class="skill-group-name">Design</div>
-            <div class="skill-list">
-              <div class="skill-item">Figma</div>
-              <div class="skill-item">Canva</div>
-              <div class="skill-item">Wireframing</div>
-              <div class="skill-item">Prototyping</div>
-              <div class="skill-item">User Research</div>
+              <div class="skill-item">shadcn/ui</div>
               <div class="skill-item">Framer Motion</div>
+              <div class="skill-item">next-intl (i18n)</div>
             </div>
           </div>
 
           <div class="glass skill-group">
-            <div class="skill-group-name">Tech & Tools</div>
+            <div class="skill-group-name">Backend & Data</div>
             <div class="skill-list">
-              <div class="skill-item">Supabase / PostgreSQL</div>
+              <div class="skill-item">Supabase (PostgreSQL)</div>
+              <div class="skill-item">Firebase Firestore</div>
               <div class="skill-item">Prisma ORM</div>
               <div class="skill-item">NextAuth.js</div>
-              <div class="skill-item">Vercel / Netlify</div>
-              <div class="skill-item">Git / GitHub</div>
-              <div class="skill-item">PWA</div>
+              <div class="skill-item">Paystack</div>
+              <div class="skill-item">Sanity.io CMS</div>
             </div>
           </div>
 
           <div class="glass skill-group">
-            <div class="skill-group-name">Soft Skills</div>
+            <div class="skill-group-name">Tools & APIs</div>
             <div class="skill-list">
-              <div class="skill-item">Problem Solving</div>
-              <div class="skill-item">Communication</div>
-              <div class="skill-item">Time Management</div>
-              <div class="skill-item">Teaching & Mentorship</div>
-              <div class="skill-item">PC Troubleshooting</div>
-              <div class="skill-item">MS Office Suite</div>
+              <div class="skill-item">Git / GitHub</div>
+              <div class="skill-item">Vercel / Netlify</div>
+              <div class="skill-item">CoinGecko API</div>
+              <div class="skill-item">Claude AI API</div>
+              <div class="skill-item">Twilio / WhatsApp API</div>
+              <div class="skill-item">EmailJS / Brevo</div>
             </div>
           </div>
 
@@ -1715,205 +2038,226 @@
         <div class="filters reveal">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="web">Web App</button>
-          <button class="filter-btn" data-filter="uiux">UI/UX</button>
-          <button class="filter-btn" data-filter="branding">Branding</button>
-          <button class="filter-btn" data-filter="crypto">Crypto</button>
+          <button class="filter-btn" data-filter="fintech">FinTech</button>
           <button class="filter-btn" data-filter="islamictech">Islamic Tech</button>
           <button class="filter-btn" data-filter="edtech">EdTech</button>
+          <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+          <button class="filter-btn" data-filter="branding">Branding</button>
         </div>
 
         <div class="projects-grid" id="projectGrid">
 
-          <!-- FALAH — Featured -->
-          <div class="glass proj-card featured reveal" data-cat="islamictech">
+          <!-- MADRASAHOS / INSAIS — Featured -->
+          <div class="glass proj-card featured reveal" data-cat="edtech">
             <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#080c1a,#0a1520);"></div>
               <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#10b981;top:30%;left:30%;"></div>
-              <span class="proj-thumb-icon">🕌</span>
+              <div class="proj-thumb-glow" style="background:#1B4F8A;top:25%;left:25%;"></div>
+              <div class="proj-thumb-glow" style="background:#C8970A;bottom:25%;right:25%;width:100px;height:100px;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.12em;color:rgba(200,151,10,0.9);margin-bottom:8px;">MadrasahOS</div>
+                <div style="font-family:var(--font-mono);font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.1em;">معهد التعليم العربي الإسلامي</div>
+              </div>
             </div>
             <div class="proj-body">
-              <div class="proj-cat" style="color:var(--green)">Islamic Tech · Web App · Social Impact</div>
-              <div class="proj-name">Falah — Islamic Prayer Tracker</div>
-              <p class="proj-desc">A modern Islamic prayer tracking web app helping Muslims build consistent Salah habits through streaks, leaderboards, prayer buddies, and smart reminders. Gamification meets spirituality.</p>
+              <div class="proj-cat" style="color:#60a5fa">EdTech · School Management · SaaS Architecture</div>
+              <div class="proj-name">MadrasahOS — INSAIS School Platform</div>
+              <p class="proj-desc">Full-stack bilingual (Arabic/English) school management system for a 40-year-old Lagos Islamic institution with 1,000+ students. Role-based portals for Admin, Teachers, and Students. Result management, bilingual PDF reports, Paystack fee payments, WhatsApp notifications, and Claude AI integration — built solo as the sole developer and designed for multi-tenant SaaS expansion.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">Next.js 14</span>
+                <span class="proj-tag">TypeScript</span>
+                <span class="proj-tag">Supabase</span>
+                <span class="proj-tag">shadcn/ui</span>
+                <span class="proj-tag">NextAuth.js</span>
+                <span class="proj-tag">Claude AI</span>
+                <span class="proj-tag">Paystack</span>
+                <span class="proj-tag">next-intl</span>
+                <span class="proj-tag">Twilio</span>
+              </div>
+              <span class="proj-link" style="color:rgba(255,255,255,0.25);cursor:default;font-size:0.65rem;letter-spacing:0.08em;font-family:var(--font-mono);text-transform:uppercase;">In Active Development</span>
+            </div>
+          </div>
+
+          <!-- ORDA — Featured -->
+          <div class="glass proj-card featured reveal" data-cat="fintech">
+            <div class="proj-thumb">
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#06080f,#0d1320);"></div>
+              <div class="proj-thumb-lines"></div>
+              <div class="proj-thumb-glow" style="background:#10b981;top:20%;left:20%;"></div>
+              <div class="proj-thumb-glow" style="background:#00d4ff;bottom:20%;right:20%;width:100px;height:100px;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-display);font-size:2.8rem;font-weight:900;letter-spacing:-0.05em;color:#e8eaf6;line-height:1;">ORDA</div>
+                <div style="font-family:var(--font-mono);font-size:0.6rem;color:rgba(16,185,129,0.8);letter-spacing:0.15em;margin-top:4px;">TRADING JOURNAL</div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-cat" style="color:var(--green)">FinTech · Trading Intelligence · SaaS</div>
+              <div class="proj-name">ORDA — Trading Journal & Intelligence Platform</div>
+              <p class="proj-desc">A trading journal and behavioural intelligence platform for retail traders — tracks trades, performance metrics, psychology, and drawdown in real time. Interactive dashboards built with Recharts for P&L analysis, win rate, and risk metrics. Subscription-based access via Paystack.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">React</span>
+                <span class="proj-tag">TypeScript</span>
+                <span class="proj-tag">Vite</span>
+                <span class="proj-tag">Tailwind CSS</span>
+                <span class="proj-tag">Supabase</span>
+                <span class="proj-tag">Recharts</span>
+                <span class="proj-tag">Paystack</span>
+              </div>
+              <a href="https://orda-plum.vercel.app" target="_blank" class="proj-link">Live Site →</a>
+            </div>
+          </div>
+
+          <!-- OFFICIALVALUE EXCHANGE -->
+          <div class="glass proj-card reveal" data-cat="fintech">
+            <div class="proj-thumb">
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#050a05,#091209);"></div>
+              <div class="proj-thumb-lines"></div>
+              <div class="proj-thumb-glow" style="background:#22c55e;top:25%;left:30%;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:rgba(34,197,94,0.9);margin-bottom:6px;">OfficialValue</div>
+                <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:#e8eaf6;letter-spacing:-0.03em;">Exchange</div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-cat" style="color:#22c55e">FinTech · Crypto · Gift Cards · Nigeria</div>
+              <div class="proj-name">OfficialValue Exchange</div>
+              <p class="proj-desc">Live crypto and gift card trading platform for the Nigerian market — built entirely without frameworks. A zero-dependency SPA with 9 pages, GSAP transitions, live CoinGecko prices in NGN with production CORS fallback, and a Firebase-backed admin panel with SHA-256 password hashing.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">Vanilla JS</span>
+                <span class="proj-tag">HTML/CSS</span>
+                <span class="proj-tag">Firebase</span>
+                <span class="proj-tag">CoinGecko API</span>
+                <span class="proj-tag">GSAP</span>
+              </div>
+              <a href="https://officialvalue-exchange.vercel.app" target="_blank" class="proj-link">Live Site →</a>
+            </div>
+          </div>
+
+          <!-- BRIDAL FIX -->
+          <div class="glass proj-card reveal" data-cat="ecommerce">
+            <div class="proj-thumb">
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#0f080d,#180d14);"></div>
+              <div class="proj-thumb-lines"></div>
+              <div class="proj-thumb-glow" style="background:#ec4899;top:30%;left:30%;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#f9a8d4;letter-spacing:-0.02em;">The Bridal Fix</div>
+                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.12em;color:rgba(249,168,212,0.5);margin-top:4px;">BRIDAL EMERGENCY KITS</div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-cat" style="color:#f472b6">E-Commerce · Nigeria · Bridal</div>
+              <div class="proj-name">The Bridal Fix</div>
+              <p class="proj-desc">Nigerian bridal emergency kit e-commerce platform — brides order curated wedding day essentials for nationwide delivery before their big day. Sanity.io CMS, Paystack checkout, Brevo transactional emails, and Framer Motion for a premium product experience.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">Next.js 14</span>
+                <span class="proj-tag">TypeScript</span>
+                <span class="proj-tag">Sanity.io</span>
+                <span class="proj-tag">Paystack</span>
+                <span class="proj-tag">Framer Motion</span>
+                <span class="proj-tag">Brevo</span>
+              </div>
+              <a href="https://the-bridal-fix.vercel.app" target="_blank" class="proj-link">Live Site →</a>
+            </div>
+          </div>
+
+          <!-- IMANSOFT -->
+          <div class="glass proj-card reveal" data-cat="web">
+            <div class="proj-thumb">
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#080c18,#0c1020);"></div>
+              <div class="proj-thumb-lines"></div>
+              <div class="proj-thumb-glow" style="background:#6366f1;top:25%;left:30%;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:#e8eaf6;letter-spacing:-0.03em;">IMANSOFT</div>
+                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.12em;color:rgba(99,102,241,0.8);margin-top:4px;">TECHNOLOGIES</div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-cat" style="color:#818cf8">Web · Corporate · Software Agency</div>
+              <div class="proj-name">IMANSOFT Technologies</div>
+              <p class="proj-desc">Corporate website for a custom software agency serving enterprises in distribution, warehousing, and logistics. Clean, professional web presence built with vanilla HTML, CSS, and JavaScript.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">HTML</span>
+                <span class="proj-tag">CSS</span>
+                <span class="proj-tag">JavaScript</span>
+                <span class="proj-tag">Vercel</span>
+              </div>
+              <a href="https://imansoft.vercel.app" target="_blank" class="proj-link">Live Site →</a>
+            </div>
+          </div>
+
+          <!-- FAGARS & FASHEG -->
+          <div class="glass proj-card reveal" data-cat="web">
+            <div class="proj-thumb">
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#0a0a06,#14120a);"></div>
+              <div class="proj-thumb-lines"></div>
+              <div class="proj-thumb-glow" style="background:#f59e0b;top:30%;left:25%;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:#fbbf24;letter-spacing:-0.02em;">Fagars & Fasheg</div>
+                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.1em;color:rgba(251,191,36,0.5);margin-top:4px;">IMPORT · EXPORT</div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-cat" style="color:var(--orange)">Web · Enterprise · Business</div>
+              <div class="proj-name">Fagars & Fasheg Import/Export</div>
+              <p class="proj-desc">Enterprise business website for an import/export company dealing in farm produce, food products, and electronics. Interactive divisions showcase, working contact form, and professional UI/UX.</p>
               <div class="proj-tags">
                 <span class="proj-tag">Next.js 16</span>
                 <span class="proj-tag">TypeScript</span>
                 <span class="proj-tag">Tailwind CSS</span>
+                <span class="proj-tag">shadcn/ui</span>
+                <span class="proj-tag">EmailJS</span>
+              </div>
+              <a href="https://fagars-fasheg-website.vercel.app" target="_blank" class="proj-link">Live Site →</a>
+            </div>
+          </div>
+
+          <!-- FALAH -->
+          <div class="glass proj-card reveal" data-cat="islamictech">
+            <div class="proj-thumb">
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#050f08,#0a1510);"></div>
+              <div class="proj-thumb-lines"></div>
+              <div class="proj-thumb-glow" style="background:#10b981;top:25%;left:30%;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:#34d399;letter-spacing:-0.04em;">Falah</div>
+                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.14em;color:rgba(52,211,153,0.5);margin-top:4px;">PRAYER TRACKER · PWA</div>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-cat" style="color:var(--green)">Islamic Tech · Web App · PWA</div>
+              <div class="proj-name">Falah — Islamic Prayer Tracker</div>
+              <p class="proj-desc">Prayer tracking PWA helping Muslims build consistent Salah habits through streaks, leaderboards, prayer buddies, and smart reminders. Gamification built on a spiritual foundation.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">Next.js 16</span>
+                <span class="proj-tag">TypeScript</span>
                 <span class="proj-tag">Supabase</span>
-                <span class="proj-tag">Vercel</span>
-                <span class="proj-tag">PWA</span>
                 <span class="proj-tag">Shadcn/UI</span>
+                <span class="proj-tag">PWA</span>
                 <span class="proj-tag">Framer Motion</span>
               </div>
               <a href="https://falah-six.vercel.app" target="_blank" class="proj-link">Live Site →</a>
             </div>
           </div>
 
-          <!-- INSAIS -->
-          <div class="glass proj-card reveal" data-cat="edtech">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#3b82f6;top:25%;left:35%;"></div>
-              <span class="proj-thumb-icon">🎓</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:#60a5fa">EdTech · School Management System</div>
-              <div class="proj-name">INSAIS School Management</div>
-              <p class="proj-desc">Premium web-based school management platform for a 40+ year old Lagos Islamic school with 1000+ students. Features student/teacher/admin portals, results, attendance, bilingual support.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Next.js 14</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Prisma</span>
-                <span class="proj-tag">PostgreSQL</span>
-                <span class="proj-tag">NextAuth</span>
-              </div>
-              <span class="proj-link" style="color:var(--muted2);cursor:default">🔒 In Development</span>
-            </div>
-          </div>
-
-          <!-- FAGARS & FASHEG -->
-          <div class="glass proj-card featured reveal" data-cat="web">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#f59e0b;top:20%;right:20%;"></div>
-              <span class="proj-thumb-icon">🌍</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--orange)">Web Dev & UI/UX · Enterprise Business</div>
-              <div class="proj-name">Fagars & Fasheg Import/Export</div>
-              <p class="proj-desc">Premium enterprise-grade business website for an import/export company specializing in farm produce, food products, and electronics. Features interactive divisions showcase, working contact form, and modern UI/UX.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Next.js 16</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Tailwind CSS</span>
-                <span class="proj-tag">EmailJS</span>
-                <span class="proj-tag">Vercel</span>
-                <span class="proj-tag">shadcn/ui</span>
-              </div>
-              <a href="https://fagars-fasheg-website.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- GAMERVERSE -->
-          <div class="glass proj-card reveal" data-cat="web">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#7c3aed;bottom:20%;left:20%;"></div>
-              <span class="proj-thumb-icon">🎮</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--purple-bright)">Web · Community Platform</div>
-              <div class="proj-name">GAMERVERSE</div>
-              <p class="proj-desc">A real-time gaming community platform concept where players globally connect, chat, compete, and earn rewards. Full product concept with UI design and flow mapping.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Web</span>
-                <span class="proj-tag">Real-time</span>
-                <span class="proj-tag">Product Design</span>
-              </div>
-            </div>
-          </div>
-
           <!-- ORNAMIQUE -->
           <div class="glass proj-card reveal" data-cat="branding">
             <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
+              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#100810,#180c18);"></div>
               <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#ec4899;top:30%;right:20%;"></div>
-              <span class="proj-thumb-icon">💎</span>
+              <div class="proj-thumb-glow" style="background:#ec4899;top:25%;right:25%;"></div>
+              <div style="position:relative;z-index:2;text-align:center;">
+                <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:#f9a8d4;letter-spacing:0.02em;">Ornamique</div>
+                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.14em;color:rgba(249,168,212,0.45);margin-top:3px;">JEWELS · CAMPAIGN</div>
+              </div>
             </div>
             <div class="proj-body">
-              <div class="proj-cat" style="color:var(--pink)">Branding · Campaign Design</div>
+              <div class="proj-cat" style="color:var(--pink)">Branding · Campaign Design · Figma</div>
               <div class="proj-name">Ornamique Jewels Campaign</div>
-              <p class="proj-desc">Full promotional campaign for a jewelry brand's Girlfriend's Day sales push. Flyers, pricing layouts, social media assets, and brand-aligned marketing graphics.</p>
+              <p class="proj-desc">Full promotional campaign for a jewellery brand's Girlfriend's Day sales push — flyers, pricing layouts, social media assets, and brand-aligned marketing graphics designed in Figma and Canva.</p>
               <div class="proj-tags">
                 <span class="proj-tag">Figma</span>
                 <span class="proj-tag">Canva</span>
                 <span class="proj-tag">Branding</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- CRYPTO TRACKER -->
-          <div class="glass proj-card reveal" data-cat="crypto">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#10b981;bottom:20%;left:30%;"></div>
-              <span class="proj-thumb-icon">📈</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--green)">Crypto · Dashboard Concept</div>
-              <div class="proj-name">Forex / Crypto Tracker</div>
-              <p class="proj-desc">Market analysis dashboard for tracking currency pairs, chart patterns, watchlists, and real-time price movements. JavaScript with chart API integrations.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">JavaScript</span>
-                <span class="proj-tag">APIs</span>
-                <span class="proj-tag">Charts</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- UI/UX CASE STUDY -->
-          <div class="glass proj-card reveal" data-cat="uiux">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#00d4ff;top:20%;right:20%;"></div>
-              <span class="proj-thumb-icon">🖌️</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--cyan)">UI/UX · Case Study</div>
-              <div class="proj-name">UI/UX Design Case Study</div>
-              <p class="proj-desc">Full UI/UX case study — from user research and wireframes through prototyping to high-fidelity final UI in Figma. Design thinking process documented end-to-end.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Figma</span>
-                <span class="proj-tag">Wireframes</span>
-                <span class="proj-tag">UX Research</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- KIDS CODING -->
-          <div class="glass proj-card reveal" data-cat="edtech">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#f59e0b;top:20%;left:20%;"></div>
-              <span class="proj-thumb-icon">👶</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--orange)">Education · Teaching</div>
-              <div class="proj-name">Kids Coding Curriculum</div>
-              <p class="proj-desc">Designed and delivered a programming curriculum for children aged 7–18. Created interactive, age-appropriate lessons covering foundational coding concepts and problem-solving.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Education</span>
-                <span class="proj-tag">Python</span>
-                <span class="proj-tag">Curriculum Design</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- THIS PORTFOLIO -->
-          <div class="glass proj-card reveal" data-cat="web">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#4f8ef7;bottom:20%;right:20%;"></div>
-              <span class="proj-thumb-icon">🗂️</span>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--cyan)">Web · Personal Project</div>
-              <div class="proj-name">This Portfolio Website</div>
-              <p class="proj-desc">Built from scratch with Three.js 3D visuals, animated particle field, custom cursor, scanline aesthetics, and full responsive design. A live showcase of modern web development.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Three.js</span>
-                <span class="proj-tag">HTML/CSS</span>
-                <span class="proj-tag">JavaScript</span>
-                <span class="proj-tag">Vercel</span>
+                <span class="proj-tag">Campaign Design</span>
               </div>
             </div>
           </div>
@@ -1939,13 +2283,16 @@
 
               <div class="timeline-item">
                 <div class="tl-dot"></div>
-                <div class="tl-date">2025 — Present</div>
-                <div class="tl-role">Computer Engineering Trainee</div>
-                <div class="tl-org">Next to Your Mobile Computer Ltd · Computer Village, Ikeja, Lagos</div>
+                <div class="tl-date">2024 — Present</div>
+                <div class="tl-role">Full-Stack Developer — Independent</div>
+                <div class="tl-org">Self-employed · Remote, Lagos</div>
                 <ul class="tl-points">
-                  <li>Hands-on experience in hardware setup, maintenance, and troubleshooting</li>
-                  <li>Assembling and repairing computer systems for real clients</li>
-                  <li>Applying computer engineering principles in live environments</li>
+                  <li>Built and shipped 7+ production web applications end-to-end as sole developer</li>
+                  <li>MadrasahOS — bilingual school management platform for INSAIS (1,000+ students), built with Next.js 14, Supabase, Claude AI, and Paystack; designed for multi-tenant SaaS scale</li>
+                  <li>OfficialValue Exchange — live fintech platform with Firebase admin, CoinGecko live prices, and SHA-256 auth — zero dependencies in the frontend</li>
+                  <li>ORDA — trading journal and behavioural intelligence SaaS (React, TypeScript, Recharts, Supabase)</li>
+                  <li>The Bridal Fix — e-commerce platform with Sanity CMS, Paystack, and Brevo transactional email</li>
+                  <li>IMANSOFT Technologies, Fagars & Fasheg, Falah — additional live, deployed products</li>
                 </ul>
               </div>
 
@@ -1955,7 +2302,7 @@
                 <div class="tl-role">Freelance UI/UX Designer</div>
                 <div class="tl-org">Ornamique Jewels & Personal Projects · Remote, Lagos</div>
                 <ul class="tl-points">
-                  <li>Designed UI/UX wireframes and prototypes for digital platforms</li>
+                  <li>Designed UI/UX wireframes and prototypes for digital platforms using Figma</li>
                   <li>Developed branding and marketing graphics for social media campaigns</li>
                   <li>Delivered client-aligned designs that met measurable business objectives</li>
                 </ul>
@@ -1975,13 +2322,12 @@
 
               <div class="timeline-item">
                 <div class="tl-dot"></div>
-                <div class="tl-date">2024 — Present</div>
-                <div class="tl-role">Full Stack Developer (Personal Projects)</div>
-                <div class="tl-org">Independent · Remote</div>
+                <div class="tl-date">2025 — Present</div>
+                <div class="tl-role">Computer Engineering Trainee</div>
+                <div class="tl-org">Next to Your Mobile Computer Ltd · Computer Village, Ikeja, Lagos</div>
                 <ul class="tl-points">
-                  <li>Built Falah — Islamic prayer tracking PWA with gamification (Next.js + Supabase)</li>
-                  <li>Delivered Fagars & Fasheg — enterprise import/export website (Next.js + TypeScript)</li>
-                  <li>Developing INSAIS — comprehensive school management system for 1000+ students</li>
+                  <li>Hands-on hardware setup, maintenance, and troubleshooting</li>
+                  <li>Assembling and repairing computer systems for real clients daily</li>
                 </ul>
               </div>
 
@@ -2041,7 +2387,6 @@
             <div class="contact-options">
 
               <a href="mailto:balogunabdsamad6@gmail.com" class="contact-opt">
-                <span class="contact-opt-icon">📩</span>
                 <div class="contact-opt-info">
                   <div class="contact-opt-key">Email</div>
                   <div class="contact-opt-val">balogunabdsamad6@gmail.com</div>
@@ -2049,7 +2394,6 @@
               </a>
 
               <a href="https://wa.me/2349114007286" target="_blank" class="contact-opt">
-                <span class="contact-opt-icon">💬</span>
                 <div class="contact-opt-info">
                   <div class="contact-opt-key">WhatsApp</div>
                   <div class="contact-opt-val">+234 911 400 7286</div>
@@ -2057,15 +2401,20 @@
               </a>
 
               <a href="tel:+2349114007286" class="contact-opt">
-                <span class="contact-opt-icon">📞</span>
                 <div class="contact-opt-info">
                   <div class="contact-opt-key">Phone</div>
                   <div class="contact-opt-val">09114007286 / 09036661555</div>
                 </div>
               </a>
 
+              <a href="https://github.com/balosam" target="_blank" class="contact-opt">
+                <div class="contact-opt-info">
+                  <div class="contact-opt-key">GitHub</div>
+                  <div class="contact-opt-val">github.com/balosam</div>
+                </div>
+              </a>
+
               <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" class="contact-opt">
-                <span class="contact-opt-icon">🔗</span>
                 <div class="contact-opt-info">
                   <div class="contact-opt-key">LinkedIn</div>
                   <div class="contact-opt-val">balogun-abdsamad</div>
@@ -2077,15 +2426,14 @@
 
           <div class="glass contact-right">
             <div class="cta-box">
-              <span class="cta-icon">🚀</span>
               <div class="cta-title">Ready to Start a Project?</div>
               <p class="cta-text">
                 Let's talk about your idea. Whether it's a startup web app, business website, UI design, or branding — I'm here and I deliver.
               </p>
               <div class="cta-btns">
-                <a href="mailto:balogunabdsamad6@gmail.com" class="cta-btn primary">📩 Send Me an Email</a>
-                <a href="https://wa.me/2349114007286" target="_blank" class="cta-btn secondary">💬 Chat on WhatsApp</a>
-                <button onclick="openCVModal()" class="cta-btn ghost">📄 Request My CV</button>
+                <a href="mailto:balogunabdsamad6@gmail.com" class="cta-btn primary">Send Me an Email</a>
+                <a href="https://wa.me/2349114007286" target="_blank" class="cta-btn secondary">Chat on WhatsApp</a>
+                <button onclick="openCVModal()" class="cta-btn ghost">Request My CV</button>
               </div>
             </div>
           </div>
@@ -2106,178 +2454,13 @@
     </div>
   </footer>
 
-  <!-- ====== CV REQUEST MODAL ====== -->
-  <div id="cvModal" style="
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:500;
-    background:rgba(4,6,15,0.85);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-  ">
-    <div style="
-      background:#0a0f1e;
-      border:1px solid rgba(0,212,255,0.2);
-      border-radius:12px;
-      padding:40px 36px;
-      max-width:460px;
-      width:100%;
-      position:relative;
-      box-shadow:0 0 60px rgba(0,212,255,0.08), 0 32px 64px rgba(0,0,0,0.5);
-    ">
-      <!-- Close -->
-      <button onclick="closeCVModal()" style="
-        position:absolute;
-        top:16px;right:18px;
-        background:none;border:none;
-        color:rgba(232,234,246,0.4);
-        font-size:1.3rem;
-        cursor:pointer;
-        font-family:'Space Mono',monospace;
-        transition:color 0.2s;
-        line-height:1;
-      " onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='rgba(232,234,246,0.4)'">✕</button>
-
-      <!-- Header -->
-      <div style="margin-bottom:28px;">
-        <div style="
-          font-family:'Space Mono',monospace;
-          font-size:0.65rem;
-          letter-spacing:0.15em;
-          text-transform:uppercase;
-          color:#00d4ff;
-          margin-bottom:10px;
-          display:flex;align-items:center;gap:8px;
-        ">
-          <span style="display:inline-block;width:20px;height:1px;background:#00d4ff;"></span>
-          Request CV
-        </div>
-        <h3 style="
-          font-family:'Outfit',sans-serif;
-          font-size:1.5rem;
-          font-weight:800;
-          letter-spacing:-0.03em;
-          color:#e8eaf6;
-          margin-bottom:8px;
-        ">How would you like to reach out?</h3>
-        <p style="
-          font-size:0.85rem;
-          color:rgba(232,234,246,0.45);
-          line-height:1.65;
-          font-weight:300;
-        ">Choose your preferred channel. I'll send my CV over right away.</p>
-      </div>
-
-      <!-- Options -->
-      <div style="display:flex;flex-direction:column;gap:12px;">
-
-        <!-- Email option -->
-        <a href="mailto:balogunabdsamad6@gmail.com" style="
-          display:flex;
-          align-items:center;
-          gap:16px;
-          padding:18px 20px;
-          border:1px solid rgba(255,255,255,0.08);
-          border-radius:8px;
-          text-decoration:none;
-          background:rgba(255,255,255,0.02);
-          transition:all 0.25s;
-          cursor:pointer;
-        " onmouseover="this.style.borderColor='#00d4ff';this.style.background='rgba(0,212,255,0.06)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.02)';this.style.transform='translateX(0)'">
-          <span style="font-size:1.6rem;width:44px;text-align:center;flex-shrink:0;">📩</span>
-          <div>
-            <div style="
-              font-family:'Space Mono',monospace;
-              font-size:0.6rem;
-              letter-spacing:0.1em;
-              text-transform:uppercase;
-              color:rgba(232,234,246,0.35);
-              margin-bottom:4px;
-            ">Via Email</div>
-            <div style="
-              font-size:0.95rem;
-              font-weight:600;
-              color:#e8eaf6;
-              margin-bottom:2px;
-            ">Send a formal request</div>
-            <div style="
-              font-size:0.78rem;
-              color:rgba(232,234,246,0.4);
-              font-weight:300;
-            ">balogunabdsamad6@gmail.com</div>
-          </div>
-          <span style="margin-left:auto;color:#00d4ff;font-size:1rem;opacity:0.6;">→</span>
-        </a>
-
-        <!-- WhatsApp option -->
-        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%0A%0AThanks!" target="_blank" style="
-          display:flex;
-          align-items:center;
-          gap:16px;
-          padding:18px 20px;
-          border:1px solid rgba(255,255,255,0.08);
-          border-radius:8px;
-          text-decoration:none;
-          background:rgba(255,255,255,0.02);
-          transition:all 0.25s;
-          cursor:pointer;
-        "
-        onmouseover="this.style.borderColor='#25d366';this.style.background='rgba(37,211,102,0.06)';this.style.transform='translateX(4px)'"
-        onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.background='rgba(255,255,255,0.02)';this.style.transform='translateX(0)'"
-        >
-          <span style="font-size:1.6rem;width:44px;text-align:center;flex-shrink:0;">💬</span>
-          <div>
-            <div style="
-              font-family:'Space Mono',monospace;
-              font-size:0.6rem;
-              letter-spacing:0.1em;
-              text-transform:uppercase;
-              color:rgba(232,234,246,0.35);
-              margin-bottom:4px;
-            ">Via WhatsApp</div>
-            <div style="
-              font-size:0.95rem;
-              font-weight:600;
-              color:#e8eaf6;
-              margin-bottom:2px;
-            ">Quick & direct message</div>
-            <div style="
-              font-size:0.78rem;
-              color:rgba(232,234,246,0.4);
-              font-weight:300;
-            ">+234 911 400 7286</div>
-          </div>
-          <span style="margin-left:auto;color:#25d366;font-size:1rem;opacity:0.6;">→</span>
-        </a>
-
-      </div>
-
-      <!-- Footer note -->
-      <p style="
-        margin-top:20px;
-        font-family:'Space Mono',monospace;
-        font-size:0.62rem;
-        letter-spacing:0.05em;
-        color:rgba(232,234,246,0.25);
-        text-align:center;
-        line-height:1.6;
-      ">I typically respond within a few hours · Lagos, Nigeria 🇳🇬</p>
-
-    </div>
-  </div>
-
   <!-- WhatsApp Float -->
   <a href="https://wa.me/2349114007286" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
 
   <!-- Back to Top -->
   <button id="backToTop" title="Back to top">↑</button>
 
-
-  <!-- ===== CV REQUEST MODAL ===== -->
+  <!-- ====== CV REQUEST MODAL ====== -->
   <div class="cv-modal-overlay" id="cvModal" onclick="handleOverlayClick(event)">
     <div class="cv-modal">
       <button class="cv-modal-close" onclick="closeCVModal()">[ ✕ ]</button>
@@ -2288,24 +2471,29 @@
 
       <div class="cv-modal-options">
 
-        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV%20for%20review.%0A%0AThank%20you." class="cv-modal-opt email">
+        <!-- Email option -->
+        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV%20for%20review.%0A%0AThank%20you."
+           class="cv-modal-opt email">
           <span class="cv-modal-opt-icon">📩</span>
-          <div class="cv-modal-opt-text">
-            <div class="cv-modal-opt-label">Via Email</div>
+          <div class="cv-modal-opt-body">
+            <div class="cv-modal-opt-type">Via Email</div>
+            <div class="cv-modal-opt-label">Send a formal request</div>
             <div class="cv-modal-opt-val">balogunabdsamad6@gmail.com</div>
-            <div class="cv-modal-opt-hint">Formal request — preferred by companies</div>
           </div>
-          <span class="cv-modal-arrow">→</span>
+          <span class="cv-modal-opt-arrow">→</span>
         </a>
 
-        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%0A%0AThanks!" target="_blank" class="cv-modal-opt whatsapp">
+        <!-- WhatsApp option -->
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%0A%0AThanks!"
+           target="_blank"
+           class="cv-modal-opt whatsapp">
           <span class="cv-modal-opt-icon">💬</span>
-          <div class="cv-modal-opt-text">
-            <div class="cv-modal-opt-label">Via WhatsApp</div>
+          <div class="cv-modal-opt-body">
+            <div class="cv-modal-opt-type">Via WhatsApp</div>
+            <div class="cv-modal-opt-label">Quick &amp; direct message</div>
             <div class="cv-modal-opt-val">+234 911 400 7286</div>
-            <div class="cv-modal-opt-hint">Quick & direct — fastest response</div>
           </div>
-          <span class="cv-modal-arrow">→</span>
+          <span class="cv-modal-opt-arrow">→</span>
         </a>
 
       </div>
@@ -2314,9 +2502,10 @@
     </div>
   </div>
 
-  <!-- Three.js (must load before script.js) -->
+  <!-- Three.js must load BEFORE script.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- External JS -->
+  <!-- Main JS -->
   <script src="script.js"></script>
+
 </body>
 </html>
