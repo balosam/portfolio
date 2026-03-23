@@ -22,7 +22,6 @@ if (!isMobile) {
     });
   }
 } else {
-  // Hide cursor elements on mobile
   const c = document.getElementById('cursor');
   const r = document.getElementById('cursorRing');
   if (c) c.style.display = 'none';
@@ -52,7 +51,6 @@ if (!isMobile) {
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
     camera.position.z = 30;
 
-    // Fewer particles on smaller desktop screens
     const count     = window.innerWidth > 1200 ? 1200 : 700;
     const positions = new Float32Array(count * 3);
     const colors    = new Float32Array(count * 3);
@@ -81,7 +79,6 @@ if (!isMobile) {
     const points = new THREE.Points(geo, mat);
     scene.add(points);
 
-    // Wireframe shapes
     const shapes         = [];
     const geometries     = [
       new THREE.DodecahedronGeometry(5.5, 0),
@@ -111,7 +108,6 @@ if (!isMobile) {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Pause when tab is hidden — saves battery
     let isVisible = true;
     document.addEventListener('visibilitychange', () => { isVisible = !document.hidden; });
 
@@ -122,7 +118,6 @@ if (!isMobile) {
       requestAnimationFrame(animateBG);
       if (!isVisible) return;
       frame++;
-      // Skip every other frame on smaller desktops
       if (window.innerWidth < 1024 && frame % 2 !== 0) return;
 
       const t = clock.getElapsedTime();
@@ -137,7 +132,6 @@ if (!isMobile) {
     animateBG();
   })();
 } else {
-  // Hide canvas on mobile to free GPU
   const bgCanvas = document.getElementById('bg-canvas');
   if (bgCanvas) bgCanvas.style.display = 'none';
 }
@@ -164,7 +158,6 @@ if (!isMobile) {
     const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
     camera.position.z = 6;
 
-    // Simpler geometry on low-end devices
     const segments = isLowEnd ? 80 : 150;
     const geo = new THREE.TorusKnotGeometry(1.8, 0.42, segments, 24, 3, 5);
 
@@ -220,7 +213,6 @@ if (!isMobile) {
     animateHero();
   })();
 } else {
-  // Hide hero canvas on mobile — show a clean gradient instead
   const heroCanvas = document.getElementById('hero-canvas');
   const heroWrap   = document.getElementById('hero-canvas-wrap');
   if (heroCanvas) heroCanvas.style.display = 'none';
@@ -261,8 +253,6 @@ function closeMM() {
 
 // -------------------------------------------------------
 // SCROLL REVEAL
-// Mobile: instant (no stagger delay)
-// Desktop: staggered fade-up
 // -------------------------------------------------------
 const reveals     = document.querySelectorAll('.reveal');
 const revObserver = new IntersectionObserver(entries => {
@@ -277,7 +267,6 @@ const revObserver = new IntersectionObserver(entries => {
 
 reveals.forEach(el => revObserver.observe(el));
 
-// Hero always visible immediately
 document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('show'));
 
 
@@ -332,12 +321,37 @@ function closeCVModal() {
   document.body.style.overflow = '';
 }
 
-// Called by onclick="handleOverlayClick(event)" on the modal backdrop
 function handleOverlayClick(e) {
   if (e.target === e.currentTarget) closeCVModal();
 }
 
-// Also close on Escape key
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeCVModal();
 });
+
+
+// -------------------------------------------------------
+// CASE STUDY TOGGLE
+// -------------------------------------------------------
+function toggleCaseStudy(btn) {
+  const projBody = btn.closest('.proj-body');
+  if (!projBody) return;
+  const panel = projBody.querySelector('.case-study-panel');
+  if (!panel) return;
+
+  const isOpen = panel.classList.contains('open');
+
+  if (isOpen) {
+    panel.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    panel.classList.add('open');
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    // Smooth scroll so the panel comes into view
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+}

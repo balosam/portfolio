@@ -982,6 +982,119 @@
     .proj-card.featured .proj-thumb { height: 260px; }
     .proj-card.featured .proj-name { font-size: 1.4rem; }
 
+    /* ---- CASE STUDY TOGGLE ---- */
+    .case-study-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--purple-bright);
+      background: none;
+      border: 1px solid rgba(167,139,250,0.25);
+      border-radius: 2px;
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 12px;
+    }
+
+    .case-study-toggle:hover {
+      border-color: var(--purple-bright);
+      background: rgba(167,139,250,0.08);
+    }
+
+    .case-study-toggle .toggle-arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+      font-style: normal;
+    }
+
+    .case-study-toggle.open .toggle-arrow { transform: rotate(180deg); }
+
+    .case-study-panel {
+      display: none;
+      margin-top: 20px;
+      padding: 20px 22px;
+      border-top: 1px solid var(--border);
+      animation: csFadeIn 0.3s ease;
+    }
+
+    .case-study-panel.open { display: block; }
+
+    @keyframes csFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .cs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .cs-block {}
+
+    .cs-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cs-label::before {
+      content: '';
+      width: 10px; height: 1px;
+      background: var(--cyan);
+    }
+
+    .cs-text {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .cs-text b { color: var(--text); font-weight: 600; }
+
+    .cs-outcome-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    .cs-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cs-stat-val {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .cs-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+
     /* ---- EXPERIENCE ---- */
     .exp-grid {
       display: grid;
@@ -1381,7 +1494,6 @@
       50% { box-shadow: 0 0 16px var(--green); }
     }
 
-    /* ---- MOBILE PERFORMANCE ---- */
     /* ============================================================
        TABLET — max 1024px
     ============================================================ */
@@ -1391,19 +1503,17 @@
       .proj-card.featured .proj-thumb { height: 220px; }
       .proj-card.featured .proj-name { font-size: 1.15rem; }
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .cs-grid { grid-template-columns: 1fr 1fr; }
     }
 
     /* ============================================================
        TABLET PORTRAIT — max 900px
-       Stack all grids, hide desktop nav
     ============================================================ */
     @media (max-width: 900px) {
-      /* Nav */
       .nav-links,
       .nav-right .btn-cv { display: none; }
       .hamburger { display: flex; }
 
-      /* Grids → single column */
       .hero-grid,
       .about-grid,
       .contact-layout,
@@ -1412,33 +1522,27 @@
 
       .about-main { grid-row: auto; }
 
-      /* Hero */
       #hero { padding: 100px 0 60px; }
       .hero-grid { gap: 36px; }
       #hero-canvas-wrap { height: 280px; }
       .hero-hud { padding: 14px 18px; }
       .hud-val { font-size: 1.2rem; }
 
-      /* Sections */
       section { padding: 72px 0; }
       .sec-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
 
-      /* Experience grid */
       .exp-grid { gap: 40px; }
     }
 
     /* ============================================================
        MOBILE — max 768px
-       Performance + layout fixes
     ============================================================ */
     @media (max-width: 768px) {
-      /* --- Performance: kill expensive paint ops --- */
-      body::after  { display: none; } /* grain animation */
-      body::before { display: none; } /* scanlines */
+      body::after  { display: none; }
+      body::before { display: none; }
       .cursor, .cursor-ring { display: none; }
       body { cursor: auto; }
 
-      /* Disable hover transforms — janky on touch */
       .glass:hover { transform: none; box-shadow: none; }
       .glass:hover::before { opacity: 0; }
       .proj-card:hover .proj-thumb-icon { transform: none; filter: none; }
@@ -1448,14 +1552,11 @@
       .btn-outline:hover { transform: none; }
       .nav-cta:hover { transform: none; }
 
-      /* --- Container --- */
       .container { padding: 0 18px; }
 
-      /* --- Nav --- */
       nav { padding: 16px 0; }
       .logo { font-size: 1rem; }
 
-      /* --- Hero --- */
       #hero { padding: 90px 0 52px; min-height: auto; }
       .hero-eyebrow { font-size: 0.65rem; margin-bottom: 14px; }
       .hero-name { font-size: clamp(2.4rem, 11vw, 3.8rem); line-height: 0.92; margin-bottom: 10px; }
@@ -1467,23 +1568,19 @@
       .hero-links { gap: 16px; flex-wrap: wrap; }
       .hero-links a { font-size: 0.65rem; }
 
-      /* Hero canvas wrap: show a gradient, no 3D */
       #hero-canvas-wrap { height: 220px; border-radius: 8px; }
       #hero-canvas { display: none; }
 
-      /* HUD */
       .hud-row { gap: 16px; flex-wrap: wrap; }
       .hud-val { font-size: 1.1rem; }
       .hud-label { font-size: 0.52rem; }
 
-      /* --- Sections --- */
       section { padding: 56px 0; }
       .sec-tag { font-size: 0.62rem; margin-bottom: 8px; }
       .sec-title { font-size: clamp(1.6rem, 8vw, 2.4rem); margin-bottom: 10px; }
       .sec-sub { font-size: 0.88rem; margin-bottom: 40px; }
       .divider { margin: 0 18px; }
 
-      /* --- About --- */
       .about-main { padding: 24px; }
       .about-text { font-size: 0.92rem; line-height: 1.75; }
       .chips { gap: 6px; margin-top: 20px; }
@@ -1492,20 +1589,17 @@
       .info-key { font-size: 0.58rem; }
       .info-val { font-size: 0.9rem; }
 
-      /* --- Services --- */
       .services-grid { gap: 12px; }
       .service-card { padding: 26px 22px; }
       .service-num { font-size: 0.6rem; margin-bottom: 12px; }
       .service-name { font-size: 1.1rem; margin-bottom: 8px; }
       .service-desc { font-size: 0.85rem; }
 
-      /* --- Skills --- */
       .skills-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
       .skill-group { padding: 20px; }
       .skill-group-name { font-size: 0.6rem; margin-bottom: 12px; }
       .skill-item { font-size: 0.82rem; padding: 5px 0; }
 
-      /* --- Projects --- */
       .projects-grid { grid-template-columns: 1fr; gap: 14px; }
       .proj-card.featured { grid-column: span 1; }
       .proj-card.featured .proj-thumb { height: 200px; }
@@ -1522,7 +1616,9 @@
       .filters { gap: 6px; margin-bottom: 28px; }
       .filter-btn { font-size: 0.6rem; padding: 6px 13px; }
 
-      /* --- Experience / Timeline --- */
+      .cs-grid { grid-template-columns: 1fr; gap: 12px; }
+      .case-study-panel { padding: 16px 18px; }
+
       .timeline::before { left: 0; }
       .timeline-item { padding: 0 0 32px 24px; }
       .tl-dot { left: -4px; width: 8px; height: 8px; }
@@ -1531,7 +1627,6 @@
       .tl-org { font-size: 0.72rem; margin-bottom: 10px; }
       .tl-points li { font-size: 0.82rem; padding-left: 12px; }
 
-      /* Education */
       .edu-sec-label { font-size: 0.6rem; margin-bottom: 14px; }
       .edu-cards { gap: 10px; }
       .edu-card { padding: 16px 20px; }
@@ -1539,7 +1634,6 @@
       .edu-deg { font-size: 0.88rem; margin-bottom: 4px; }
       .edu-inst { font-size: 0.75rem; }
 
-      /* --- Contact --- */
       .contact-left { padding: 24px; }
       .contact-left h3 { font-size: 1.3rem; margin-bottom: 8px; }
       .contact-left p { font-size: 0.85rem; margin-bottom: 24px; }
@@ -1555,23 +1649,19 @@
       .cta-btns { gap: 8px; }
       .cta-btn { font-size: 0.7rem; padding: 12px 18px; }
 
-      /* --- Footer --- */
       footer { padding: 28px 0; }
       .foot-inner { flex-direction: column; gap: 8px; text-align: center; }
       .foot-logo { font-size: 0.9rem; }
       .foot-copy { font-size: 0.58rem; }
 
-      /* --- WhatsApp + Back to top --- */
       .wa-float { width: 46px; height: 46px; font-size: 1.2rem; bottom: 20px; right: 16px; }
       #backToTop { width: 38px; height: 38px; font-size: 0.9rem; bottom: 76px; right: 16px; }
 
-      /* --- Mobile menu links --- */
       .mobile-menu a { font-size: 2rem; }
     }
 
     /* ============================================================
        SMALL MOBILE — max 480px
-       Extra tightening for small phones
     ============================================================ */
     @media (max-width: 480px) {
       .container { padding: 0 16px; }
@@ -1591,12 +1681,12 @@
       .filters { gap: 5px; }
       .filter-btn { font-size: 0.58rem; padding: 5px 11px; }
 
-      /* Stack contact info on very small screens */
       .contact-opt-val { font-size: 0.75rem; word-break: break-all; }
 
       .mobile-menu a { font-size: 1.7rem; gap: 28px; }
       .mobile-menu { gap: 24px; }
     }
+
     /* ============================================================
        CV REQUEST MODAL
     ============================================================ */
@@ -1741,7 +1831,6 @@
       line-height: 1.6;
     }
 
-    /* Mobile modal adjustments */
     @media (max-width: 480px) {
       .cv-modal { padding: 28px 20px; }
       .cv-modal-title { font-size: 1.15rem; }
@@ -1749,7 +1838,7 @@
       .cv-modal-opt-icon { font-size: 1.2rem; width: 32px; }
       .cv-modal-opt-label { font-size: 0.85rem; }
       .cv-modal-opt-val { font-size: 0.72rem; }
-      .cv-modal-opt:hover { transform: none; } /* no hover shift on mobile */
+      .cv-modal-opt:hover { transform: none; }
     }
 
   </style>
@@ -1805,6 +1894,7 @@
       <div class="container">
         <div class="hero-grid">
 
+          <!-- LEFT COLUMN -->
           <div>
             <div class="hero-eyebrow">
               <span class="status-dot"></span>
@@ -1838,13 +1928,16 @@
               <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank">LinkedIn</a>
               <a href="https://wa.me/2349114007286" target="_blank">WhatsApp</a>
             </div>
+          </div>
+          <!-- END LEFT COLUMN -->
 
+          <!-- RIGHT COLUMN — 3D canvas -->
           <div id="hero-canvas-wrap">
             <canvas id="hero-canvas"></canvas>
             <div class="hero-hud">
               <div class="hud-row">
                 <div class="hud-stat">
-                  <div class="hud-val">8+</div>
+                  <div class="hud-val">10+</div>
                   <div class="hud-label">Projects</div>
                 </div>
                 <div class="hud-stat">
@@ -1862,6 +1955,7 @@
               </div>
             </div>
           </div>
+          <!-- END RIGHT COLUMN -->
 
         </div>
       </div>
@@ -2047,7 +2141,7 @@
 
         <div class="projects-grid" id="projectGrid">
 
-          <!-- MADRASAHOS / INSAIS — Featured -->
+          <!-- MADRASAHOS / INSAIS — Featured + Case Study -->
           <div class="glass proj-card featured reveal" data-cat="edtech">
             <div class="proj-thumb">
               <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#080c1a,#0a1520);"></div>
@@ -2074,7 +2168,50 @@
                 <span class="proj-tag">next-intl</span>
                 <span class="proj-tag">Twilio</span>
               </div>
-              <span class="proj-link" style="color:rgba(255,255,255,0.25);cursor:default;font-size:0.65rem;letter-spacing:0.08em;font-family:var(--font-mono);text-transform:uppercase;">In Active Development</span>
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
+                <span style="color:rgba(255,255,255,0.25);cursor:default;font-size:0.65rem;letter-spacing:0.08em;font-family:var(--font-mono);text-transform:uppercase;">In Active Development</span>
+                <button class="case-study-toggle" onclick="toggleCaseStudy(this)" aria-expanded="false">
+                  Case Study <i class="toggle-arrow">▾</i>
+                </button>
+              </div>
+
+              <!-- CASE STUDY PANEL -->
+              <div class="case-study-panel">
+                <div class="cs-grid">
+                  <div class="cs-block">
+                    <div class="cs-label">The Problem</div>
+                    <p class="cs-text">INSAIS — a 40-year-old Lagos Islamic school with <b>1,000+ students</b> — was running entirely on paper. No digital records, no result system, no fee tracking. Staff were manually writing report cards and losing student data across terms.</p>
+                  </div>
+                  <div class="cs-block">
+                    <div class="cs-label">What I Built</div>
+                    <p class="cs-text">A fully bilingual (Arabic + English) SaaS platform with role-based portals for Admins, Teachers, and Students. Features include result entry & PDF report generation, Paystack fee collection, WhatsApp notifications via Twilio, and Claude AI for smart summaries — all built solo.</p>
+                  </div>
+                  <div class="cs-block">
+                    <div class="cs-label">Architecture Decision</div>
+                    <p class="cs-text">Chose <b>Next.js 14 + Supabase</b> for real-time data and row-level security, <b>next-intl</b> for true RTL Arabic support, and <b>shadcn/ui</b> for accessible, themeable components — designed from day one for multi-tenant SaaS scale beyond this first institution.</p>
+                  </div>
+                </div>
+                <div class="cs-outcome-row">
+                  <div class="cs-stat">
+                    <div class="cs-stat-val">1,000+</div>
+                    <div class="cs-stat-label">Students on platform</div>
+                  </div>
+                  <div class="cs-stat">
+                    <div class="cs-stat-val">3</div>
+                    <div class="cs-stat-label">Role-based portals</div>
+                  </div>
+                  <div class="cs-stat">
+                    <div class="cs-stat-val">40yr</div>
+                    <div class="cs-stat-label">Institution digitised</div>
+                  </div>
+                  <div class="cs-stat">
+                    <div class="cs-stat-val">Solo</div>
+                    <div class="cs-stat-label">Built end-to-end</div>
+                  </div>
+                </div>
+              </div>
+              <!-- END CASE STUDY PANEL -->
+
             </div>
           </div>
 
@@ -2276,7 +2413,6 @@
 
         <div class="exp-grid reveal">
 
-          <!-- Timeline -->
           <div>
             <div class="sec-tag" style="margin-bottom:28px;color:var(--cyan)">Experience</div>
             <div class="timeline">
@@ -2334,7 +2470,6 @@
             </div>
           </div>
 
-          <!-- Education -->
           <div class="edu-side">
             <div class="edu-sec-label">Education</div>
             <div class="edu-cards">
@@ -2449,7 +2584,7 @@
     <div class="container">
       <div class="foot-inner">
         <a href="#" class="foot-logo">Sam<span>.</span></a>
-        <p class="foot-copy">© 2025 Abd'samad Adeniyi Balogun · Lagos, Nigeria · Built with Three.js + ❤️</p>
+        <p class="foot-copy">© 2026 Abd'samad Adeniyi Balogun · Lagos, Nigeria · Built with Three.js + ❤️</p>
       </div>
     </div>
   </footer>
@@ -2471,7 +2606,6 @@
 
       <div class="cv-modal-options">
 
-        <!-- Email option -->
         <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV%20for%20review.%0A%0AThank%20you."
            class="cv-modal-opt email">
           <span class="cv-modal-opt-icon">📩</span>
@@ -2483,7 +2617,6 @@
           <span class="cv-modal-opt-arrow">→</span>
         </a>
 
-        <!-- WhatsApp option -->
         <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%0A%0AThanks!"
            target="_blank"
            class="cv-modal-opt whatsapp">
@@ -2502,9 +2635,7 @@
     </div>
   </div>
 
-  <!-- Three.js must load BEFORE script.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- Main JS -->
   <script src="script.js"></script>
 
 </body>
