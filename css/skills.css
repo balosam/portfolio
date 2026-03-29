@@ -1,0 +1,445 @@
+/* ============================================================
+   SKILLS.CSS — Abd'samad Balogun Portfolio
+   Skills page: hero, tier legend, filter tabs, skill grid, stats, CTA
+============================================================ */
+
+/* ── PAGE HERO ── */
+#skills-hero {
+  padding: calc(var(--nav-h) + 72px) 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skills-hero-glow {
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 55vw; height: 40vw;
+  background: radial-gradient(ellipse, rgba(124,92,252,0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skills-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.skills-bg-count {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 14vw, 10rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(124,92,252,0.12);
+  position: absolute;
+  top: -0.1em; right: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ── TIER LEGEND ── */
+#tier-legend {
+  padding: 0 0 20px;
+}
+
+.legend-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 16px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.legend-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.legend-items {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tier-pip {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tier-production { background: var(--cyan); box-shadow: 0 0 8px rgba(0,212,255,0.5); }
+.tier-proficient  { background: var(--violet); box-shadow: 0 0 8px rgba(124,92,252,0.4); }
+.tier-familiar    { background: var(--amber); box-shadow: 0 0 8px rgba(245,166,35,0.4); }
+.tier-learning    { background: var(--green); box-shadow: 0 0 8px rgba(18,185,129,0.4); }
+
+.legend-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.legend-sub {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  font-weight: 300;
+}
+
+/* ── FILTER TABS ── */
+#skills-filter {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 40;
+  padding: 16px 0;
+  background: rgba(6,8,16,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.skills-filter-inner {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.skill-tab {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+  white-space: nowrap;
+}
+
+.skill-tab:hover {
+  border-color: var(--border-2);
+  color: var(--text);
+  background: var(--surface);
+}
+
+.skill-tab.active {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(124,92,252,0.35);
+}
+
+/* ── SKILLS GRID SECTION ── */
+#skills-grid {
+  padding: 64px 0 80px;
+}
+
+/* Panel show/hide */
+.skill-panel {
+  display: none;
+  animation: panel-in 0.35s var(--ease);
+}
+
+.skill-panel.active {
+  display: block;
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Three-column tier layout */
+.skill-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* Tier column */
+.skill-tier-col {}
+
+.tier-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tier-production-header { color: var(--cyan); }
+.tier-proficient-header  { color: var(--violet); }
+.tier-familiar-header    { color: var(--amber); }
+.tier-learning-header    { color: var(--green); }
+
+/* Skill list */
+.skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Skill card */
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  position: relative;
+  transition:
+    border-color var(--dur-med) var(--ease),
+    transform var(--dur-med) var(--ease),
+    background var(--dur-med) var(--ease);
+  overflow: hidden;
+}
+
+/* Left accent bar per tier — applied by column */
+.skill-tier-col:nth-child(1) .skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: var(--cyan);
+  opacity: 0;
+  transition: opacity var(--dur-med);
+}
+
+.skill-tier-col:nth-child(2) .skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: var(--violet);
+  opacity: 0;
+  transition: opacity var(--dur-med);
+}
+
+.skill-tier-col:nth-child(3) .skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: var(--amber);
+  opacity: 0;
+  transition: opacity var(--dur-med);
+}
+
+/* Learning tier (3rd column in backends/languages panels) */
+.skill-panel[data-panel="backend"]   .skill-tier-col:nth-child(3) .skill-card::before,
+.skill-panel[data-panel="languages"] .skill-tier-col:nth-child(3) .skill-card::before {
+  background: var(--green);
+}
+
+.skill-card:hover {
+  border-color: rgba(255,255,255,0.1);
+  transform: translateX(3px);
+  background: var(--surface-2);
+}
+
+.skill-card:hover::before { opacity: 1; }
+
+.skill-name {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+.skill-note {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  font-weight: 300;
+  line-height: 1.5;
+  font-family: var(--font-mono);
+}
+
+/* APIs panel — single wide column */
+.skill-panel[data-panel="apis"] .skill-panel-grid {
+  grid-template-columns: 1fr;
+  max-width: 540px;
+}
+
+.skill-panel[data-panel="apis"] .skill-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+/* Design panel — two columns */
+.skill-panel[data-panel="design"] .skill-panel-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* ── STATS STRIP ── */
+#skills-stats {
+  padding: 64px 0;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 16px 48px;
+  flex-shrink: 0;
+}
+
+.stat-val {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-plus {
+  color: var(--cyan);
+  font-size: 0.7em;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background: var(--border-2);
+  flex-shrink: 0;
+}
+
+/* ── CTA SECTION ── */
+#skills-cta {
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+}
+
+.skills-cta-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw; height: 30vw;
+  background: radial-gradient(ellipse, rgba(124,92,252,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.skills-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+
+.cta-title .outline {
+  -webkit-text-stroke: 1px rgba(124,92,252,0.5);
+  color: transparent;
+}
+
+.skills-cta-sub {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.skills-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .skill-panel-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .skill-panel[data-panel="apis"] .skill-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .skill-panel-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .skill-panel[data-panel="design"] .skill-panel-grid { grid-template-columns: 1fr 1fr; }
+  .legend-sub { display: none; }
+  .stat-item { padding: 16px 28px; }
+}
+
+@media (max-width: 768px) {
+  #skills-hero { padding: calc(var(--nav-h) + 32px) 0 40px; }
+  .skills-bg-count { display: none; }
+
+  .skill-panel-grid { grid-template-columns: 1fr; gap: 24px; }
+  .skill-panel[data-panel="apis"] .skill-list { grid-template-columns: 1fr; }
+  .skill-panel[data-panel="design"] .skill-panel-grid { grid-template-columns: 1fr; }
+
+  .stats-row { gap: 0; }
+  .stat-item { padding: 14px 20px; }
+  .stat-divider { display: none; }
+  .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+  .stat-item { background: var(--bg); padding: 24px 16px; }
+
+  .legend-inner { gap: 14px; }
+  .legend-items { gap: 12px; }
+
+  .skills-cta-actions { flex-direction: column; align-items: center; }
+  .skills-cta-actions .btn { width: 100%; max-width: 300px; justify-content: center; }
+
+  #skills-grid { padding: 40px 0 56px; }
+}
+
+@media (max-width: 480px) {
+  .skills-filter-inner { gap: 5px; }
+  .skill-tab { padding: 7px 12px; font-size: 0.58rem; }
+
+  .legend-item .legend-text { font-size: 0.58rem; }
+}

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Abd'samad Balogun</title>
+  <meta name="description" content="About Abd'samad Balogun — full-stack developer, UI/UX designer, and computer engineer based in Lagos, Nigeria. My journey, how I work, and what I'm building." />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== MOBILE MENU ==================== -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="btn-ghost" id="mobile-close" aria-label="Close menu" style="position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);">[ close ]</button>
+    <nav>
+      <a href="index.html"    class="mobile-menu-link" data-text="Home">Home</a>
+      <a href="about.html"    class="mobile-menu-link" data-text="About">About</a>
+      <a href="projects.html" class="mobile-menu-link" data-text="Projects">Projects</a>
+      <a href="skills.html"   class="mobile-menu-link" data-text="Skills">Skills</a>
+      <a href="blog.html"     class="mobile-menu-link" data-text="Writing">Writing</a>
+      <a href="contact.html"  class="mobile-menu-link" data-text="Contact">Contact</a>
+    </nav>
+    <div class="mobile-menu-bottom">
+      <button onclick="openCVModal()" class="btn btn-outline" style="width:200px;justify-content:center;">Request CV</button>
+      <p class="mobile-menu-status">Available for projects — Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Abd'samad Balogun home">
+        Sam<span class="dot">.</span>
+        <span class="tag">// dev</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"    class="nav-link">Home</a></li>
+        <li><a href="about.html"    class="nav-link active">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="skills.html"   class="nav-link">Skills</a></li>
+        <li><a href="blog.html"     class="nav-link">Writing</a></li>
+        <li><a href="contact.html"  class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-cv-btn" onclick="openCVModal()">Request CV</button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE ==================== -->
+  <div class="page">
+
+    <!-- ============ HERO ============ -->
+    <section id="about-hero">
+      <div class="about-hero-glow-1" aria-hidden="true"></div>
+      <div class="about-hero-glow-2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="about-hero-grid">
+
+          <!-- Left: text -->
+          <div class="about-hero-left">
+            <div class="sec-eyebrow reveal">About Me</div>
+            <h1 class="sec-title reveal delay-1">
+              Builder.<br>
+              <span class="outline">Designer.</span><br>
+              Engineer.
+            </h1>
+            <p class="about-intro reveal delay-2">
+              I'm Abd'samad — Balo for short. I'm a full-stack developer and UI/UX designer working out of Lagos, Nigeria. I build complete digital products from concept to deployment: the backend that holds things together, the interface people actually enjoy using, and everything in between.
+            </p>
+            <p class="about-intro reveal delay-3">
+              I started in hardware at Computer Village, Ikeja, learning how machines work at the component level. Then I trained formally at Aptech International in software engineering and UI/UX design. That combination shapes how I think about software: I care about how things work all the way down, not just what they look like on the surface.
+            </p>
+            <div class="about-hero-actions reveal delay-4">
+              <a href="projects.html" class="btn btn-primary">See My Work</a>
+              <a href="contact.html"  class="btn btn-outline">Get In Touch</a>
+            </div>
+          </div>
+
+          <!-- Right: identity card -->
+          <div class="about-hero-right reveal delay-2">
+            <div class="about-id-card">
+              <div class="id-card-top">
+                <div class="id-avatar" aria-hidden="true">
+                  <span>AB</span>
+                </div>
+                <div class="id-card-badge">
+                  <span class="status-dot"></span>
+                  Open to Opportunities
+                </div>
+              </div>
+
+              <div class="id-card-name">
+                <div class="id-name-full">Abd'samad Adeniyi Balogun</div>
+                <div class="id-name-handle">// balosam</div>
+              </div>
+
+              <div class="id-card-meta">
+                <div class="id-meta-row">
+                  <span class="id-meta-label">Role</span>
+                  <span class="id-meta-val">Full-Stack Dev + UI/UX Designer</span>
+                </div>
+                <div class="id-meta-row">
+                  <span class="id-meta-label">Base</span>
+                  <span class="id-meta-val">Lagos, Nigeria</span>
+                </div>
+                <div class="id-meta-row">
+                  <span class="id-meta-label">Training</span>
+                  <span class="id-meta-val">Aptech International · 2023–2025</span>
+                </div>
+                <div class="id-meta-row">
+                  <span class="id-meta-label">Stack</span>
+                  <span class="id-meta-val">Next.js · TypeScript · Supabase</span>
+                </div>
+                <div class="id-meta-row">
+                  <span class="id-meta-label">Available</span>
+                  <span class="id-meta-val id-meta-green">Freelance · Remote · Full-time</span>
+                </div>
+              </div>
+
+              <div class="id-card-stats">
+                <div class="id-stat">
+                  <div class="id-stat-val">10+</div>
+                  <div class="id-stat-label">Projects</div>
+                </div>
+                <div class="id-stat">
+                  <div class="id-stat-val">2yr</div>
+                  <div class="id-stat-label">Training</div>
+                </div>
+                <div class="id-stat">
+                  <div class="id-stat-val">4</div>
+                  <div class="id-stat-label">Disciplines</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TIMELINE ============ -->
+    <div class="divider"></div>
+    <section id="about-timeline">
+      <div class="container">
+        <div class="sec-eyebrow reveal">The Journey</div>
+        <h2 class="sec-title reveal delay-1">
+          How I got <span class="outline">here</span>
+        </h2>
+
+        <div class="timeline-wrap">
+
+          <!-- Entry 0 — WAPA -->
+          <div class="timeline-entry reveal">
+            <div class="timeline-left">
+              <div class="tl-year">2021</div>
+            </div>
+            <div class="timeline-connector" aria-hidden="true">
+              <div class="tl-dot tl-dot-violet"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-right">
+              <div class="tl-card">
+                <div class="tl-card-label tl-card-label-violet">Education</div>
+                <div class="tl-card-title">Office Productivity + Graphic Design at WAPA, Egbeda</div>
+                <p class="tl-card-desc">
+                  My first structured training. Learned Microsoft Word, Excel, and PowerPoint for professional document, spreadsheet, and presentation work. Also got hands-on with CorelDraw for vector graphic design and introductory Photoshop for image editing. This is where the interest in visual communication started.
+                </p>
+                <div class="tl-card-chips">
+                  <span class="chip">MS Office</span>
+                  <span class="chip">CorelDraw</span>
+                  <span class="chip chip-violet">First design training</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 1 -->
+          <div class="timeline-entry reveal delay-1">
+            <div class="timeline-left">
+              <div class="tl-year">2023</div>
+            </div>
+            <div class="timeline-connector" aria-hidden="true">
+              <div class="tl-dot"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-right">
+              <div class="tl-card">
+                <div class="tl-card-label">Education</div>
+                <div class="tl-card-title">Enrolled at Aptech International</div>
+                <p class="tl-card-desc">
+                  Started a two-year programme in Software Engineering and UI/UX Design at Aptech International. This is where I went from curious to serious. The curriculum covered full-stack web development, object-oriented programming, database design, and human-computer interaction. My first real projects came from here.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 2 -->
+          <div class="timeline-entry reveal delay-1">
+            <div class="timeline-left">
+              <div class="tl-year">2023</div>
+            </div>
+            <div class="timeline-connector" aria-hidden="true">
+              <div class="tl-dot"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-right">
+              <div class="tl-card">
+                <div class="tl-card-label">First Project</div>
+                <div class="tl-card-title">OfficialValue Exchange — First Production Ship</div>
+                <p class="tl-card-desc">
+                  Shipped my first real client project: a crypto and gift card trading platform for the Nigerian market. Built entirely in Vanilla JS with Firebase. Three weeks from brief to handoff. That project taught me more about production development than months of tutorials ever could.
+                </p>
+                <div class="tl-card-chips">
+                  <span class="chip">Vanilla JS</span>
+                  <span class="chip">Firebase</span>
+                  <span class="chip chip-cyan">First live deploy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 3 -->
+          <div class="timeline-entry reveal delay-2">
+            <div class="timeline-left">
+              <div class="tl-year">2024</div>
+            </div>
+            <div class="timeline-connector" aria-hidden="true">
+              <div class="tl-dot"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-right">
+              <div class="tl-card">
+                <div class="tl-card-label">Growth</div>
+                <div class="tl-card-title">Moved into Next.js and TypeScript at scale</div>
+                <p class="tl-card-desc">
+                  Graduated from jQuery-era thinking and went deep on the modern stack. Built MadrasahOS and ORDA in this period: both complex, real-user applications with multi-role auth, payment integrations, and demanding UX requirements. TypeScript became a daily tool, not an optional extra.
+                </p>
+                <div class="tl-card-chips">
+                  <span class="chip">Next.js 14</span>
+                  <span class="chip">TypeScript</span>
+                  <span class="chip">Supabase</span>
+                  <span class="chip">Paystack</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 4 -->
+          <div class="timeline-entry reveal delay-3">
+            <div class="timeline-left">
+              <div class="tl-year">2025</div>
+            </div>
+            <div class="timeline-connector" aria-hidden="true">
+              <div class="tl-dot"></div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-right">
+              <div class="tl-card">
+                <div class="tl-card-label">Education</div>
+                <div class="tl-card-title">Computer Engineering at Computer Village, Ikeja</div>
+                <p class="tl-card-desc">
+                  Completed the Aptech programme and started hands-on computer engineering work at Computer Village. Hardware diagnostics, system assembly, networking — the low-level foundation that makes me think differently about software performance, resource constraints, and what happens under the hood when code runs.
+                </p>
+                <div class="tl-card-chips">
+                  <span class="chip chip-amber">Hardware</span>
+                  <span class="chip chip-amber">Networking</span>
+                  <span class="chip chip-amber">System builds</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 5 -->
+          <div class="timeline-entry reveal delay-4">
+            <div class="timeline-left">
+              <div class="tl-year">2025</div>
+            </div>
+            <div class="timeline-connector" aria-hidden="true">
+              <div class="tl-dot"></div>
+              <div class="tl-line last"></div>
+            </div>
+            <div class="timeline-right">
+              <div class="tl-card tl-card-active">
+                <div class="tl-card-label-active">
+                  <span class="building-dot"></span>
+                  Now
+                </div>
+                <div class="tl-card-title">MadrasahOS v2 + active job search</div>
+                <p class="tl-card-desc">
+                  Currently rebuilding MadrasahOS v2 with a multi-tenant architecture designed to scale beyond INSAIS to Islamic schools across Nigeria. Simultaneously looking for a full-time role at a Nigerian tech company where I can grow fast and ship real products with a strong team.
+                </p>
+                <div class="tl-card-chips">
+                  <span class="chip chip-cyan">In progress</span>
+                  <span class="chip">MadrasahOS v2</span>
+                  <span class="chip">Open to roles</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STRENGTHS ============ -->
+    <div class="divider"></div>
+    <section id="about-strengths">
+      <div class="container">
+        <div class="sec-eyebrow reveal">Core Strengths</div>
+        <h2 class="sec-title reveal delay-1">
+          What I actually <span class="outline">bring</span>
+        </h2>
+        <p class="sec-sub reveal delay-2">
+          Not a skills list. These are things I can back up with real projects and real decisions.
+        </p>
+
+        <div class="strengths-grid">
+
+          <div class="strength-card reveal glass">
+            <div class="strength-number">01</div>
+            <div class="strength-icon" aria-hidden="true">⬡</div>
+            <h3 class="strength-title">I build things end to end</h3>
+            <p class="strength-desc">
+              From database schema to deployed UI, I own the full product. MadrasahOS has role-based auth, real-time Supabase queries, bilingual PDF generation, Paystack fee collection, and WhatsApp notifications via Twilio. I didn't hand any of that off because there was no one to hand it to.
+            </p>
+            <div class="strength-evidence">
+              <span class="chip chip-cyan">MadrasahOS</span>
+              <span class="chip chip-cyan">ORDA</span>
+              <span class="chip chip-cyan">OfficialValue</span>
+            </div>
+          </div>
+
+          <div class="strength-card reveal delay-1 glass">
+            <div class="strength-number">02</div>
+            <div class="strength-icon" aria-hidden="true">◈</div>
+            <h3 class="strength-title">I design before I code</h3>
+            <p class="strength-desc">
+              Every project starts in Figma. I think about user flows, information architecture, and what the experience feels like before a single component is written. The Bridal Fix needed to feel premium on mobile for brides buying on the day of their wedding. That product sense came from designing first, not last.
+            </p>
+            <div class="strength-evidence">
+              <span class="chip chip-violet">Figma</span>
+              <span class="chip chip-violet">UI/UX Design</span>
+              <span class="chip chip-violet">The Bridal Fix</span>
+            </div>
+          </div>
+
+          <div class="strength-card reveal delay-2 glass">
+            <div class="strength-number">03</div>
+            <div class="strength-icon" aria-hidden="true">⬙</div>
+            <h3 class="strength-title">I choose the right tool, not the trendy one</h3>
+            <p class="strength-desc">
+              OfficialValue Exchange is zero-dependency Vanilla JS because that was the right call for the client's hosting and maintenance situation. ORDA is React and TypeScript because the analytics layer needed it. I have strong opinions about stacks but they come from project requirements, not hype cycles.
+            </p>
+            <div class="strength-evidence">
+              <span class="chip chip-amber">Vanilla JS</span>
+              <span class="chip chip-amber">React</span>
+              <span class="chip chip-amber">Next.js</span>
+            </div>
+          </div>
+
+          <div class="strength-card reveal delay-3 glass">
+            <div class="strength-number">04</div>
+            <div class="strength-icon" aria-hidden="true">◎</div>
+            <h3 class="strength-title">I build for the Nigerian market</h3>
+            <p class="strength-desc">
+              NGN billing without USD friction. WhatsApp as a communication layer. Connectivity-aware design. RTL Arabic for a Lagos Islamic school. I understand the Nigerian user context from the inside, and that shapes how I build: Paystack over Stripe, Firebase fallbacks for flaky connections, mobile-first always.
+            </p>
+            <div class="strength-evidence">
+              <span class="chip">Paystack</span>
+              <span class="chip">Twilio</span>
+              <span class="chip">Lagos-first</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CURRENTLY BUILDING ============ -->
+    <div class="divider"></div>
+    <section id="about-building">
+      <div class="container">
+        <div class="about-building-inner">
+          <div class="about-building-left">
+            <div class="sec-eyebrow reveal">Active Work</div>
+            <h2 class="sec-title reveal delay-1" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">
+              What I'm <span class="outline">building now</span>
+            </h2>
+            <p class="about-building-desc reveal delay-2">
+              I don't stop between clients. There's always something in progress.
+            </p>
+          </div>
+          <div class="about-building-right">
+
+            <div class="building-item reveal">
+              <div class="building-item-header">
+                <div class="building-item-dot"></div>
+                <div class="building-item-title">MadrasahOS v2</div>
+                <span class="chip chip-amber" style="font-size:0.52rem;">In Progress</span>
+              </div>
+              <p class="building-item-desc">
+                A full architectural rebuild with multi-tenant support so any Islamic school can onboard, not just INSAIS. The v2 adds a school-admin super-dashboard, improved bilingual PDF engine, and a parent-facing mobile portal. Stack: Next.js 14, TypeScript, Supabase with row-level tenancy, Paystack, Twilio.
+              </p>
+              <div class="building-item-stack">
+                <span class="chip">Next.js 14</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Supabase</span>
+                <span class="chip">Multi-tenant</span>
+              </div>
+            </div>
+
+            <div class="building-item reveal delay-1">
+              <div class="building-item-header">
+                <div class="building-item-dot building-item-dot-violet"></div>
+                <div class="building-item-title">This Portfolio</div>
+                <span class="chip chip-violet" style="font-size:0.52rem;">Live</span>
+              </div>
+              <p class="building-item-desc">
+                The site you're on. Built in pure HTML, CSS, and Vanilla JS — no frameworks, no build step. Three.js for the 3D hero animation. Each page is a separate HTML file with scoped CSS, which means every section loads fast and the whole thing deploys instantly on Vercel.
+              </p>
+              <div class="building-item-stack">
+                <span class="chip">Vanilla JS</span>
+                <span class="chip">Three.js</span>
+                <span class="chip">Vercel</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION / CERTIFICATIONS ============ -->
+    <div class="divider"></div>
+    <section id="about-education">
+      <div class="container">
+        <div class="sec-eyebrow reveal">Education</div>
+        <h2 class="sec-title reveal delay-1" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">
+          Where I <span class="outline">trained</span>
+        </h2>
+
+        <div class="education-grid">
+
+          <!-- Aptech -->
+          <div class="edu-card reveal glass">
+            <div class="edu-card-top">
+              <div class="edu-logo-wrap" aria-hidden="true">
+                <span class="edu-logo-text">AI</span>
+              </div>
+              <div class="edu-card-period">
+                <div class="edu-period-year">2023 — 2025</div>
+                <div class="edu-period-status">
+                  <span class="chip chip-cyan" style="font-size:0.5rem;">Completed</span>
+                </div>
+              </div>
+            </div>
+            <h3 class="edu-card-title">Aptech International</h3>
+            <div class="edu-card-programme">Software Engineering + UI/UX Design</div>
+            <p class="edu-card-desc">
+              Two-year accredited programme covering full-stack web development, object-oriented programming, database design, UI/UX principles, and human-computer interaction. Graduated with practical project experience across web applications and interface design.
+            </p>
+            <div class="edu-card-subjects">
+              <span class="chip">Web Development</span>
+              <span class="chip">OOP</span>
+              <span class="chip">Database Design</span>
+              <span class="chip">UI/UX Design</span>
+              <span class="chip">HCI</span>
+            </div>
+          </div>
+
+          <!-- Computer Village -->
+          <div class="edu-card reveal delay-1 glass">
+            <div class="edu-card-top">
+              <div class="edu-logo-wrap edu-logo-wrap-amber" aria-hidden="true">
+                <span class="edu-logo-text">CV</span>
+              </div>
+              <div class="edu-card-period">
+                <div class="edu-period-year">2025 — Present</div>
+                <div class="edu-period-status">
+                  <span class="chip chip-amber" style="font-size:0.5rem;">Ongoing</span>
+                </div>
+              </div>
+            </div>
+            <h3 class="edu-card-title">Computer Village, Ikeja</h3>
+            <div class="edu-card-programme">Computer Engineering (Practical)</div>
+            <p class="edu-card-desc">
+              Hands-on engineering work in hardware diagnostics, system assembly, and network configuration. This grounds my software thinking in how machines actually work at the component level — which shapes how I approach performance, resource constraints, and reliability in every application I build.
+            </p>
+            <div class="edu-card-subjects">
+              <span class="chip">Hardware Diagnostics</span>
+              <span class="chip">System Assembly</span>
+              <span class="chip">Networking</span>
+              <span class="chip">Computer Repair</span>
+            </div>
+          </div>
+
+          <!-- WAPA Egbeda -->
+          <div class="edu-card reveal delay-2 glass">
+            <div class="edu-card-top">
+              <div class="edu-logo-wrap edu-logo-wrap-violet" aria-hidden="true">
+                <span class="edu-logo-text">WA</span>
+              </div>
+              <div class="edu-card-period">
+                <div class="edu-period-year">2021</div>
+                <div class="edu-period-status">
+                  <span class="chip chip-violet" style="font-size:0.5rem;">Completed</span>
+                </div>
+              </div>
+            </div>
+            <h3 class="edu-card-title">WAPA, Egbeda</h3>
+            <div class="edu-card-programme edu-card-programme-violet">Office Productivity + Graphic Design</div>
+            <p class="edu-card-desc">
+              Trained in Microsoft Office productivity tools and graphic design fundamentals. Covered Word, Excel, and PowerPoint for professional document and data work, alongside visual design using CorelDraw and introductory Photoshop for image editing and composition.
+            </p>
+            <div class="edu-card-subjects">
+              <span class="chip">MS Word</span>
+              <span class="chip">MS Excel</span>
+              <span class="chip">MS PowerPoint</span>
+              <span class="chip">CorelDraw</span>
+              <span class="chip">Photoshop</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section id="about-cta">
+      <div class="about-cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="about-cta-inner reveal">
+          <h2 class="cta-title">
+            Ready to work <span class="outline">together?</span>
+          </h2>
+          <p class="about-cta-sub">
+            I'm open to full-time roles, freelance projects, and contract work from Lagos and remote.
+            If you're building something worth building, I want to hear about it.
+          </p>
+          <div class="about-cta-actions">
+            <a href="contact.html"  class="btn btn-primary">Get In Touch</a>
+            <a href="projects.html" class="btn btn-outline">See My Projects</a>
+            <button onclick="openCVModal()" class="btn btn-ghost">Request CV</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- END PAGE -->
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Sam<span class="dot">.</span></a>
+          <p class="footer-tagline">
+            Full-stack developer and UI/UX designer building modern digital products from Lagos, Nigeria.
+            Open to freelance, remote, and full-time opportunities.
+          </p>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            Open to Opportunities
+          </span>
+        </div>
+        <div>
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html"    class="footer-link">Home</a></li>
+            <li><a href="about.html"    class="footer-link">About</a></li>
+            <li><a href="projects.html" class="footer-link">Projects</a></li>
+            <li><a href="skills.html"   class="footer-link">Skills</a></li>
+            <li><a href="blog.html"     class="footer-link">Writing</a></li>
+            <li><a href="contact.html"  class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-links" role="list">
+            <li><a href="/cdn-cgi/l/email-protection#fa989b96959d8f949b989e899b979b9eccba9d979b9396d4999597" class="footer-link">Email</a></li>
+            <li><a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="footer-link">WhatsApp</a></li>
+            <li><a href="https://github.com/balosam"  target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" rel="noopener" class="footer-link">LinkedIn</a></li>
+            <li><a href="tel:+2349114007286"                                          class="footer-link">+234 911 400 7286</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Abd'samad Adeniyi Balogun &middot; Lagos, Nigeria</p>
+        <p class="footer-made">Built with <span>Three.js</span> &amp; precision</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- CV MODAL -->
+  <div class="cv-modal-overlay" id="cv-modal" onclick="handleModalOverlay(event)" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+    <div class="cv-modal">
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">[ esc ]</button>
+      <div class="cv-modal-eyebrow">Request CV</div>
+      <h2 class="cv-modal-title" id="cv-modal-title">How would you like to reach out?</h2>
+      <p class="cv-modal-sub">Choose your preferred channel and I'll send my CV right over.</p>
+      <div class="cv-modal-options">
+        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV.%0A%0AThank%20you."
+           class="cv-modal-opt email">
+          <span class="cv-opt-icon">📩</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via Email</div>
+            <div class="cv-opt-label">Send a formal request</div>
+            <div class="cv-opt-val">balogunabdsamad6@gmail.com</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%3F%0A%0AThanks!"
+           target="_blank" rel="noopener"
+           class="cv-modal-opt whatsapp">
+          <span class="cv-opt-icon">💬</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via WhatsApp</div>
+            <div class="cv-opt-label">Quick and direct</div>
+            <div class="cv-opt-val">+234 911 400 7286</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+      </div>
+      <p class="cv-modal-note">I typically respond within a few hours &middot; Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/global.js"></script>
+
+</body>
+</html>

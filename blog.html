@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Abd'samad Balogun</title>
+  <meta name="description" content="Abd'samad Balogun writes about software development, product building, and working as a developer in Lagos, Nigeria — on OgaStack." />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== MOBILE MENU ==================== -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="btn-ghost" id="mobile-close" aria-label="Close menu" style="position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);">[ close ]</button>
+    <nav>
+      <a href="index.html"    class="mobile-menu-link" data-text="Home">Home</a>
+      <a href="about.html"    class="mobile-menu-link" data-text="About">About</a>
+      <a href="projects.html" class="mobile-menu-link" data-text="Projects">Projects</a>
+      <a href="skills.html"   class="mobile-menu-link" data-text="Skills">Skills</a>
+      <a href="blog.html"     class="mobile-menu-link" data-text="Writing">Writing</a>
+      <a href="contact.html"  class="mobile-menu-link" data-text="Contact">Contact</a>
+    </nav>
+    <div class="mobile-menu-bottom">
+      <button onclick="openCVModal()" class="btn btn-outline" style="width:200px;justify-content:center;">Request CV</button>
+      <p class="mobile-menu-status">Available for projects — Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Abd'samad Balogun home">
+        Sam<span class="dot">.</span>
+        <span class="tag">// dev</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"    class="nav-link">Home</a></li>
+        <li><a href="about.html"    class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="skills.html"   class="nav-link">Skills</a></li>
+        <li><a href="blog.html"     class="nav-link active">Writing</a></li>
+        <li><a href="contact.html"  class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-cv-btn" onclick="openCVModal()">Request CV</button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE ==================== -->
+  <div class="page">
+
+    <!-- ============ HERO ============ -->
+    <section id="blog-hero">
+      <div class="blog-hero-glow-1" aria-hidden="true"></div>
+      <div class="blog-hero-glow-2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="blog-hero-inner">
+          <div class="sec-eyebrow reveal">Writing</div>
+          <h1 class="sec-title reveal delay-1">
+            Where I write<br>
+            <span class="outline">things down.</span>
+          </h1>
+          <p class="blog-hero-sub reveal delay-2">
+            I write about building software, working as a developer in Lagos, the decisions behind my projects, and everything else that doesn't fit in a GitHub commit message.
+          </p>
+          <p class="blog-hero-sub reveal delay-3">
+            All of it lives on <strong>OgaStack</strong> — my personal blog. It's in progress right now and will be live soon.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OGASTACK FEATURE ============ -->
+    <section id="blog-ogastack">
+      <div class="container">
+
+        <div class="ogastack-card reveal">
+
+          <!-- Left: brand -->
+          <div class="ogastack-brand">
+            <div class="ogastack-logo" aria-hidden="true">
+              <span class="oga-logo-text">OgaStack</span>
+              <span class="oga-logo-dot">.</span>
+            </div>
+            <div class="ogastack-status">
+              <span class="oga-status-dot"></span>
+              <span class="oga-status-text">In development</span>
+            </div>
+            <p class="ogastack-tagline">
+              A personal blog about software, products, and what it actually looks like to build things from Lagos.
+            </p>
+            <div class="ogastack-topics">
+              <div class="oga-topic-label">Topics I cover</div>
+              <div class="oga-topic-list">
+                <span class="chip">Software Development</span>
+                <span class="chip">Product Building</span>
+                <span class="chip">UI/UX Design</span>
+                <span class="chip">Nigerian Tech</span>
+                <span class="chip">Project deep-dives</span>
+                <span class="chip">Tools and workflow</span>
+                <span class="chip">Lessons from clients</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: coming soon panel -->
+          <div class="ogastack-coming">
+            <div class="coming-inner">
+              <div class="coming-eyebrow">
+                <span class="coming-dot"></span>
+                Coming Soon
+              </div>
+              <h2 class="coming-title">OgaStack is launching soon</h2>
+              <p class="coming-desc">
+                While it's being built, the best way to stay in the loop is to connect with me directly. I announce new posts and project updates via WhatsApp and LinkedIn first.
+              </p>
+
+              <div class="coming-actions">
+                <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%20I%20want%20to%20be%20notified%20when%20OgaStack%20launches!" target="_blank" rel="noopener" class="coming-cta coming-cta-wa">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                  </svg>
+                  Notify me on WhatsApp
+                </a>
+                <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" rel="noopener" class="coming-cta coming-cta-linkedin">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+                  </svg>
+                  Follow on LinkedIn
+                </a>
+              </div>
+
+              <p class="coming-note">
+                Once OgaStack is live, this page will link directly to the latest posts.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ WHAT TO EXPECT ============ -->
+    <div class="divider"></div>
+    <section id="blog-preview-topics">
+      <div class="container">
+        <div class="sec-eyebrow reveal">What to expect</div>
+        <h2 class="sec-title reveal delay-1" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">
+          The kind of things <span class="outline">I plan to write</span>
+        </h2>
+
+        <div class="blog-topics-grid">
+
+          <div class="blog-topic-card reveal glass">
+            <div class="btc-icon" aria-hidden="true">01</div>
+            <h3 class="btc-title">Project deep-dives</h3>
+            <p class="btc-desc">The real story behind builds like MadrasahOS and ORDA — the decisions made, the problems hit, and what I'd do differently.</p>
+          </div>
+
+          <div class="blog-topic-card reveal delay-1 glass">
+            <div class="btc-icon" aria-hidden="true">02</div>
+            <h3 class="btc-title">Building for the Nigerian market</h3>
+            <p class="btc-desc">What changes when your users are in Lagos — Paystack over Stripe, WhatsApp as infrastructure, mobile-first as non-negotiable.</p>
+          </div>
+
+          <div class="blog-topic-card reveal delay-2 glass">
+            <div class="btc-icon" aria-hidden="true">03</div>
+            <h3 class="btc-title">Tools, stacks, and tradeoffs</h3>
+            <p class="btc-desc">Why I picked Next.js over Remix, Supabase over PlanetScale, and when Vanilla JS is the right answer over a full framework.</p>
+          </div>
+
+          <div class="blog-topic-card reveal delay-3 glass">
+            <div class="btc-icon" aria-hidden="true">04</div>
+            <h3 class="btc-title">UI/UX design thinking</h3>
+            <p class="btc-desc">How I approach product design before writing a line of code — wireframes, user flows, and the design decisions that shape the build.</p>
+          </div>
+
+          <div class="blog-topic-card reveal delay-4 glass">
+            <div class="btc-icon" aria-hidden="true">05</div>
+            <h3 class="btc-title">Freelance and client work</h3>
+            <p class="btc-desc">What working with clients actually looks like — scoping projects, handling feedback, and delivering under real constraints.</p>
+          </div>
+
+          <div class="blog-topic-card reveal delay-5 glass">
+            <div class="btc-icon" aria-hidden="true">06</div>
+            <h3 class="btc-title">Growing as a developer in Lagos</h3>
+            <p class="btc-desc">The self-taught path, training at Aptech, working at Computer Village, and what it takes to build a career in tech from Nigeria.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section id="blog-cta">
+      <div class="blog-cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="blog-cta-inner reveal">
+          <h2 class="cta-title">
+            Want to work <span class="outline">together?</span>
+          </h2>
+          <p class="blog-cta-sub">
+            While OgaStack is being built, the best place to reach me is the contact page.
+            I'm open to full-time roles, freelance, and contract work.
+          </p>
+          <div class="blog-cta-actions">
+            <a href="contact.html"  class="btn btn-primary">Get In Touch</a>
+            <a href="projects.html" class="btn btn-outline">See My Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- END PAGE -->
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Sam<span class="dot">.</span></a>
+          <p class="footer-tagline">
+            Full-stack developer and UI/UX designer building modern digital products from Lagos, Nigeria.
+            Open to freelance, remote, and full-time opportunities.
+          </p>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            Open to Opportunities
+          </span>
+        </div>
+        <div>
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html"    class="footer-link">Home</a></li>
+            <li><a href="about.html"    class="footer-link">About</a></li>
+            <li><a href="projects.html" class="footer-link">Projects</a></li>
+            <li><a href="skills.html"   class="footer-link">Skills</a></li>
+            <li><a href="blog.html"     class="footer-link">Writing</a></li>
+            <li><a href="contact.html"  class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-links" role="list">
+            <li><a href="mailto:balogunabdsamad6@gmail.com"                          class="footer-link">Email</a></li>
+            <li><a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="footer-link">WhatsApp</a></li>
+            <li><a href="https://github.com/balosam"  target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" rel="noopener" class="footer-link">LinkedIn</a></li>
+            <li><a href="tel:+2349114007286"                                          class="footer-link">+234 911 400 7286</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Abd'samad Adeniyi Balogun &middot; Lagos, Nigeria</p>
+        <p class="footer-made">Built with <span>Three.js</span> &amp; precision</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- CV MODAL -->
+  <div class="cv-modal-overlay" id="cv-modal" onclick="handleModalOverlay(event)" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+    <div class="cv-modal">
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">[ esc ]</button>
+      <div class="cv-modal-eyebrow">Request CV</div>
+      <h2 class="cv-modal-title" id="cv-modal-title">How would you like to reach out?</h2>
+      <p class="cv-modal-sub">Choose your preferred channel and I'll send my CV right over.</p>
+      <div class="cv-modal-options">
+        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV.%0A%0AThank%20you."
+           class="cv-modal-opt email">
+          <span class="cv-opt-icon">📩</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via Email</div>
+            <div class="cv-opt-label">Send a formal request</div>
+            <div class="cv-opt-val">balogunabdsamad6@gmail.com</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%3F%0A%0AThanks!"
+           target="_blank" rel="noopener"
+           class="cv-modal-opt whatsapp">
+          <span class="cv-opt-icon">💬</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via WhatsApp</div>
+            <div class="cv-opt-label">Quick and direct</div>
+            <div class="cv-opt-val">+234 911 400 7286</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+      </div>
+      <p class="cv-modal-note">I typically respond within a few hours &middot; Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/global.js"></script>
+
+</body>
+</html>

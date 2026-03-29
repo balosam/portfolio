@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Abd'samad Balogun</title>
+  <meta name="description" content="Projects shipped by Abd'samad Balogun — full-stack developer and UI/UX designer based in Lagos, Nigeria. EdTech, FinTech, and web tools." />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/projects.css">
+</head>
+<body>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== MOBILE MENU ==================== -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="btn-ghost" id="mobile-close" aria-label="Close menu" style="position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);">[ close ]</button>
+    <nav>
+      <a href="index.html"    class="mobile-menu-link" data-text="Home">Home</a>
+      <a href="about.html"    class="mobile-menu-link" data-text="About">About</a>
+      <a href="projects.html" class="mobile-menu-link" data-text="Projects">Projects</a>
+      <a href="skills.html"   class="mobile-menu-link" data-text="Skills">Skills</a>
+      <a href="blog.html"     class="mobile-menu-link" data-text="Writing">Writing</a>
+      <a href="contact.html"  class="mobile-menu-link" data-text="Contact">Contact</a>
+    </nav>
+    <div class="mobile-menu-bottom">
+      <button onclick="openCVModal()" class="btn btn-outline" style="width:200px;justify-content:center;">Request CV</button>
+      <p class="mobile-menu-status">Available for projects — Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Abd'samad Balogun home">
+        Sam<span class="dot">.</span>
+        <span class="tag">// dev</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"    class="nav-link">Home</a></li>
+        <li><a href="about.html"    class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="skills.html"   class="nav-link">Skills</a></li>
+        <li><a href="blog.html"     class="nav-link">Writing</a></li>
+        <li><a href="contact.html"  class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-cv-btn" onclick="openCVModal()">Request CV</button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE ==================== -->
+  <div class="page">
+
+    <!-- ============ HERO ============ -->
+    <section id="projects-hero">
+      <div class="projects-hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="projects-hero-inner">
+          <div class="sec-eyebrow reveal">Portfolio</div>
+          <h1 class="sec-title reveal delay-1">
+            Things I've<br>
+            <span class="outline">Shipped</span>
+          </h1>
+          <p class="sec-sub reveal delay-2" style="margin-bottom:0;">
+            10+ production builds across EdTech, FinTech, and web tooling.
+            Every project here was designed, developed, and deployed solo
+            unless stated otherwise.
+          </p>
+        </div>
+        <!-- Large decorative number -->
+        <div class="projects-count" aria-hidden="true">10+</div>
+      </div>
+    </section>
+
+    <!-- ============ FILTER BAR ============ -->
+    <div id="filter-bar" role="navigation" aria-label="Project filters">
+      <div class="container">
+        <div class="filter-inner">
+          <span class="filter-label">Filter:</span>
+          <button class="filter-btn active" data-filter="all">All <span class="f-count">8</span></button>
+          <button class="filter-btn" data-filter="edtech">EdTech <span class="f-count">2</span></button>
+          <button class="filter-btn" data-filter="fintech">FinTech <span class="f-count">2</span></button>
+          <button class="filter-btn" data-filter="tools">Tools <span class="f-count">3</span></button>
+          <button class="filter-btn" data-filter="design">Design <span class="f-count">2</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PROJECTS GRID ============ -->
+    <section id="projects-grid">
+      <div class="container">
+        <div class="grid-wrap">
+
+
+          <!-- ─── 1. MadrasahOS ── LARGE ─── -->
+          <article class="proj-card large reveal" data-cat="edtech">
+            <div class="proj-media">
+              <img src="images/previews/madrasah-preview.png" alt="MadrasahOS school management system dashboard" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-edtech">EdTech</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-wip">
+                <span class="proj-status-dot"></span>
+                V2 in progress
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">MadrasahOS</h2>
+                <div class="proj-links">
+                  <a href="https://github.com/balosam" target="_blank" rel="noopener" class="proj-link-btn" aria-label="GitHub repository">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                Full-stack bilingual (Arabic + English) school management SaaS for a 40-year-old Lagos Islamic institution with 1,000+ students. Role-based portals for Admin, Teachers, and Students. Handles result management, bilingual PDF reports, Paystack fee collection, WhatsApp notifications via Twilio, and Claude AI smart summaries. Designed for multi-tenant SaaS expansion. Built solo, end to end.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">Next.js 14</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Supabase</span>
+                <span class="chip">shadcn/ui</span>
+                <span class="chip">NextAuth.js</span>
+                <span class="chip">Claude AI</span>
+                <span class="chip">Paystack</span>
+                <span class="chip">next-intl</span>
+                <span class="chip">Twilio</span>
+              </div>
+              <button class="proj-case-toggle" data-panel="case-madrasah" aria-expanded="false">
+                <span class="toggle-line"></span>
+                Case Study
+                <span class="toggle-arrow">+</span>
+              </button>
+              <div class="proj-case-panel" id="case-madrasah" role="region">
+                <div class="proj-case-inner">
+                  <div class="case-section">
+                    <div class="case-label">The Problem</div>
+                    <p class="case-text">
+                      INSAIS — a 40-year-old Lagos Islamic school with 1,000+ students — was running entirely on paper. No digital records, no result system, no fee tracking. Staff were manually writing report cards and losing student data across terms. The institution had no digital presence and no way to communicate with parents at scale.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">The Build</div>
+                    <p class="case-text">
+                      Built a fully bilingual SaaS platform with role-based portals for Admins, Teachers, and Students using <strong>Next.js 14 App Router</strong> and <strong>Supabase</strong> for real-time data and row-level security. <strong>next-intl</strong> handles true RTL Arabic support. <strong>Paystack</strong> collects fees, <strong>Twilio</strong> sends WhatsApp notifications to parents, and <strong>Claude AI</strong> powers smart result summaries. Designed from day one for multi-tenant SaaS scale beyond this first institution.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">Key Results</div>
+                    <div class="case-metrics">
+                      <div class="case-metric">
+                        <div class="case-metric-val">1,000+</div>
+                        <div class="case-metric-label">Students on platform</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">3</div>
+                        <div class="case-metric-label">Role-based portals</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">40yr</div>
+                        <div class="case-metric-label">Institution digitised</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">Solo</div>
+                        <div class="case-metric-label">Built end-to-end</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 2. OfficialValue Exchange ── MEDIUM (with video) ─── -->
+          <article class="proj-card medium reveal delay-1" data-cat="fintech">
+            <div class="proj-media">
+              <div class="proj-video-wrap">
+                <img src="images/previews/officialvalue-preview.png" alt="OfficialValue Exchange crypto and gift card trading platform" loading="lazy"
+                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                <button class="video-play-btn" data-open-video aria-label="Watch OfficialValue demo video">
+                  <div class="play-circle">
+                    <div class="play-icon" aria-hidden="true"></div>
+                  </div>
+                </button>
+              </div>
+              <div class="proj-badges">
+                <span class="proj-badge badge-fintech">FinTech</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-live">
+                <span class="proj-status-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">OfficialValue Exchange</h2>
+                <div class="proj-links">
+                  <button class="proj-link-btn" data-open-video aria-label="Watch demo video">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    Demo
+                  </button>
+                  <a href="https://officialvalue-exchange.vercel.app" target="_blank" rel="noopener" class="proj-link-btn" aria-label="Live site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                Live crypto and gift card trading platform for the Nigerian market. A zero-dependency 9-page SPA with GSAP page transitions, CoinGecko live prices in NGN with production CORS fallback, and a Firebase-backed admin panel with SHA-256 password hashing for trade verification. No frameworks — vanilla all the way through.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">Vanilla JS</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">CoinGecko API</span>
+                <span class="chip">GSAP</span>
+                <span class="chip">HTML/CSS</span>
+              </div>
+              <button class="proj-case-toggle" data-panel="case-ov" aria-expanded="false">
+                <span class="toggle-line"></span>
+                Case Study
+                <span class="toggle-arrow">+</span>
+              </button>
+              <div class="proj-case-panel" id="case-ov" role="region">
+                <div class="proj-case-inner">
+                  <div class="case-section">
+                    <div class="case-label">The Problem</div>
+                    <p class="case-text">
+                      The client ran a crypto and gift card trading operation manually over WhatsApp. Every trade meant switching apps, checking rates by hand, and tracking payments in a notes app. The process was slow, error-prone, and impossible to scale.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">The Build</div>
+                    <p class="case-text">
+                      Built without any framework on purpose. The client's hosting situation made a lightweight Vanilla JS build the right call. <strong>Firebase Realtime Database</strong> handles the live order book. <strong>CoinGecko API</strong> feeds live crypto prices in NGN, with a production CORS fallback so rates never go stale. The admin panel uses SHA-256 password hashing and lets the team verify gift card uploads and confirm payouts without touching the codebase. Brief to handoff in three weeks.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">Key Results</div>
+                    <div class="case-metrics">
+                      <div class="case-metric">
+                        <div class="case-metric-val">3 wks</div>
+                        <div class="case-metric-label">Brief to handoff</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">0 deps</div>
+                        <div class="case-metric-label">Zero frontend deps</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">Live</div>
+                        <div class="case-metric-label">Real-time NGN rates</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 3. ORDA ── LARGE ─── -->
+          <article class="proj-card large reveal" data-cat="fintech">
+            <div class="proj-media">
+              <img src="images/previews/orda-preview.png" alt="ORDA trading journal and behavioural analytics dashboard" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-fintech">FinTech</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-live">
+                <span class="proj-status-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">ORDA</h2>
+                <div class="proj-links">
+                  <a href="https://orda-plum.vercel.app" target="_blank" rel="noopener" class="proj-link-btn" aria-label="Live site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                  <a href="https://github.com/balosam" target="_blank" rel="noopener" class="proj-link-btn" aria-label="GitHub repository">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                A trading journal and behavioural intelligence SaaS for retail traders. Tracks trades, performance metrics, psychology, and drawdown in real time. Interactive dashboards with Recharts for P&L analysis, win rate, and risk metrics. Subscription-based access via Paystack with native NGN billing — no USD friction for Nigerian traders.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">React</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Vite</span>
+                <span class="chip">Tailwind CSS</span>
+                <span class="chip">Supabase</span>
+                <span class="chip">Recharts</span>
+                <span class="chip">Paystack</span>
+              </div>
+              <button class="proj-case-toggle" data-panel="case-orda" aria-expanded="false">
+                <span class="toggle-line"></span>
+                Case Study
+                <span class="toggle-arrow">+</span>
+              </button>
+              <div class="proj-case-panel" id="case-orda" role="region">
+                <div class="proj-case-inner">
+                  <div class="case-section">
+                    <div class="case-label">The Problem</div>
+                    <p class="case-text">
+                      Most traders track what they traded, not why. Spreadsheet journals are tedious and don't surface patterns. The gap between knowing what to do and actually doing it under live market pressure is a behavioural problem, not an informational one.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">The Build</div>
+                    <p class="case-text">
+                      Built on <strong>React + TypeScript</strong> with <strong>Vite</strong> for fast development iteration and <strong>Recharts</strong> for the analytics layer. Trade entries include a mandatory "mindset note" field, and the system categorises these over time to surface recurring emotional triggers and drawdown patterns. <strong>Paystack</strong> handles subscription billing in NGN natively, removing the friction Nigerian traders face with USD-only SaaS tools.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">Key Results</div>
+                    <div class="case-metrics">
+                      <div class="case-metric">
+                        <div class="case-metric-val">NGN</div>
+                        <div class="case-metric-label">Native billing</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">SaaS</div>
+                        <div class="case-metric-label">Subscription model</div>
+                      </div>
+                      <div class="case-metric">
+                        <div class="case-metric-val">Live</div>
+                        <div class="case-metric-label">Deployed on Vercel</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 4. The Bridal Fix ── MEDIUM ─── -->
+          <article class="proj-card medium reveal delay-1" data-cat="tools">
+            <div class="proj-media">
+              <img src="images/previews/bridalfix-preview.png" alt="The Bridal Fix bridal emergency kit e-commerce platform" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-tools">Tools</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-live">
+                <span class="proj-status-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">The Bridal Fix</h2>
+                <div class="proj-links">
+                  <a href="https://the-bridal-fix.vercel.app" target="_blank" rel="noopener" class="proj-link-btn" aria-label="Live site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                  <a href="https://github.com/balosam" target="_blank" rel="noopener" class="proj-link-btn" aria-label="GitHub repository">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                Nigerian bridal emergency kit e-commerce platform where brides order curated wedding day essentials for nationwide delivery before their big day. Sanity.io CMS for product management, Paystack checkout, Brevo transactional emails, and Framer Motion for a premium product experience.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">Next.js 14</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Sanity.io</span>
+                <span class="chip">Paystack</span>
+                <span class="chip">Framer Motion</span>
+                <span class="chip">Brevo</span>
+              </div>
+              <button class="proj-case-toggle" data-panel="case-bridal" aria-expanded="false">
+                <span class="toggle-line"></span>
+                Case Study
+                <span class="toggle-arrow">+</span>
+              </button>
+              <div class="proj-case-panel" id="case-bridal" role="region">
+                <div class="proj-case-inner">
+                  <div class="case-section">
+                    <div class="case-label">The Problem</div>
+                    <p class="case-text">
+                      Nigerian brides have no reliable source for curated wedding day emergency kits — the small but critical items that get forgotten on the day. The client wanted a premium e-commerce experience that matched the emotional weight of the purchase and handled nationwide delivery cleanly.
+                    </p>
+                  </div>
+                  <div class="case-section">
+                    <div class="case-label">The Build</div>
+                    <p class="case-text">
+                      Built on <strong>Next.js 14</strong> with <strong>Sanity.io</strong> as the CMS so the client can manage products without touching code. <strong>Paystack</strong> handles checkout, and <strong>Brevo</strong> fires order confirmation and shipping emails automatically. <strong>Framer Motion</strong> gives the product pages the premium feel the brand needed — smooth reveals and transitions that match the luxury positioning.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 5. IMANSOFT Technologies ── HALF ─── -->
+          <article class="proj-card half reveal" data-cat="design">
+            <div class="proj-media">
+              <img src="images/previews/imansoft-preview.png" alt="IMANSOFT Technologies company website" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-design">Design</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-live">
+                <span class="proj-status-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">IMANSOFT Technologies</h2>
+                <div class="proj-links">
+                  <a href="https://imansoft.vercel.app" target="_blank" rel="noopener" class="proj-link-btn" aria-label="Live site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                  <a href="https://github.com/balosam" target="_blank" rel="noopener" class="proj-link-btn" aria-label="GitHub repository">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                Corporate website for a custom software agency serving enterprises in distribution, warehousing, and logistics. Clean, professional web presence built to communicate services and build trust with enterprise clients — vanilla HTML, CSS, and JavaScript.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">HTML/CSS</span>
+                <span class="chip">Vanilla JS</span>
+                <span class="chip">Vercel</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 6. Fagars & Fasheg ── HALF ─── -->
+          <article class="proj-card half reveal delay-1" data-cat="tools">
+            <div class="proj-media">
+              <img src="images/previews/fagars-preview.png" alt="Fagars and Fasheg import export enterprise website" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-tools">Tools</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-live">
+                <span class="proj-status-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">Fagars &amp; Fasheg</h2>
+                <div class="proj-links">
+                  <a href="https://fagars-fasheg-website.vercel.app" target="_blank" rel="noopener" class="proj-link-btn" aria-label="Live site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                  <a href="https://github.com/balosam" target="_blank" rel="noopener" class="proj-link-btn" aria-label="GitHub repository">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                Enterprise business website for an import/export company dealing in farm produce, food products, and electronics. Interactive divisions showcase, a working contact form via EmailJS, and a professional UI built to win enterprise clients.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">Next.js 16</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Tailwind CSS</span>
+                <span class="chip">shadcn/ui</span>
+                <span class="chip">EmailJS</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 7. Falah Prayer Tracker ── THIRD ─── -->
+          <article class="proj-card third reveal" data-cat="edtech">
+            <div class="proj-media">
+              <img src="images/previews/falah-preview.png" alt="Falah Islamic prayer tracker PWA" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-edtech">EdTech</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+              <div class="proj-status status-live">
+                <span class="proj-status-dot"></span>
+                Live
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">Falah</h2>
+                <div class="proj-links">
+                  <a href="https://falah-prayerapp.vercel.app" target="_blank" rel="noopener" class="proj-link-btn" aria-label="Live site">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live
+                  </a>
+                  <a href="https://github.com/balosam" target="_blank" rel="noopener" class="proj-link-btn" aria-label="GitHub repository">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <p class="proj-desc">
+                Prayer tracking PWA helping Muslims build consistent Salah habits through streaks, leaderboards, prayer buddies, and smart reminders. Gamification built on a spiritual foundation — installable on any device.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">Next.js 16</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Supabase</span>
+                <span class="chip">shadcn/ui</span>
+                <span class="chip">Framer Motion</span>
+                <span class="chip">PWA</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 8. Ornamique ── THIRD ─── -->
+          <article class="proj-card third reveal delay-1" data-cat="design">
+            <div class="proj-media">
+              <img src="images/previews/ornamique-preview.png" alt="Ornamique Jewels campaign design and branding" loading="lazy">
+              <div class="proj-badges">
+                <span class="proj-badge badge-design">Design</span>
+                <span class="proj-badge badge-solo">Solo Build</span>
+              </div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h2 class="proj-title">Ornamique Jewels Campaign</h2>
+              </div>
+              <p class="proj-desc">
+                Full promotional campaign for a jewellery brand's Girlfriend's Day sales push. Flyers, pricing layouts, social media assets, and brand-aligned marketing graphics designed in Figma and Canva.
+              </p>
+              <div class="proj-tags">
+                <span class="chip">Figma</span>
+                <span class="chip">Canva</span>
+                <span class="chip">Branding</span>
+                <span class="chip">Campaign Design</span>
+              </div>
+            </div>
+          </article>
+
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section id="testimonials">
+      <div class="testimonials-bg-text" aria-hidden="true">Kind Words</div>
+      <div class="container testimonials-inner">
+
+        <div class="sec-eyebrow reveal">What Clients Say</div>
+        <h2 class="sec-title reveal delay-1" style="font-size:clamp(1.8rem,3.5vw,2.8rem); margin-bottom:0;">
+          Straight from the <span class="outline">people I built for</span>
+        </h2>
+
+        <div class="testimonials-grid">
+
+          <!-- Testimonial 1 — OfficialValue Exchange CEO -->
+          <div class="testimonial-card reveal">
+            <span class="testimonial-quote-mark" aria-hidden="true">"</span>
+            <p class="testimonial-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. What Sam built turned our entire operation around.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">O</div>
+              <div>
+                <div class="testimonial-name">Habeeb Balogun</div>
+                <div class="testimonial-role">CEO, OfficialValue Exchange</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 — BridalFix CEO -->
+          <div class="testimonial-card reveal delay-1">
+            <span class="testimonial-quote-mark" aria-hidden="true">"</span>
+            <p class="testimonial-text">
+              Your work on The Bridal Fix website was exceptional. You paid attention to every detail and delivered a polished, luxury-standard website that exceeded my expectations. Thank you so much, I would recommend you over and over again.
+            </p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">B</div>
+              <div>
+                <div class="testimonial-name">Zainab Balogun</div>
+                <div class="testimonial-role">CEO, BridalFix</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ CTA ============ -->
+    <section id="projects-cta">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-inner reveal">
+          <h2 class="cta-title">
+            Got something<br>worth <span class="outline">building?</span>
+          </h2>
+          <p class="cta-sub">
+            I'm open to freelance, contract, and full-time opportunities from Lagos and remote.
+            If you have a product that needs designing or engineering, let's talk.
+          </p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+            <button onclick="openCVModal()" class="btn btn-outline">Request CV</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+  <!-- END PAGE -->
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Sam<span class="dot">.</span></a>
+          <p class="footer-tagline">
+            Full-stack developer and UI/UX designer building modern digital products from Lagos, Nigeria.
+            Open to freelance, remote, and full-time opportunities.
+          </p>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            Open to Opportunities
+          </span>
+        </div>
+        <div>
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html"    class="footer-link">Home</a></li>
+            <li><a href="about.html"    class="footer-link">About</a></li>
+            <li><a href="projects.html" class="footer-link">Projects</a></li>
+            <li><a href="skills.html"   class="footer-link">Skills</a></li>
+            <li><a href="blog.html"     class="footer-link">Writing</a></li>
+            <li><a href="contact.html"  class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-links" role="list">
+            <li><a href="/cdn-cgi/l/email-protection#fb999a97949c8e959a999f889a969a9fcdbb9c969a9297d5989496" class="footer-link">Email</a></li>
+            <li><a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="footer-link">WhatsApp</a></li>
+            <li><a href="https://github.com/balosam"  target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" rel="noopener" class="footer-link">LinkedIn</a></li>
+            <li><a href="tel:+2349114007286"                                          class="footer-link">+234 911 400 7286</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Abd'samad Adeniyi Balogun &middot; Lagos, Nigeria</p>
+        <p class="footer-made">Built with <span>Three.js</span> &amp; precision</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- CV MODAL -->
+  <div class="cv-modal-overlay" id="cv-modal" onclick="handleModalOverlay(event)" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+    <div class="cv-modal">
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">[ esc ]</button>
+      <div class="cv-modal-eyebrow">Request CV</div>
+      <h2 class="cv-modal-title" id="cv-modal-title">How would you like to reach out?</h2>
+      <p class="cv-modal-sub">Choose your preferred channel and I'll send my CV right over.</p>
+      <div class="cv-modal-options">
+        <a href="/cdn-cgi/l/email-protection#88eae9e4e7effde6e9eaecfbe9e5e9ecbec8efe5e9e1e4a6ebe7e5b7fbfdeae2edebfcb5cbdeadbab8daedf9fdedfbfcaeeae7ecf1b5c0e1adbab8dbe9e5adbacbadb8c9adb8c9c1adbab8ebe9e5edadbab8e9ebfae7fbfbadbab8f1e7fdfaadbab8f8e7fafceee7e4e1e7adbab8e9e6ecadbab8ffe7fde4ecadbab8e4e1e3edadbab8fce7adbab8faedf9fdedfbfcadbab8e9adbab8ebe7f8f1adbab8e7eeadbab8f1e7fdfaadbab8cbdea6adb8c9adb8c9dce0e9e6e3adbab8f1e7fda6" class="cv-modal-opt email">
+          <span class="cv-opt-icon">📩</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via Email</div>
+            <div class="cv-opt-label">Send a formal request</div>
+            <div class="cv-opt-val"><span class="__cf_email__" data-cfemail="8fedeee3e0e8fae1eeedebfceee2eeebb9cfe8e2eee6e3a1ece0e2">[email&#160;protected]</span></div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%3F%0A%0AThanks!"
+           target="_blank" rel="noopener"
+           class="cv-modal-opt whatsapp">
+          <span class="cv-opt-icon">💬</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via WhatsApp</div>
+            <div class="cv-opt-label">Quick and direct</div>
+            <div class="cv-opt-val">+234 911 400 7286</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+      </div>
+      <p class="cv-modal-note">I typically respond within a few hours &middot; Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div class="video-modal-overlay" id="video-modal" role="dialog" aria-modal="true" aria-label="OfficialValue demo video">
+    <div class="video-modal-inner">
+      <div class="video-modal-header">
+        <span class="video-modal-title">OfficialValue Exchange — Demo</span>
+        <button class="video-modal-close" id="video-modal-close">[ close ]</button>
+      </div>
+      <div class="video-modal-player">
+        <video id="modal-video" controls preload="none" playsinline>
+          <source src="images/video/officialvalue-demo.mp4" type="video/mp4">
+          Your browser doesn't support embedded video.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/global.js"></script>
+  <script src="js/projects.js"></script>
+
+</body>
+</html>
+

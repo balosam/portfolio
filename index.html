@@ -3,2640 +3,412 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abd'samad Balogun — Developer, Designer & Builder</title>
-  <meta name="description" content="Portfolio of Abd'samad Adeniyi Balogun — Software Developer, UI/UX Designer, Digital Creative & Computer Engineer based in Lagos, Nigeria." />
+  <title>Abd'samad Balogun — Software Developer & UI/UX Designer</title>
+  <meta name="description" content="Full-stack developer and UI/UX designer based in Lagos, Nigeria. Building modern digital products with Next.js, React, TypeScript and Supabase." />
 
-  <!-- Performance hints -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Fonts loaded in global.css via @import -->
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
 
   <!-- Three.js -->
-
-  <style>
-    :root {
-      --bg: #04060f;
-      --bg2: #080c1a;
-      --surface: rgba(255,255,255,0.03);
-      --surface-hover: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.07);
-      --border-bright: rgba(255,255,255,0.14);
-      --text: #e8eaf6;
-      --muted: rgba(232,234,246,0.45);
-      --muted2: rgba(232,234,246,0.25);
-      --cyan: #00d4ff;
-      --cyan-dim: rgba(0,212,255,0.15);
-      --cyan-glow: rgba(0,212,255,0.25);
-      --purple: #7c3aed;
-      --purple-bright: #a78bfa;
-      --green: #10b981;
-      --orange: #f59e0b;
-      --pink: #ec4899;
-      --font-display: 'Outfit', sans-serif;
-      --font-mono: 'Space Mono', monospace;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-
-    body {
-      font-family: var(--font-display);
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* ---- CUSTOM CURSOR ---- */
-    .cursor {
-      width: 10px; height: 10px;
-      background: var(--cyan);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background 0.2s;
-      mix-blend-mode: screen;
-    }
-
-    .cursor-ring {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(0,212,255,0.5);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.12s ease, width 0.25s, height 0.25s, border-color 0.25s;
-    }
-
-    body:has(a:hover) .cursor, body:has(button:hover) .cursor {
-      width: 16px; height: 16px;
-    }
-
-    /* ---- CANVAS ---- */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ---- SCANLINES ---- */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.025) 2px,
-        rgba(0,0,0,0.025) 4px
-      );
-      pointer-events: none;
-    }
-
-    /* ---- GRAIN ---- */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: -50%;
-      z-index: 1;
-      width: 200%;
-      height: 200%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.03;
-      pointer-events: none;
-      animation: grain 0.5s steps(1) infinite;
-    }
-
-    @keyframes grain {
-      0%, 100% { transform: translate(0,0); }
-      10% { transform: translate(-5%, -10%); }
-      20% { transform: translate(-15%, 5%); }
-      30% { transform: translate(7%, -25%); }
-      40% { transform: translate(-5%, 25%); }
-      50% { transform: translate(-15%, 10%); }
-      60% { transform: translate(15%, 0%); }
-      70% { transform: translate(0%, 15%); }
-      80% { transform: translate(3%, 35%); }
-      90% { transform: translate(-10%, 10%); }
-    }
-
-    /* ---- LAYOUT ---- */
-    .page { position: relative; z-index: 2; }
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
-
-    /* ---- NAV ---- */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 24px 0;
-      transition: all 0.4s;
-    }
-
-    nav.scrolled {
-      padding: 14px 0;
-      background: rgba(4,6,15,0.8);
-      backdrop-filter: blur(32px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-family: var(--font-mono);
-      font-size: 1.15rem;
-      font-weight: 700;
-      text-decoration: none;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-
-    .logo .accent { color: var(--cyan); }
-    .logo .mono { color: var(--muted); font-size: 0.8rem; }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 1px;
-      background: var(--cyan);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    .nav-right { display: flex; align-items: center; gap: 14px; }
-
-    .btn-cv {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 9px 20px;
-      border: 1px solid var(--border-bright);
-      border-radius: 4px;
-      color: var(--text);
-      text-decoration: none;
-      transition: all 0.25s;
-      background: transparent;
-    }
-
-    .btn-cv:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      box-shadow: 0 0 20px var(--cyan-glow);
-    }
-
-    /* ---- CV REQUEST MODAL ---- */
-    .cv-modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background: rgba(4,6,15,0.85);
-      backdrop-filter: blur(16px);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cv-modal-overlay.open { display: flex; }
-
-    .cv-modal {
-      background: #0a0f1e;
-      border: 1px solid var(--border-bright);
-      border-radius: 12px;
-      padding: 40px 36px;
-      width: 90%;
-      max-width: 420px;
-      position: relative;
-      box-shadow: 0 0 80px rgba(0,212,255,0.08), 0 40px 80px rgba(0,0,0,0.6);
-      animation: modalIn 0.3s ease;
-    }
-
-    @keyframes modalIn {
-      from { opacity: 0; transform: translateY(20px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .cv-modal-close {
-      position: absolute;
-      top: 16px; right: 20px;
-      background: none; border: none;
-      color: var(--muted);
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .cv-modal-close:hover { color: var(--text); }
-
-    .cv-modal-tag {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cv-modal-tag::before {
-      content: '';
-      width: 18px; height: 1px;
-      background: var(--cyan);
-    }
-
-    .cv-modal-title {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 8px;
-    }
-
-    .cv-modal-sub {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 28px;
-      font-weight: 300;
-    }
-
-    .cv-modal-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .cv-modal-opt {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 18px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      background: rgba(255,255,255,0.02);
-      transition: all 0.25s;
-    }
-
-    .cv-modal-opt:hover {
-      transform: translateX(4px);
-    }
-
-    .cv-modal-opt.email:hover {
-      border-color: var(--cyan);
-      background: rgba(0,212,255,0.06);
-    }
-
-    .cv-modal-opt.whatsapp:hover {
-      border-color: #25d366;
-      background: rgba(37,211,102,0.06);
-    }
-
-    .cv-modal-opt-icon { font-size: 1.4rem; flex-shrink: 0; }
-
-    .cv-modal-opt-text {}
-
-    .cv-modal-opt-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted2);
-      margin-bottom: 2px;
-    }
-
-    .cv-modal-opt-val {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .cv-modal-opt.email .cv-modal-opt-val { color: var(--cyan); }
-    .cv-modal-opt.whatsapp .cv-modal-opt-val { color: #25d366; }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--text);
-      transition: all 0.3s;
-    }
-
-    /* ---- MOBILE MENU ---- */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(4,6,15,0.97);
-      backdrop-filter: blur(40px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-
-    .mobile-menu.open { display: flex; }
-
-    .mobile-menu a {
-      font-family: var(--font-display);
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      letter-spacing: -0.04em;
-    }
-
-    .mobile-menu a:hover { color: var(--cyan); }
-
-    .mobile-menu .close-btn {
-      position: absolute;
-      top: 24px; right: 28px;
-      background: none; border: none;
-      color: var(--muted);
-      font-size: 1.8rem;
-      cursor: pointer;
-      font-family: var(--font-mono);
-    }
-
-    /* ---- HERO ---- */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 0 80px;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-eyebrow::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--cyan);
-    }
-
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(3.2rem, 6.5vw, 6rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    .hero-name .name-dim { color: var(--muted); }
-    .hero-name .name-bright { color: var(--text); }
-
-    .hero-tagline {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      margin-bottom: 28px;
-      line-height: 1.6;
-    }
-
-    .hero-tagline strong { color: var(--cyan); font-weight: 400; }
-
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 500px;
-      margin-bottom: 40px;
-      font-weight: 300;
-    }
-
-    .hero-desc b { color: var(--text); font-weight: 600; }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 52px;
-    }
-
-    .btn-primary {
-      padding: 14px 32px;
-      background: var(--cyan);
-      color: #04060f;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.25s;
-      box-shadow: 0 0 30px var(--cyan-glow);
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 60px var(--cyan-glow);
-    }
-
-    .btn-outline {
-      padding: 13px 28px;
-      border: 1px solid var(--border-bright);
-      color: var(--text);
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: all 0.25s;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    .hero-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .hero-links a {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--muted2);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .hero-links a:hover { color: var(--cyan); }
-
-    /* Hero right: 3D canvas */
-    #hero-canvas-wrap {
-      position: relative;
-      height: 500px;
-    }
-
-    #hero-canvas {
-      width: 100%;
-      height: 100%;
-      border-radius: 8px;
-    }
-
-    .hero-hud {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 20px 24px;
-      background: rgba(4,6,15,0.75);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      border-radius: 0 0 8px 8px;
-    }
-
-    .hud-row {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-
-    .hud-stat {}
-    .hud-val {
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--cyan);
-      line-height: 1;
-    }
-
-    .hud-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted2);
-      margin-top: 2px;
-    }
-
-    /* ---- SECTION BASE ---- */
-    section { padding: 100px 0; }
-
-    .sec-tag {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .sec-tag::before {
-      content: '';
-      width: 24px;
-      height: 1px;
-      background: var(--cyan);
-    }
-
-    .sec-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .sec-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.75;
-      margin-bottom: 60px;
-      font-weight: 300;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0 32px;
-    }
-
-    /* ---- GLASS CARD ---- */
-    .glass {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .glass::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, transparent 60%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .glass:hover {
-      border-color: rgba(0,212,255,0.2);
-      transform: translateY(-4px);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,255,0.1);
-    }
-
-    .glass:hover::before { opacity: 1; }
-
-    /* ---- ABOUT ---- */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 24px;
-    }
-
-    .about-main {
-      grid-row: span 2;
-      padding: 40px;
-    }
-
-    .about-text {
-      font-size: 1.05rem;
-      color: var(--muted);
-      line-height: 1.85;
-      font-weight: 300;
-    }
-
-    .about-text b { color: var(--text); font-weight: 600; }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 28px;
-    }
-
-    .chip {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      padding: 5px 12px;
-      border-radius: 2px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .chip.hi {
-      border-color: rgba(0,212,255,0.35);
-      color: var(--cyan);
-      background: var(--cyan-dim);
-    }
-
-    .info-block {
-      padding: 24px 28px;
-    }
-
-    .info-key {
-      font-family: var(--font-mono);
-      font-size: 0.64rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted2);
-      margin-bottom: 6px;
-    }
-
-    .info-val {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    /* ---- SERVICES ---- */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .service-card {
-      padding: 36px 32px;
-    }
-
-    .service-num {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--muted2);
-      letter-spacing: 0.1em;
-      margin-bottom: 20px;
-    }
-
-    .service-icon {
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .service-name {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .service-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .service-bar {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple-bright));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s ease;
-    }
-
-    .service-card:hover .service-bar { transform: scaleX(1); }
-
-    /* ---- SKILLS ---- */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .skill-group {
-      padding: 28px;
-    }
-
-    .skill-group-name {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 18px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .skill-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .skill-item {
-      font-size: 0.88rem;
-      color: var(--muted);
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: color 0.2s, padding-left 0.2s;
-      font-weight: 300;
-    }
-
-    .skill-item:last-child { border-bottom: none; }
-    .skill-item:hover { color: var(--text); padding-left: 6px; }
-
-    /* ---- PROJECTS ---- */
-    .filters {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 44px;
-    }
-
-    .filter-btn {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      background: var(--cyan-dim);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .proj-card {
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .proj-thumb {
-      height: 200px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .proj-thumb-icon {
-      font-size: 4.5rem;
-      position: relative;
-      z-index: 2;
-      transition: transform 0.4s, filter 0.4s;
-    }
-
-    .proj-card:hover .proj-thumb-icon {
-      transform: scale(1.15) rotate(-5deg);
-      filter: drop-shadow(0 0 20px rgba(0,212,255,0.5));
-    }
-
-    .proj-thumb-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #080c1a, #0d1628);
-    }
-
-    .proj-thumb-glow {
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      filter: blur(50px);
-      opacity: 0.6;
-      z-index: 1;
-      transition: opacity 0.4s;
-    }
-
-    .proj-card:hover .proj-thumb-glow { opacity: 1; }
-
-    .proj-thumb-lines {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 8px,
-        rgba(255,255,255,0.015) 8px,
-        rgba(255,255,255,0.015) 9px
-      );
-    }
-
-    .proj-body {
-      padding: 20px 22px 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .proj-cat {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .proj-name {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .proj-desc {
-      font-size: 0.83rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 16px;
-      flex: 1;
-      font-weight: 300;
-    }
-
-    .proj-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .proj-tag {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      padding: 3px 8px;
-      border-radius: 2px;
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    .proj-link {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      text-decoration: none;
-      transition: opacity 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .proj-link:hover { opacity: 0.7; }
-
-    /* ---- FEATURED PROJECTS (wide) ---- */
-    .proj-card.featured {
-      grid-column: span 2;
-    }
-
-    .proj-card.featured .proj-thumb { height: 260px; }
-    .proj-card.featured .proj-name { font-size: 1.4rem; }
-
-    /* ---- CASE STUDY TOGGLE ---- */
-    .case-study-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--purple-bright);
-      background: none;
-      border: 1px solid rgba(167,139,250,0.25);
-      border-radius: 2px;
-      padding: 5px 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-left: 12px;
-    }
-
-    .case-study-toggle:hover {
-      border-color: var(--purple-bright);
-      background: rgba(167,139,250,0.08);
-    }
-
-    .case-study-toggle .toggle-arrow {
-      display: inline-block;
-      transition: transform 0.3s;
-      font-style: normal;
-    }
-
-    .case-study-toggle.open .toggle-arrow { transform: rotate(180deg); }
-
-    .case-study-panel {
-      display: none;
-      margin-top: 20px;
-      padding: 20px 22px;
-      border-top: 1px solid var(--border);
-      animation: csFadeIn 0.3s ease;
-    }
-
-    .case-study-panel.open { display: block; }
-
-    @keyframes csFadeIn {
-      from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: none; }
-    }
-
-    .cs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .cs-block {}
-
-    .cs-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .cs-label::before {
-      content: '';
-      width: 10px; height: 1px;
-      background: var(--cyan);
-    }
-
-    .cs-text {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.65;
-      font-weight: 300;
-    }
-
-    .cs-text b { color: var(--text); font-weight: 600; }
-
-    .cs-outcome-row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      margin-top: 4px;
-    }
-
-    .cs-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .cs-stat-val {
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
-
-    .cs-stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted2);
-    }
-
-    /* ---- EXPERIENCE ---- */
-    .exp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-    }
-
-    .timeline { position: relative; }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--cyan), transparent);
-    }
-
-    .timeline-item {
-      padding: 0 0 44px 32px;
-      position: relative;
-    }
-
-    .timeline-item:last-child { padding-bottom: 0; }
-
-    .tl-dot {
-      position: absolute;
-      left: -4px; top: 6px;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 10px var(--cyan);
-    }
-
-    .tl-date {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 8px;
-    }
-
-    .tl-role {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: -0.02em;
-    }
-
-    .tl-org {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .tl-points {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .tl-points li {
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding-left: 14px;
-      position: relative;
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    .tl-points li::before {
-      content: '›';
-      position: absolute;
-      left: 0;
-      color: var(--cyan);
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-
-    .edu-side {}
-
-    .edu-sec-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--purple-bright);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .edu-sec-label::before {
-      content: '';
-      width: 20px;
-      height: 1px;
-      background: var(--purple-bright);
-    }
-
-    .edu-cards { display: flex; flex-direction: column; gap: 14px; }
-
-    .edu-card {
-      padding: 20px 24px;
-    }
-
-    .edu-year {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple-bright);
-      margin-bottom: 6px;
-    }
-
-    .edu-deg {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-    }
-
-    .edu-inst {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.5;
-      font-weight: 300;
-    }
-
-    /* ---- CONTACT ---- */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .contact-left { padding: 40px; }
-
-    .contact-left h3 {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .contact-left p {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 36px;
-      font-weight: 300;
-    }
-
-    .contact-options { display: flex; flex-direction: column; gap: 12px; }
-
-    .contact-opt {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      text-decoration: none;
-      background: rgba(255,255,255,0.02);
-      transition: all 0.25s;
-    }
-
-    .contact-opt:hover {
-      border-color: var(--cyan);
-      background: var(--cyan-dim);
-      transform: translateX(4px);
-    }
-
-    .contact-opt-icon {
-      font-size: 1.3rem;
-      width: 40px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .contact-opt-info {}
-
-    .contact-opt-key {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted2);
-    }
-
-    .contact-opt-val {
-      font-size: 0.9rem;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .contact-right {
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .cta-box {
-      text-align: center;
-      padding: 48px 32px;
-    }
-
-    .cta-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
-
-    .cta-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-
-    .cta-text {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 28px;
-      font-weight: 300;
-    }
-
-    .cta-btns { display: flex; flex-direction: column; gap: 10px; }
-
-    .cta-btn {
-      display: block;
-      padding: 14px 24px;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
-      transition: all 0.25s;
-      font-weight: 700;
-    }
-
-    .cta-btn.primary {
-      background: var(--cyan);
-      color: #04060f;
-      box-shadow: 0 0 20px var(--cyan-glow);
-    }
-
-    .cta-btn.primary:hover {
-      box-shadow: 0 0 40px var(--cyan-glow);
-      transform: translateY(-2px);
-    }
-
-    .cta-btn.secondary {
-      background: #25d366;
-      color: #fff;
-      box-shadow: 0 0 20px rgba(37,211,102,0.25);
-    }
-
-    .cta-btn.secondary:hover {
-      box-shadow: 0 0 40px rgba(37,211,102,0.4);
-      transform: translateY(-2px);
-    }
-
-    .cta-btn.ghost {
-      border: 1px solid var(--border-bright);
-      color: var(--text);
-    }
-
-    .cta-btn.ghost:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    /* ---- FOOTER ---- */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 36px 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .foot-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .foot-logo {
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      font-weight: 700;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .foot-logo span { color: var(--cyan); }
-
-    .foot-copy {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.05em;
-      color: var(--muted2);
-    }
-
-    /* ---- WA FLOAT ---- */
-    .wa-float {
-      position: fixed;
-      bottom: 28px; right: 28px;
-      z-index: 1000;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: #25d366;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      text-decoration: none;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      pointer-events: auto !important;
-      cursor: pointer;
-    }
-
-    .wa-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 30px rgba(37,211,102,0.6);
-    }
-
-    /* ---- BACK TO TOP ---- */
-    #backToTop {
-      position: fixed;
-      bottom: 92px; right: 28px;
-      z-index: 90;
-      width: 44px; height: 44px;
-      border-radius: 4px;
-      border: 1px solid var(--border-bright);
-      background: rgba(4,6,15,0.8);
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.25s;
-      opacity: 0;
-      pointer-events: none;
-      font-family: var(--font-mono);
-    }
-
-    #backToTop.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    #backToTop:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    /* ---- SCROLL REVEAL ---- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.show { opacity: 1; transform: none; }
-
-    /* ---- SCROLLBAR ---- */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.25); border-radius: 2px; }
-
-    /* ---- STATUS DOT ---- */
-    .status-dot {
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: statusPulse 2s infinite;
-    }
-
-    @keyframes statusPulse {
-      0%, 100% { box-shadow: 0 0 8px var(--green); }
-      50% { box-shadow: 0 0 16px var(--green); }
-    }
-
-    /* ============================================================
-       TABLET — max 1024px
-    ============================================================ */
-    @media (max-width: 1024px) {
-      .projects-grid { grid-template-columns: repeat(2, 1fr); }
-      .proj-card.featured { grid-column: span 1; }
-      .proj-card.featured .proj-thumb { height: 220px; }
-      .proj-card.featured .proj-name { font-size: 1.15rem; }
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .cs-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ============================================================
-       TABLET PORTRAIT — max 900px
-    ============================================================ */
-    @media (max-width: 900px) {
-      .nav-links,
-      .nav-right .btn-cv { display: none; }
-      .hamburger { display: flex; }
-
-      .hero-grid,
-      .about-grid,
-      .contact-layout,
-      .services-grid,
-      .exp-grid { grid-template-columns: 1fr; }
-
-      .about-main { grid-row: auto; }
-
-      #hero { padding: 100px 0 60px; }
-      .hero-grid { gap: 36px; }
-      #hero-canvas-wrap { height: 280px; }
-      .hero-hud { padding: 14px 18px; }
-      .hud-val { font-size: 1.2rem; }
-
-      section { padding: 72px 0; }
-      .sec-title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
-
-      .exp-grid { gap: 40px; }
-    }
-
-    /* ============================================================
-       MOBILE — max 768px
-    ============================================================ */
-    @media (max-width: 768px) {
-      body::after  { display: none; }
-      body::before { display: none; }
-      .cursor, .cursor-ring { display: none; }
-      body { cursor: auto; }
-
-      .glass:hover { transform: none; box-shadow: none; }
-      .glass:hover::before { opacity: 0; }
-      .proj-card:hover .proj-thumb-icon { transform: none; filter: none; }
-      .glass { transition: border-color 0.15s; }
-      .contact-opt:hover { transform: none; }
-      .btn-primary:hover,
-      .btn-outline:hover { transform: none; }
-      .nav-cta:hover { transform: none; }
-
-      .container { padding: 0 18px; }
-
-      nav { padding: 16px 0; }
-      .logo { font-size: 1rem; }
-
-      #hero { padding: 90px 0 52px; min-height: auto; }
-      .hero-eyebrow { font-size: 0.65rem; margin-bottom: 14px; }
-      .hero-name { font-size: clamp(2.4rem, 11vw, 3.8rem); line-height: 0.92; margin-bottom: 10px; }
-      .hero-tagline { font-size: 0.75rem; margin-bottom: 20px; }
-      .hero-desc { font-size: 0.92rem; margin-bottom: 28px; }
-      .hero-actions { gap: 10px; margin-bottom: 32px; }
-      .btn-primary { padding: 12px 24px; font-size: 0.78rem; }
-      .btn-outline  { padding: 11px 20px; font-size: 0.78rem; }
-      .hero-links { gap: 16px; flex-wrap: wrap; }
-      .hero-links a { font-size: 0.65rem; }
-
-      #hero-canvas-wrap { height: 220px; border-radius: 8px; }
-      #hero-canvas { display: none; }
-
-      .hud-row { gap: 16px; flex-wrap: wrap; }
-      .hud-val { font-size: 1.1rem; }
-      .hud-label { font-size: 0.52rem; }
-
-      section { padding: 56px 0; }
-      .sec-tag { font-size: 0.62rem; margin-bottom: 8px; }
-      .sec-title { font-size: clamp(1.6rem, 8vw, 2.4rem); margin-bottom: 10px; }
-      .sec-sub { font-size: 0.88rem; margin-bottom: 40px; }
-      .divider { margin: 0 18px; }
-
-      .about-main { padding: 24px; }
-      .about-text { font-size: 0.92rem; line-height: 1.75; }
-      .chips { gap: 6px; margin-top: 20px; }
-      .chip { font-size: 0.62rem; padding: 4px 10px; }
-      .info-block { padding: 18px 22px; }
-      .info-key { font-size: 0.58rem; }
-      .info-val { font-size: 0.9rem; }
-
-      .services-grid { gap: 12px; }
-      .service-card { padding: 26px 22px; }
-      .service-num { font-size: 0.6rem; margin-bottom: 12px; }
-      .service-name { font-size: 1.1rem; margin-bottom: 8px; }
-      .service-desc { font-size: 0.85rem; }
-
-      .skills-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .skill-group { padding: 20px; }
-      .skill-group-name { font-size: 0.6rem; margin-bottom: 12px; }
-      .skill-item { font-size: 0.82rem; padding: 5px 0; }
-
-      .projects-grid { grid-template-columns: 1fr; gap: 14px; }
-      .proj-card.featured { grid-column: span 1; }
-      .proj-card.featured .proj-thumb { height: 200px; }
-      .proj-card.featured .proj-name { font-size: 1.1rem; }
-      .proj-thumb { height: 180px; }
-      .proj-body { padding: 16px 18px 20px; }
-      .proj-cat { font-size: 0.58rem; margin-bottom: 6px; }
-      .proj-name { font-size: 1rem; margin-bottom: 6px; }
-      .proj-desc { font-size: 0.82rem; line-height: 1.6; margin-bottom: 12px; }
-      .proj-tags { gap: 5px; margin-bottom: 10px; }
-      .proj-tag { font-size: 0.58rem; padding: 3px 7px; }
-      .proj-link { font-size: 0.62rem; }
-
-      .filters { gap: 6px; margin-bottom: 28px; }
-      .filter-btn { font-size: 0.6rem; padding: 6px 13px; }
-
-      .cs-grid { grid-template-columns: 1fr; gap: 12px; }
-      .case-study-panel { padding: 16px 18px; }
-
-      .timeline::before { left: 0; }
-      .timeline-item { padding: 0 0 32px 24px; }
-      .tl-dot { left: -4px; width: 8px; height: 8px; }
-      .tl-date { font-size: 0.6rem; margin-bottom: 4px; }
-      .tl-role { font-size: 1rem; margin-bottom: 2px; }
-      .tl-org { font-size: 0.72rem; margin-bottom: 10px; }
-      .tl-points li { font-size: 0.82rem; padding-left: 12px; }
-
-      .edu-sec-label { font-size: 0.6rem; margin-bottom: 14px; }
-      .edu-cards { gap: 10px; }
-      .edu-card { padding: 16px 20px; }
-      .edu-year { font-size: 0.58rem; margin-bottom: 4px; }
-      .edu-deg { font-size: 0.88rem; margin-bottom: 4px; }
-      .edu-inst { font-size: 0.75rem; }
-
-      .contact-left { padding: 24px; }
-      .contact-left h3 { font-size: 1.3rem; margin-bottom: 8px; }
-      .contact-left p { font-size: 0.85rem; margin-bottom: 24px; }
-      .contact-options { gap: 8px; }
-      .contact-opt { padding: 12px 16px; border-radius: 6px; }
-      .contact-opt-key { font-size: 0.55rem; }
-      .contact-opt-val { font-size: 0.82rem; }
-
-      .contact-right { padding: 0; }
-      .cta-box { padding: 24px 20px; }
-      .cta-title { font-size: 1.2rem; margin-bottom: 8px; }
-      .cta-text { font-size: 0.82rem; margin-bottom: 20px; }
-      .cta-btns { gap: 8px; }
-      .cta-btn { font-size: 0.7rem; padding: 12px 18px; }
-
-      footer { padding: 28px 0; }
-      .foot-inner { flex-direction: column; gap: 8px; text-align: center; }
-      .foot-logo { font-size: 0.9rem; }
-      .foot-copy { font-size: 0.58rem; }
-
-      .wa-float { width: 46px; height: 46px; font-size: 1.2rem; bottom: 20px; right: 16px; }
-      #backToTop { width: 38px; height: 38px; font-size: 0.9rem; bottom: 76px; right: 16px; }
-
-      .mobile-menu a { font-size: 2rem; }
-    }
-
-    /* ============================================================
-       SMALL MOBILE — max 480px
-    ============================================================ */
-    @media (max-width: 480px) {
-      .container { padding: 0 16px; }
-
-      .hero-name { font-size: clamp(2rem, 12vw, 3rem); }
-      .hero-actions { flex-direction: column; }
-      .btn-primary,
-      .btn-outline { width: 100%; text-align: center; }
-
-      .skills-grid { grid-template-columns: 1fr; }
-
-      .hud-row { gap: 12px; }
-      .hud-val { font-size: 1rem; }
-
-      .sec-title { font-size: clamp(1.5rem, 9vw, 2rem); }
-
-      .filters { gap: 5px; }
-      .filter-btn { font-size: 0.58rem; padding: 5px 11px; }
-
-      .contact-opt-val { font-size: 0.75rem; word-break: break-all; }
-
-      .mobile-menu a { font-size: 1.7rem; gap: 28px; }
-      .mobile-menu { gap: 24px; }
-    }
-
-    /* ============================================================
-       CV REQUEST MODAL
-    ============================================================ */
-    .cv-modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background: rgba(4,6,15,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .cv-modal {
-      background: #0a0f1e;
-      border: 1px solid rgba(0,212,255,0.2);
-      border-radius: 12px;
-      padding: 40px 36px;
-      max-width: 460px;
-      width: 100%;
-      position: relative;
-      box-shadow: 0 0 60px rgba(0,212,255,0.07), 0 32px 64px rgba(0,0,0,0.5);
-    }
-
-    .cv-modal-close {
-      position: absolute;
-      top: 14px; right: 16px;
-      background: none; border: none;
-      color: rgba(232,234,246,0.35);
-      font-size: 1rem;
-      cursor: pointer;
-      font-family: var(--font-mono);
-      transition: color 0.2s;
-      line-height: 1;
-    }
-    .cv-modal-close:hover { color: var(--cyan); }
-
-    .cv-modal-tag {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .cv-modal-tag::before {
-      content: '';
-      display: inline-block;
-      width: 20px; height: 1px;
-      background: var(--cyan);
-    }
-
-    .cv-modal-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .cv-modal-sub {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 28px;
-      font-weight: 300;
-    }
-
-    .cv-modal-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .cv-modal-opt {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      text-decoration: none;
-      background: rgba(255,255,255,0.02);
-      transition: border-color 0.25s, background 0.25s, transform 0.25s;
-    }
-    .cv-modal-opt:hover { transform: translateX(4px); }
-    .cv-modal-opt.email:hover    { border-color: var(--cyan);  background: rgba(0,212,255,0.05); }
-    .cv-modal-opt.whatsapp:hover { border-color: #25d366;      background: rgba(37,211,102,0.05); }
-
-    .cv-modal-opt-icon { font-size: 1.5rem; width: 40px; text-align: center; flex-shrink: 0; }
-    .cv-modal-opt-body { flex: 1; }
-
-    .cv-modal-opt-type {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted2);
-      margin-bottom: 3px;
-    }
-
-    .cv-modal-opt-label {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .cv-modal-opt-val {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 300;
-    }
-
-    .cv-modal-opt.email    .cv-modal-opt-val { color: var(--cyan); }
-    .cv-modal-opt.whatsapp .cv-modal-opt-val { color: #25d366; }
-
-    .cv-modal-opt-arrow {
-      color: var(--muted2);
-      font-size: 1rem;
-      margin-left: auto;
-      flex-shrink: 0;
-      transition: color 0.2s;
-    }
-    .cv-modal-opt.email:hover    .cv-modal-opt-arrow { color: var(--cyan); }
-    .cv-modal-opt.whatsapp:hover .cv-modal-opt-arrow { color: #25d366; }
-
-    .cv-modal-note {
-      margin-top: 20px;
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.05em;
-      color: var(--muted2);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 480px) {
-      .cv-modal { padding: 28px 20px; }
-      .cv-modal-title { font-size: 1.15rem; }
-      .cv-modal-opt { padding: 14px 16px; gap: 12px; }
-      .cv-modal-opt-icon { font-size: 1.2rem; width: 32px; }
-      .cv-modal-opt-label { font-size: 0.85rem; }
-      .cv-modal-opt-val { font-size: 0.72rem; }
-      .cv-modal-opt:hover { transform: none; }
-    }
-
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 <body>
 
-  <!-- CUSTOM CURSOR -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
 
-  <!-- BG CANVAS -->
-  <canvas id="bg-canvas"></canvas>
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition"></div>
 
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="close-btn" id="closeMenu">[ ✕ ]</button>
-    <a href="#about" onclick="closeMM()">About</a>
-    <a href="#services" onclick="closeMM()">Services</a>
-    <a href="#skills" onclick="closeMM()">Skills</a>
-    <a href="#projects" onclick="closeMM()">Projects</a>
-    <a href="#experience" onclick="closeMM()">Experience</a>
-    <a href="#contact" onclick="closeMM()">Contact</a>
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== MOBILE MENU ==================== -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="btn-ghost" id="mobile-close" aria-label="Close menu" style="position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);">[ close ]</button>
+
+    <nav>
+      <a href="index.html"    class="mobile-menu-link" data-text="Home">Home</a>
+      <a href="about.html"    class="mobile-menu-link" data-text="About">About</a>
+      <a href="projects.html" class="mobile-menu-link" data-text="Projects">Projects</a>
+      <a href="skills.html"   class="mobile-menu-link" data-text="Skills">Skills</a>
+      <a href="blog.html"     class="mobile-menu-link" data-text="Writing">Writing</a>
+      <a href="contact.html"  class="mobile-menu-link" data-text="Contact">Contact</a>
+    </nav>
+
+    <div class="mobile-menu-bottom">
+      <button onclick="openCVModal()" class="btn btn-outline" style="width:200px;justify-content:center;">Request CV</button>
+      <p class="mobile-menu-status">Available for projects — Lagos, Nigeria</p>
+    </div>
   </div>
 
-  <!-- NAV -->
-  <nav id="nav">
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
     <div class="container nav-inner">
-      <a href="#" class="logo">
-        Sam<span class="accent">.</span>
-        <span class="mono">&nbsp;// dev</span>
+
+      <a href="index.html" class="nav-logo" aria-label="Abd'samad Balogun home">
+        Sam<span class="dot">.</span>
+        <span class="tag">// dev</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"    class="nav-link">Home</a></li>
+        <li><a href="about.html"    class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="skills.html"   class="nav-link">Skills</a></li>
+        <li><a href="blog.html"     class="nav-link">Writing</a></li>
+        <li><a href="contact.html"  class="nav-link">Contact</a></li>
       </ul>
+
       <div class="nav-right">
-        <button onclick="openCVModal()" class="btn-cv">Request CV</button>
-        <button class="hamburger" id="hamburger">
-          <span></span><span></span><span></span>
+        <button class="nav-cv-btn" onclick="openCVModal()">Request CV</button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
+
     </div>
   </nav>
 
+  <!-- ==================== PAGE ==================== -->
   <div class="page">
 
-    <!-- ======================== HERO ======================== -->
+    <!-- ============ HERO ============ -->
     <section id="hero">
+
+      <!-- Ambient glows -->
+      <div class="hero-glow-1" aria-hidden="true"></div>
+      <div class="hero-glow-2" aria-hidden="true"></div>
+
       <div class="container">
         <div class="hero-grid">
 
-          <!-- LEFT COLUMN -->
-          <div>
-            <div class="hero-eyebrow">
-              <span class="status-dot"></span>
-              Available for Projects — Lagos, Nigeria
+          <!-- LEFT -->
+          <div class="hero-left">
+
+            <div class="hero-eyebrow reveal">
+              <span class="status-badge">
+                <span class="status-dot"></span>
+                Available for Projects
+              </span>
             </div>
 
-            <h1 class="hero-name">
-              <span class="name-bright">Abd'samad</span><br>
-              <span class="name-dim">Balogun</span>
+            <h1 class="hero-name reveal delay-1">
+              <span class="first">Abd'samad</span>
+              <span class="last">Balogun</span>
             </h1>
 
-            <div class="hero-tagline">
-              <strong>Software Dev</strong> &nbsp;/&nbsp; <strong>UI/UX</strong> &nbsp;/&nbsp; <strong>Digital Creative</strong> &nbsp;/&nbsp; <strong>Computer Eng.</strong>
+            <div class="hero-roles reveal delay-2">
+              <span class="hero-role-tag">Software Developer</span>
+              <span class="hero-role-tag">UI/UX Designer</span>
+              <span class="hero-role-tag">Digital Creative</span>
+              <span class="hero-role-tag">Computer Engineer</span>
             </div>
 
-            <p class="hero-desc">
-              Building <b>modern digital experiences</b> from Lagos.
-              Trained at <b>Aptech International</b>, working hands-on at <b>Computer Village, Ikeja</b>
-              — I turn ideas into beautiful, functional products people actually love using.
+            <p class="hero-desc reveal delay-3">
+              Building <strong>modern digital products</strong> from Lagos, Nigeria.
+              Trained at <strong>Aptech International</strong>, working hands-on at
+              <strong>Computer Village, Ikeja</strong>, I turn ideas into
+              beautiful, functional software people actually love using.
             </p>
 
-            <div class="hero-actions">
-              <a href="#projects" class="btn-primary">View Projects →</a>
-              <a href="#contact" class="btn-outline">Get In Touch</a>
+            <div class="hero-actions reveal delay-4">
+              <a href="projects.html" class="btn btn-primary">View Projects</a>
+              <a href="contact.html"  class="btn btn-outline">Get In Touch</a>
             </div>
 
-            <div class="hero-links">
-              <a href="mailto:balogunabdsamad6@gmail.com">Email</a>
-              <a href="tel:+2349114007286">Call</a>
-              <a href="https://github.com/balosam" target="_blank">GitHub</a>
-              <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank">LinkedIn</a>
-              <a href="https://wa.me/2349114007286" target="_blank">WhatsApp</a>
+            <div class="hero-socials reveal delay-5">
+              <a href="mailto:balogunabdsamad6@gmail.com" class="hero-social">Email</a>
+              <a href="https://github.com/balosam"         class="hero-social" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://www.linkedin.com/in/balogun-abdsamad" class="hero-social" target="_blank" rel="noopener">LinkedIn</a>
+              <a href="https://wa.me/2349114007286"        class="hero-social" target="_blank" rel="noopener">WhatsApp</a>
+              <a href="tel:+2349114007286"                 class="hero-social">Call</a>
             </div>
+
           </div>
-          <!-- END LEFT COLUMN -->
+          <!-- END LEFT -->
 
-          <!-- RIGHT COLUMN — 3D canvas -->
-          <div id="hero-canvas-wrap">
-            <canvas id="hero-canvas"></canvas>
-            <div class="hero-hud">
-              <div class="hud-row">
-                <div class="hud-stat">
-                  <div class="hud-val">10+</div>
-                  <div class="hud-label">Projects</div>
-                </div>
-                <div class="hud-stat">
-                  <div class="hud-val">2yr</div>
-                  <div class="hud-label">Training</div>
-                </div>
-                <div class="hud-stat">
-                  <div class="hud-val">4</div>
-                  <div class="hud-label">Disciplines</div>
-                </div>
-                <div class="hud-stat">
-                  <div class="hud-val">∞</div>
-                  <div class="hud-label">Ambition</div>
+          <!-- RIGHT — 3D Canvas -->
+          <div class="hero-right reveal delay-2">
+
+            <div id="hero-canvas-wrap">
+              <canvas id="hero-canvas"></canvas>
+
+              <!-- Mobile fallback logo grid -->
+              <div id="hero-logo-grid">
+                <div class="hero-logo-item"><img src="images/logos/logo-nextjs.png"     alt="Next.js"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-react.png"      alt="React"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-typescript.png" alt="TypeScript"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-supabase.png"   alt="Supabase"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-tailwind.png"   alt="Tailwind CSS"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-firebase.png"   alt="Firebase"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-figma.png"      alt="Figma"></div>
+                <div class="hero-logo-item"><img src="images/logos/logo-vercel.png"     alt="Vercel"></div>
+              </div>
+
+              <!-- Currently building badge -->
+              <div class="hero-building" aria-label="Currently building">
+                <span class="building-dot"></span>
+                <span class="building-text">Building <span>MadrasahOS v2</span></span>
+              </div>
+
+              <!-- HUD Stats -->
+              <div class="hero-hud">
+                <div class="hud-row">
+                  <div class="hud-stat">
+                    <div class="hud-val">10+</div>
+                    <div class="hud-label">Projects Shipped</div>
+                  </div>
+                  <div class="hud-stat">
+                    <div class="hud-val">2yr</div>
+                    <div class="hud-label">Formal Training</div>
+                  </div>
+                  <div class="hud-stat">
+                    <div class="hud-val">4</div>
+                    <div class="hud-label">Disciplines</div>
+                  </div>
+                  <div class="hud-stat">
+                    <div class="hud-val">∞</div>
+                    <div class="hud-label">Ambition</div>
+                  </div>
                 </div>
               </div>
+
             </div>
           </div>
-          <!-- END RIGHT COLUMN -->
+          <!-- END RIGHT -->
 
         </div>
       </div>
     </section>
+    <!-- END HERO -->
 
+    <!-- Quick preview strip — Featured projects teaser -->
     <div class="divider"></div>
 
-    <!-- ======================== ABOUT ======================== -->
-    <section id="about">
+    <section style="padding: 64px 0;">
       <div class="container">
-        <div class="sec-tag reveal">Who I Am</div>
-        <h2 class="sec-title reveal">About Me</h2>
 
-        <div class="about-grid reveal">
-
-          <div class="glass about-main">
-            <p class="about-text">
-              I'm a motivated and versatile <b>Software Developer, UI/UX Designer, Digital Creative, and Computer Engineer</b>
-              based in Lagos, Nigeria. With formal training from <b>Aptech International</b> in Software Engineering and UI/UX Design,
-              combined with real-world hands-on experience at <b>Computer Village, Ikeja</b>, I bring both theory and practice to
-              every project.<br><br>
-              I've taught programming to kids aged 7–18, designed brand campaigns for jewellery clients, built Islamic prayer
-              tracking apps, enterprise import/export websites, and school management systems. I love creating
-              user-centered digital solutions that actually <b>solve real problems</b> — and I'm just getting started.
-            </p>
-            <div class="chips">
-              <span class="chip hi">Lagos, Nigeria</span>
-              <span class="chip hi">Remote Available</span>
-              <span class="chip">Full-time</span>
-              <span class="chip">Part-time</span>
-              <span class="chip">Freelance</span>
-              <span class="chip">Technology</span>
-              <span class="chip">Design</span>
-              <span class="chip">Financial Markets</span>
-            </div>
-          </div>
-
-          <div class="glass info-block">
-            <div class="info-key">Location</div>
-            <div class="info-val">Lagos State, Nigeria</div>
-          </div>
-
-          <div class="glass info-block">
-            <div class="info-key">Status</div>
-            <div class="info-val" style="color:var(--green)">● Open to Opportunities</div>
-          </div>
-
-          <div class="glass info-block">
-            <div class="info-key">Email</div>
-            <div class="info-val" style="font-size:0.85rem">balogunabdsamad6@gmail.com</div>
-          </div>
-
-          <div class="glass info-block">
-            <div class="info-key">Phone</div>
-            <div class="info-val">09114007286 / 09036661555</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ======================== SERVICES ======================== -->
-    <section id="services">
-      <div class="container">
-        <div class="sec-tag reveal">What I Offer</div>
-        <h2 class="sec-title reveal">Services</h2>
-        <p class="sec-sub reveal">From design to code to hardware — covering the full digital spectrum.</p>
-
-        <div class="services-grid reveal">
-
-          <div class="glass service-card">
-            <div class="service-num">01 —</div>
-            <div class="service-name">Web Development</div>
-            <p class="service-desc">Full-stack web applications built with Next.js, React, TypeScript, and Supabase. From landing pages to complex multi-role platforms — responsive, fast, and production-ready.</p>
-            <div class="service-bar"></div>
-          </div>
-
-          <div class="glass service-card">
-            <div class="service-num">02 —</div>
-            <div class="service-name">UI/UX Design</div>
-            <p class="service-desc">Wireframes, prototypes, and complete UI designs in Figma — focused on user experience, intuitive flows, and interfaces that look great and actually convert.</p>
-            <div class="service-bar"></div>
-          </div>
-
-          <div class="glass service-card">
-            <div class="service-num">03 —</div>
-            <div class="service-name">Digital Creative & Branding</div>
-            <p class="service-desc">Social media graphics, promotional flyers, and marketing assets. Delivered for real clients with measurable visual impact — from jewellery campaigns to fintech platforms.</p>
-            <div class="service-bar"></div>
-          </div>
-
-          <div class="glass service-card">
-            <div class="service-num">04 —</div>
-            <div class="service-name">Computer Engineering</div>
-            <p class="service-desc">Hardware setup, maintenance, troubleshooting, and repairs. Hands-on training at Computer Village, Ikeja — working with real systems and real clients daily.</p>
-            <div class="service-bar"></div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ======================== SKILLS ======================== -->
-    <section id="skills">
-      <div class="container">
-        <div class="sec-tag reveal">My Stack</div>
-        <h2 class="sec-title reveal">Skills & Tools</h2>
-
-        <div class="skills-grid reveal">
-
-          <div class="glass skill-group">
-            <div class="skill-group-name">Languages</div>
-            <div class="skill-list">
-              <div class="skill-item">JavaScript (ES6+)</div>
-              <div class="skill-item">TypeScript</div>
-              <div class="skill-item">Python</div>
-              <div class="skill-item">HTML5 & CSS3</div>
-            </div>
-          </div>
-
-          <div class="glass skill-group">
-            <div class="skill-group-name">Frameworks</div>
-            <div class="skill-list">
-              <div class="skill-item">Next.js 14 / 16</div>
-              <div class="skill-item">React / Vite</div>
-              <div class="skill-item">Tailwind CSS</div>
-              <div class="skill-item">shadcn/ui</div>
-              <div class="skill-item">Framer Motion</div>
-              <div class="skill-item">next-intl (i18n)</div>
-            </div>
-          </div>
-
-          <div class="glass skill-group">
-            <div class="skill-group-name">Backend & Data</div>
-            <div class="skill-list">
-              <div class="skill-item">Supabase (PostgreSQL)</div>
-              <div class="skill-item">Firebase Firestore</div>
-              <div class="skill-item">Prisma ORM</div>
-              <div class="skill-item">NextAuth.js</div>
-              <div class="skill-item">Paystack</div>
-              <div class="skill-item">Sanity.io CMS</div>
-            </div>
-          </div>
-
-          <div class="glass skill-group">
-            <div class="skill-group-name">Tools & APIs</div>
-            <div class="skill-list">
-              <div class="skill-item">Git / GitHub</div>
-              <div class="skill-item">Vercel / Netlify</div>
-              <div class="skill-item">CoinGecko API</div>
-              <div class="skill-item">Claude AI API</div>
-              <div class="skill-item">Twilio / WhatsApp API</div>
-              <div class="skill-item">EmailJS / Brevo</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ======================== PROJECTS ======================== -->
-    <section id="projects">
-      <div class="container">
-        <div class="sec-tag reveal">My Work</div>
-        <h2 class="sec-title reveal">Projects</h2>
-        <p class="sec-sub reveal">Real projects. Real clients. Real impact.</p>
-
-        <div class="filters reveal">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="web">Web App</button>
-          <button class="filter-btn" data-filter="fintech">FinTech</button>
-          <button class="filter-btn" data-filter="islamictech">Islamic Tech</button>
-          <button class="filter-btn" data-filter="edtech">EdTech</button>
-          <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
-          <button class="filter-btn" data-filter="branding">Branding</button>
-        </div>
-
-        <div class="projects-grid" id="projectGrid">
-
-          <!-- MADRASAHOS / INSAIS — Featured + Case Study -->
-          <div class="glass proj-card featured reveal" data-cat="edtech">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#080c1a,#0a1520);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#1B4F8A;top:25%;left:25%;"></div>
-              <div class="proj-thumb-glow" style="background:#C8970A;bottom:25%;right:25%;width:100px;height:100px;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.12em;color:rgba(200,151,10,0.9);margin-bottom:8px;">MadrasahOS</div>
-                <div style="font-family:var(--font-mono);font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.1em;">معهد التعليم العربي الإسلامي</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:#60a5fa">EdTech · School Management · SaaS Architecture</div>
-              <div class="proj-name">MadrasahOS — INSAIS School Platform</div>
-              <p class="proj-desc">Full-stack bilingual (Arabic/English) school management system for a 40-year-old Lagos Islamic institution with 1,000+ students. Role-based portals for Admin, Teachers, and Students. Result management, bilingual PDF reports, Paystack fee payments, WhatsApp notifications, and Claude AI integration — built solo as the sole developer and designed for multi-tenant SaaS expansion.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Next.js 14</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Supabase</span>
-                <span class="proj-tag">shadcn/ui</span>
-                <span class="proj-tag">NextAuth.js</span>
-                <span class="proj-tag">Claude AI</span>
-                <span class="proj-tag">Paystack</span>
-                <span class="proj-tag">next-intl</span>
-                <span class="proj-tag">Twilio</span>
-              </div>
-              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
-                <span style="color:rgba(255,255,255,0.25);cursor:default;font-size:0.65rem;letter-spacing:0.08em;font-family:var(--font-mono);text-transform:uppercase;">In Active Development</span>
-                <button class="case-study-toggle" onclick="toggleCaseStudy(this)" aria-expanded="false">
-                  Case Study <i class="toggle-arrow">▾</i>
-                </button>
-              </div>
-
-              <!-- CASE STUDY PANEL -->
-              <div class="case-study-panel">
-                <div class="cs-grid">
-                  <div class="cs-block">
-                    <div class="cs-label">The Problem</div>
-                    <p class="cs-text">INSAIS — a 40-year-old Lagos Islamic school with <b>1,000+ students</b> — was running entirely on paper. No digital records, no result system, no fee tracking. Staff were manually writing report cards and losing student data across terms.</p>
-                  </div>
-                  <div class="cs-block">
-                    <div class="cs-label">What I Built</div>
-                    <p class="cs-text">A fully bilingual (Arabic + English) SaaS platform with role-based portals for Admins, Teachers, and Students. Features include result entry & PDF report generation, Paystack fee collection, WhatsApp notifications via Twilio, and Claude AI for smart summaries — all built solo.</p>
-                  </div>
-                  <div class="cs-block">
-                    <div class="cs-label">Architecture Decision</div>
-                    <p class="cs-text">Chose <b>Next.js 14 + Supabase</b> for real-time data and row-level security, <b>next-intl</b> for true RTL Arabic support, and <b>shadcn/ui</b> for accessible, themeable components — designed from day one for multi-tenant SaaS scale beyond this first institution.</p>
-                  </div>
-                </div>
-                <div class="cs-outcome-row">
-                  <div class="cs-stat">
-                    <div class="cs-stat-val">1,000+</div>
-                    <div class="cs-stat-label">Students on platform</div>
-                  </div>
-                  <div class="cs-stat">
-                    <div class="cs-stat-val">3</div>
-                    <div class="cs-stat-label">Role-based portals</div>
-                  </div>
-                  <div class="cs-stat">
-                    <div class="cs-stat-val">40yr</div>
-                    <div class="cs-stat-label">Institution digitised</div>
-                  </div>
-                  <div class="cs-stat">
-                    <div class="cs-stat-val">Solo</div>
-                    <div class="cs-stat-label">Built end-to-end</div>
-                  </div>
-                </div>
-              </div>
-              <!-- END CASE STUDY PANEL -->
-
-            </div>
-          </div>
-
-          <!-- ORDA — Featured -->
-          <div class="glass proj-card featured reveal" data-cat="fintech">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#06080f,#0d1320);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#10b981;top:20%;left:20%;"></div>
-              <div class="proj-thumb-glow" style="background:#00d4ff;bottom:20%;right:20%;width:100px;height:100px;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-display);font-size:2.8rem;font-weight:900;letter-spacing:-0.05em;color:#e8eaf6;line-height:1;">ORDA</div>
-                <div style="font-family:var(--font-mono);font-size:0.6rem;color:rgba(16,185,129,0.8);letter-spacing:0.15em;margin-top:4px;">TRADING JOURNAL</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--green)">FinTech · Trading Intelligence · SaaS</div>
-              <div class="proj-name">ORDA — Trading Journal & Intelligence Platform</div>
-              <p class="proj-desc">A trading journal and behavioural intelligence platform for retail traders — tracks trades, performance metrics, psychology, and drawdown in real time. Interactive dashboards built with Recharts for P&L analysis, win rate, and risk metrics. Subscription-based access via Paystack.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">React</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Vite</span>
-                <span class="proj-tag">Tailwind CSS</span>
-                <span class="proj-tag">Supabase</span>
-                <span class="proj-tag">Recharts</span>
-                <span class="proj-tag">Paystack</span>
-              </div>
-              <a href="https://orda-plum.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- OFFICIALVALUE EXCHANGE -->
-          <div class="glass proj-card reveal" data-cat="fintech">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#050a05,#091209);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#22c55e;top:25%;left:30%;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;color:rgba(34,197,94,0.9);margin-bottom:6px;">OfficialValue</div>
-                <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:#e8eaf6;letter-spacing:-0.03em;">Exchange</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:#22c55e">FinTech · Crypto · Gift Cards · Nigeria</div>
-              <div class="proj-name">OfficialValue Exchange</div>
-              <p class="proj-desc">Live crypto and gift card trading platform for the Nigerian market — built entirely without frameworks. A zero-dependency SPA with 9 pages, GSAP transitions, live CoinGecko prices in NGN with production CORS fallback, and a Firebase-backed admin panel with SHA-256 password hashing.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Vanilla JS</span>
-                <span class="proj-tag">HTML/CSS</span>
-                <span class="proj-tag">Firebase</span>
-                <span class="proj-tag">CoinGecko API</span>
-                <span class="proj-tag">GSAP</span>
-              </div>
-              <a href="https://officialvalue-exchange.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- BRIDAL FIX -->
-          <div class="glass proj-card reveal" data-cat="ecommerce">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#0f080d,#180d14);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#ec4899;top:30%;left:30%;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:#f9a8d4;letter-spacing:-0.02em;">The Bridal Fix</div>
-                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.12em;color:rgba(249,168,212,0.5);margin-top:4px;">BRIDAL EMERGENCY KITS</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:#f472b6">E-Commerce · Nigeria · Bridal</div>
-              <div class="proj-name">The Bridal Fix</div>
-              <p class="proj-desc">Nigerian bridal emergency kit e-commerce platform — brides order curated wedding day essentials for nationwide delivery before their big day. Sanity.io CMS, Paystack checkout, Brevo transactional emails, and Framer Motion for a premium product experience.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Next.js 14</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Sanity.io</span>
-                <span class="proj-tag">Paystack</span>
-                <span class="proj-tag">Framer Motion</span>
-                <span class="proj-tag">Brevo</span>
-              </div>
-              <a href="https://the-bridal-fix.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- IMANSOFT -->
-          <div class="glass proj-card reveal" data-cat="web">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#080c18,#0c1020);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#6366f1;top:25%;left:30%;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:#e8eaf6;letter-spacing:-0.03em;">IMANSOFT</div>
-                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.12em;color:rgba(99,102,241,0.8);margin-top:4px;">TECHNOLOGIES</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:#818cf8">Web · Corporate · Software Agency</div>
-              <div class="proj-name">IMANSOFT Technologies</div>
-              <p class="proj-desc">Corporate website for a custom software agency serving enterprises in distribution, warehousing, and logistics. Clean, professional web presence built with vanilla HTML, CSS, and JavaScript.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">HTML</span>
-                <span class="proj-tag">CSS</span>
-                <span class="proj-tag">JavaScript</span>
-                <span class="proj-tag">Vercel</span>
-              </div>
-              <a href="https://imansoft.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- FAGARS & FASHEG -->
-          <div class="glass proj-card reveal" data-cat="web">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#0a0a06,#14120a);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#f59e0b;top:30%;left:25%;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-display);font-size:1rem;font-weight:800;color:#fbbf24;letter-spacing:-0.02em;">Fagars & Fasheg</div>
-                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.1em;color:rgba(251,191,36,0.5);margin-top:4px;">IMPORT · EXPORT</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--orange)">Web · Enterprise · Business</div>
-              <div class="proj-name">Fagars & Fasheg Import/Export</div>
-              <p class="proj-desc">Enterprise business website for an import/export company dealing in farm produce, food products, and electronics. Interactive divisions showcase, working contact form, and professional UI/UX.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Next.js 16</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Tailwind CSS</span>
-                <span class="proj-tag">shadcn/ui</span>
-                <span class="proj-tag">EmailJS</span>
-              </div>
-              <a href="https://fagars-fasheg-website.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- FALAH -->
-          <div class="glass proj-card reveal" data-cat="islamictech">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#050f08,#0a1510);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#10b981;top:25%;left:30%;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:#34d399;letter-spacing:-0.04em;">Falah</div>
-                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.14em;color:rgba(52,211,153,0.5);margin-top:4px;">PRAYER TRACKER · PWA</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--green)">Islamic Tech · Web App · PWA</div>
-              <div class="proj-name">Falah — Islamic Prayer Tracker</div>
-              <p class="proj-desc">Prayer tracking PWA helping Muslims build consistent Salah habits through streaks, leaderboards, prayer buddies, and smart reminders. Gamification built on a spiritual foundation.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Next.js 16</span>
-                <span class="proj-tag">TypeScript</span>
-                <span class="proj-tag">Supabase</span>
-                <span class="proj-tag">Shadcn/UI</span>
-                <span class="proj-tag">PWA</span>
-                <span class="proj-tag">Framer Motion</span>
-              </div>
-              <a href="https://falah-prayerapp.vercel.app" target="_blank" class="proj-link">Live Site →</a>
-            </div>
-          </div>
-
-          <!-- ORNAMIQUE -->
-          <div class="glass proj-card reveal" data-cat="branding">
-            <div class="proj-thumb">
-              <div class="proj-thumb-bg" style="background:linear-gradient(135deg,#100810,#180c18);"></div>
-              <div class="proj-thumb-lines"></div>
-              <div class="proj-thumb-glow" style="background:#ec4899;top:25%;right:25%;"></div>
-              <div style="position:relative;z-index:2;text-align:center;">
-                <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:#f9a8d4;letter-spacing:0.02em;">Ornamique</div>
-                <div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.14em;color:rgba(249,168,212,0.45);margin-top:3px;">JEWELS · CAMPAIGN</div>
-              </div>
-            </div>
-            <div class="proj-body">
-              <div class="proj-cat" style="color:var(--pink)">Branding · Campaign Design · Figma</div>
-              <div class="proj-name">Ornamique Jewels Campaign</div>
-              <p class="proj-desc">Full promotional campaign for a jewellery brand's Girlfriend's Day sales push — flyers, pricing layouts, social media assets, and brand-aligned marketing graphics designed in Figma and Canva.</p>
-              <div class="proj-tags">
-                <span class="proj-tag">Figma</span>
-                <span class="proj-tag">Canva</span>
-                <span class="proj-tag">Branding</span>
-                <span class="proj-tag">Campaign Design</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ======================== EXPERIENCE ======================== -->
-    <section id="experience">
-      <div class="container">
-        <div class="sec-tag reveal">Work History</div>
-        <h2 class="sec-title reveal">Experience & Education</h2>
-
-        <div class="exp-grid reveal">
-
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
           <div>
-            <div class="sec-tag" style="margin-bottom:28px;color:var(--cyan)">Experience</div>
-            <div class="timeline">
-
-              <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">2024 — Present</div>
-                <div class="tl-role">Full-Stack Developer — Independent</div>
-                <div class="tl-org">Self-employed · Remote, Lagos</div>
-                <ul class="tl-points">
-                  <li>Built and shipped 7+ production web applications end-to-end as sole developer</li>
-                  <li>MadrasahOS — bilingual school management platform for INSAIS (1,000+ students), built with Next.js 14, Supabase, Claude AI, and Paystack; designed for multi-tenant SaaS scale</li>
-                  <li>OfficialValue Exchange — live fintech platform with Firebase admin, CoinGecko live prices, and SHA-256 auth — zero dependencies in the frontend</li>
-                  <li>ORDA — trading journal and behavioural intelligence SaaS (React, TypeScript, Recharts, Supabase)</li>
-                  <li>The Bridal Fix — e-commerce platform with Sanity CMS, Paystack, and Brevo transactional email</li>
-                  <li>IMANSOFT Technologies, Fagars & Fasheg, Falah — additional live, deployed products</li>
-                </ul>
-              </div>
-
-              <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">2024 — 2025</div>
-                <div class="tl-role">Freelance UI/UX Designer</div>
-                <div class="tl-org">Ornamique Jewels & Personal Projects · Remote, Lagos</div>
-                <ul class="tl-points">
-                  <li>Designed UI/UX wireframes and prototypes for digital platforms using Figma</li>
-                  <li>Developed branding and marketing graphics for social media campaigns</li>
-                  <li>Delivered client-aligned designs that met measurable business objectives</li>
-                </ul>
-              </div>
-
-              <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">2024</div>
-                <div class="tl-role">Programming Instructor</div>
-                <div class="tl-org">Technical Training Program · Lagos</div>
-                <ul class="tl-points">
-                  <li>Taught foundational programming concepts to children aged 7–18</li>
-                  <li>Designed interactive, age-appropriate lessons for complex topics</li>
-                  <li>Adapted teaching style based on student progress and engagement</li>
-                </ul>
-              </div>
-
-              <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">2025 — Present</div>
-                <div class="tl-role">Computer Engineering Trainee</div>
-                <div class="tl-org">Next to Your Mobile Computer Ltd · Computer Village, Ikeja, Lagos</div>
-                <ul class="tl-points">
-                  <li>Hands-on hardware setup, maintenance, and troubleshooting</li>
-                  <li>Assembling and repairing computer systems for real clients daily</li>
-                </ul>
-              </div>
-
-            </div>
+            <div class="sec-eyebrow reveal">Selected Work</div>
+            <h2 class="sec-title reveal" style="font-size:clamp(1.8rem,3.5vw,2.8rem); margin-bottom:0;">
+              Projects I've <span class="outline">Shipped</span>
+            </h2>
           </div>
+          <a href="projects.html" class="btn btn-ghost reveal" style="font-size:0.7rem;">View all projects &rarr;</a>
+        </div>
 
-          <div class="edu-side">
-            <div class="edu-sec-label">Education</div>
-            <div class="edu-cards">
+        <!-- 3-card preview grid -->
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;" class="preview-grid">
 
-              <div class="glass edu-card">
-                <div class="edu-year">2023 – 2025</div>
-                <div class="edu-deg">Advanced Diploma in Software Engineering</div>
-                <div class="edu-inst">Aptech International · Maryland, Lagos<br>2-year program: programming, software principles & UI/UX design</div>
+          <!-- MadrasahOS -->
+          <a href="projects.html" class="glass reveal" style="overflow:hidden; border-radius:var(--radius-md); display:block;">
+            <div style="height:200px; overflow:hidden; position:relative;">
+              <img src="images/previews/madrasah-preview.png" alt="MadrasahOS school management platform"
+                style="width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease);"
+                onmouseover="this.style.transform='scale(1.05)'"
+                onmouseout="this.style.transform='scale(1)'">
+              <div style="position:absolute;top:12px;left:12px;">
+                <span class="chip chip-cyan" style="font-size:0.55rem;">EdTech</span>
               </div>
-
-              <div class="glass edu-card">
-                <div class="edu-year">2025 – Present</div>
-                <div class="edu-deg">Computer Engineering Training</div>
-                <div class="edu-inst">Next to Your Mobile Computer Ltd · Computer Village, Ikeja<br>Hardware, troubleshooting & system repair</div>
-              </div>
-
-              <div class="glass edu-card">
-                <div class="edu-year">2021</div>
-                <div class="edu-deg">Certificate in Computer Applications & Graphic Design</div>
-                <div class="edu-inst">WAPA · Lagos<br>MS Office Suite & graphic design fundamentals</div>
-              </div>
-
-              <div class="glass edu-card">
-                <div class="edu-year">2020</div>
-                <div class="edu-deg">West African Senior School Certificate (WASCE)</div>
-                <div class="edu-inst">Secondary School, Lagos</div>
-              </div>
-
             </div>
-          </div>
+            <div style="padding:18px 20px;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;">MadrasahOS</div>
+              <p style="font-size:0.8rem;color:var(--text-2);font-weight:300;line-height:1.6;margin-bottom:12px;">Bilingual school management system for 1,000+ students. Solo build.</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <span class="chip">Next.js</span>
+                <span class="chip">Supabase</span>
+                <span class="chip">Claude AI</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- ORDA -->
+          <a href="projects.html" class="glass reveal delay-1" style="overflow:hidden; border-radius:var(--radius-md); display:block;">
+            <div style="height:200px; overflow:hidden; position:relative;">
+              <img src="images/previews/orda-preview.png" alt="ORDA trading journal platform"
+                style="width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease);"
+                onmouseover="this.style.transform='scale(1.05)'"
+                onmouseout="this.style.transform='scale(1)'">
+              <div style="position:absolute;top:12px;left:12px;">
+                <span class="chip chip-amber" style="font-size:0.55rem;">FinTech</span>
+              </div>
+            </div>
+            <div style="padding:18px 20px;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;">ORDA</div>
+              <p style="font-size:0.8rem;color:var(--text-2);font-weight:300;line-height:1.6;margin-bottom:12px;">Trading journal and behavioural intelligence SaaS for retail traders.</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <span class="chip">React</span>
+                <span class="chip">Recharts</span>
+                <span class="chip">Paystack</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- OfficialValue -->
+          <a href="projects.html" class="glass reveal delay-2" style="overflow:hidden; border-radius:var(--radius-md); display:block;">
+            <div style="height:200px; overflow:hidden; position:relative;">
+              <img src="images/previews/officialvalue-preview.png" alt="OfficialValue Exchange crypto trading platform"
+                style="width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease);"
+                onmouseover="this.style.transform='scale(1.05)'"
+                onmouseout="this.style.transform='scale(1)'">
+              <div style="position:absolute;top:12px;left:12px;">
+                <span class="chip chip-cyan" style="font-size:0.55rem;">FinTech</span>
+              </div>
+            </div>
+            <div style="padding:18px 20px;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;">OfficialValue Exchange</div>
+              <p style="font-size:0.8rem;color:var(--text-2);font-weight:300;line-height:1.6;margin-bottom:12px;">Live crypto and gift card trading platform for the Nigerian market.</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <span class="chip">Vanilla JS</span>
+                <span class="chip">Firebase</span>
+                <span class="chip">CoinGecko</span>
+              </div>
+            </div>
+          </a>
 
         </div>
-      </div>
-    </section>
 
-    <div class="divider"></div>
-
-    <!-- ======================== CONTACT ======================== -->
-    <section id="contact">
-      <div class="container">
-        <div class="sec-tag reveal">Let's Connect</div>
-        <h2 class="sec-title reveal">Get In Touch</h2>
-
-        <div class="contact-layout reveal">
-
-          <div class="glass contact-left">
-            <h3>Let's Build Something Great</h3>
-            <p>Whether you need a full website, a UI design, branding work, or want to hire me — I reply fast. Open to freelance gigs, remote work, and full-time roles.</p>
-
-            <div class="contact-options">
-
-              <a href="mailto:balogunabdsamad6@gmail.com" class="contact-opt">
-                <div class="contact-opt-info">
-                  <div class="contact-opt-key">Email</div>
-                  <div class="contact-opt-val">balogunabdsamad6@gmail.com</div>
-                </div>
-              </a>
-
-              <a href="https://wa.me/2349114007286" target="_blank" class="contact-opt">
-                <div class="contact-opt-info">
-                  <div class="contact-opt-key">WhatsApp</div>
-                  <div class="contact-opt-val">+234 911 400 7286</div>
-                </div>
-              </a>
-
-              <a href="tel:+2349114007286" class="contact-opt">
-                <div class="contact-opt-info">
-                  <div class="contact-opt-key">Phone</div>
-                  <div class="contact-opt-val">09114007286 / 09036661555</div>
-                </div>
-              </a>
-
-              <a href="https://github.com/balosam" target="_blank" class="contact-opt">
-                <div class="contact-opt-info">
-                  <div class="contact-opt-key">GitHub</div>
-                  <div class="contact-opt-val">github.com/balosam</div>
-                </div>
-              </a>
-
-              <a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" class="contact-opt">
-                <div class="contact-opt-info">
-                  <div class="contact-opt-key">LinkedIn</div>
-                  <div class="contact-opt-val">abdsamad-balogun</div>
-                </div>
-              </a>
-
-            </div>
-          </div>
-
-          <div class="glass contact-right">
-            <div class="cta-box">
-              <div class="cta-title">Ready to Start a Project?</div>
-              <p class="cta-text">
-                Let's talk about your idea. Whether it's a startup web app, business website, UI design, or branding — I'm here and I deliver.
-              </p>
-              <div class="cta-btns">
-                <a href="mailto:balogunabdsamad6@gmail.com" class="cta-btn primary">Send Me an Email</a>
-                <a href="https://wa.me/2349114007286" target="_blank" class="cta-btn secondary">Chat on WhatsApp</a>
-                <button onclick="openCVModal()" class="cta-btn ghost">Request My CV</button>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
     </section>
 
   </div>
+  <!-- END PAGE -->
 
-  <!-- FOOTER -->
+  <!-- ==================== FOOTER ==================== -->
   <footer>
     <div class="container">
-      <div class="foot-inner">
-        <a href="#" class="foot-logo">Sam<span>.</span></a>
-        <p class="foot-copy">© 2026 Abd'samad Adeniyi Balogun · Lagos, Nigeria · Built with Three.js + ❤️</p>
+      <div class="footer-inner">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Sam<span class="dot">.</span></a>
+          <p class="footer-tagline">
+            Full-stack developer and UI/UX designer building modern digital products from Lagos, Nigeria.
+            Open to freelance, remote, and full-time opportunities.
+          </p>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            Open to Opportunities
+          </span>
+        </div>
+
+        <!-- Navigate -->
+        <div>
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html"    class="footer-link">Home</a></li>
+            <li><a href="about.html"    class="footer-link">About</a></li>
+            <li><a href="projects.html" class="footer-link">Projects</a></li>
+            <li><a href="skills.html"   class="footer-link">Skills</a></li>
+            <li><a href="blog.html"     class="footer-link">Writing</a></li>
+            <li><a href="contact.html"  class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Connect -->
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-links" role="list">
+            <li><a href="mailto:balogunabdsamad6@gmail.com"               class="footer-link">Email</a></li>
+            <li><a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="footer-link">WhatsApp</a></li>
+            <li><a href="https://github.com/balosam"  target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" rel="noopener" class="footer-link">LinkedIn</a></li>
+            <li><a href="tel:+2349114007286"                               class="footer-link">+234 911 400 7286</a></li>
+          </ul>
+        </div>
+
       </div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Abd'samad Adeniyi Balogun &middot; Lagos, Nigeria</p>
+        <p class="footer-made">Built with <span>Three.js</span> &amp; precision</p>
+      </div>
+
     </div>
   </footer>
 
   <!-- WhatsApp Float -->
-  <a href="https://wa.me/2349114007286" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
+  <a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
 
   <!-- Back to Top -->
-  <button id="backToTop" title="Back to top">↑</button>
+  <button id="back-to-top" aria-label="Back to top">↑</button>
 
-  <!-- ====== CV REQUEST MODAL ====== -->
-  <div class="cv-modal-overlay" id="cvModal" onclick="handleOverlayClick(event)">
+  <!-- CV MODAL -->
+  <div class="cv-modal-overlay" id="cv-modal" onclick="handleModalOverlay(event)" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
     <div class="cv-modal">
-      <button class="cv-modal-close" onclick="closeCVModal()">[ ✕ ]</button>
 
-      <div class="cv-modal-tag">Request CV</div>
-      <div class="cv-modal-title">How would you like to reach out?</div>
-      <p class="cv-modal-sub">Choose your preferred channel — I'll send my CV right over.</p>
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">[ esc ]</button>
+
+      <div class="cv-modal-eyebrow">Request CV</div>
+      <h2 class="cv-modal-title" id="cv-modal-title">How would you like to reach out?</h2>
+      <p class="cv-modal-sub">Choose your preferred channel and I'll send my CV right over.</p>
 
       <div class="cv-modal-options">
 
-        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV%20for%20review.%0A%0AThank%20you."
+        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV.%0A%0AThank%20you."
            class="cv-modal-opt email">
-          <span class="cv-modal-opt-icon">📩</span>
-          <div class="cv-modal-opt-body">
-            <div class="cv-modal-opt-type">Via Email</div>
-            <div class="cv-modal-opt-label">Send a formal request</div>
-            <div class="cv-modal-opt-val">balogunabdsamad6@gmail.com</div>
+          <span class="cv-opt-icon">📩</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via Email</div>
+            <div class="cv-opt-label">Send a formal request</div>
+            <div class="cv-opt-val">balogunabdsamad6@gmail.com</div>
           </div>
-          <span class="cv-modal-opt-arrow">→</span>
+          <span class="cv-opt-arrow">→</span>
         </a>
 
-        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%20to%20me%3F%0A%0AThanks!"
-           target="_blank"
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%3F%0A%0AThanks!"
+           target="_blank" rel="noopener"
            class="cv-modal-opt whatsapp">
-          <span class="cv-modal-opt-icon">💬</span>
-          <div class="cv-modal-opt-body">
-            <div class="cv-modal-opt-type">Via WhatsApp</div>
-            <div class="cv-modal-opt-label">Quick &amp; direct message</div>
-            <div class="cv-modal-opt-val">+234 911 400 7286</div>
+          <span class="cv-opt-icon">💬</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via WhatsApp</div>
+            <div class="cv-opt-label">Quick and direct</div>
+            <div class="cv-opt-val">+234 911 400 7286</div>
           </div>
-          <span class="cv-modal-opt-arrow">→</span>
+          <span class="cv-opt-arrow">→</span>
         </a>
 
       </div>
 
-      <p class="cv-modal-note">I typically respond within a few hours · Lagos, Nigeria 🇳🇬</p>
+      <p class="cv-modal-note">I typically respond within a few hours &middot; Lagos, Nigeria</p>
+
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="script.js"></script>
+  <!-- SCRIPTS -->
+  <script src="js/global.js"></script>
+  <script src="js/hero-3d.js" defer></script>
+
+  <!-- Preview grid mobile responsive -->
+  <style>
+    @media (max-width: 768px) {
+      .preview-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .preview-grid { grid-template-columns: repeat(2,1fr) !important; }
+    }
+  </style>
 
 </body>
 </html>

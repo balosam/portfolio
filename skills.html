@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills — Abd'samad Balogun</title>
+  <meta name="description" content="Technical skills and proficiency tiers of Abd'samad Balogun — full-stack developer and UI/UX designer based in Lagos, Nigeria." />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/skills.css">
+</head>
+<body>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ==================== MOBILE MENU ==================== -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="btn-ghost" id="mobile-close" aria-label="Close menu" style="position:absolute;top:24px;right:24px;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.08em;border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);">[ close ]</button>
+    <nav>
+      <a href="index.html"    class="mobile-menu-link" data-text="Home">Home</a>
+      <a href="about.html"    class="mobile-menu-link" data-text="About">About</a>
+      <a href="projects.html" class="mobile-menu-link" data-text="Projects">Projects</a>
+      <a href="skills.html"   class="mobile-menu-link" data-text="Skills">Skills</a>
+      <a href="blog.html"     class="mobile-menu-link" data-text="Writing">Writing</a>
+      <a href="contact.html"  class="mobile-menu-link" data-text="Contact">Contact</a>
+    </nav>
+    <div class="mobile-menu-bottom">
+      <button onclick="openCVModal()" class="btn btn-outline" style="width:200px;justify-content:center;">Request CV</button>
+      <p class="mobile-menu-status">Available for projects — Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Abd'samad Balogun home">
+        Sam<span class="dot">.</span>
+        <span class="tag">// dev</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"    class="nav-link">Home</a></li>
+        <li><a href="about.html"    class="nav-link">About</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="skills.html"   class="nav-link active">Skills</a></li>
+        <li><a href="blog.html"     class="nav-link">Writing</a></li>
+        <li><a href="contact.html"  class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="nav-cv-btn" onclick="openCVModal()">Request CV</button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE ==================== -->
+  <div class="page">
+
+    <!-- ============ HERO ============ -->
+    <section id="skills-hero">
+      <div class="skills-hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="skills-hero-inner">
+          <div class="sec-eyebrow reveal">Capabilities</div>
+          <h1 class="sec-title reveal delay-1">
+            Tools I<br>
+            <span class="outline">Actually Use</span>
+          </h1>
+          <p class="sec-sub reveal delay-2" style="margin-bottom:0;">
+            Four tiers. No vanity listings. Every skill here has shipped real code in a real project
+            or is actively being built into the next one.
+          </p>
+        </div>
+        <div class="skills-bg-count" aria-hidden="true">35+</div>
+      </div>
+    </section>
+
+    <!-- ============ TIER LEGEND ============ -->
+    <div id="tier-legend">
+      <div class="container">
+        <div class="legend-inner reveal">
+          <span class="legend-label">Tiers:</span>
+          <div class="legend-items">
+            <div class="legend-item">
+              <span class="tier-pip tier-production"></span>
+              <span class="legend-text">Production</span>
+              <span class="legend-sub">Shipped live code with this</span>
+            </div>
+            <div class="legend-item">
+              <span class="tier-pip tier-proficient"></span>
+              <span class="legend-text">Proficient</span>
+              <span class="legend-sub">Comfortable and building</span>
+            </div>
+            <div class="legend-item">
+              <span class="tier-pip tier-familiar"></span>
+              <span class="legend-text">Familiar</span>
+              <span class="legend-sub">Used it, know my way around</span>
+            </div>
+            <div class="legend-item">
+              <span class="tier-pip tier-learning"></span>
+              <span class="legend-text">Learning</span>
+              <span class="legend-sub">Actively in progress</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CATEGORY FILTER ============ -->
+    <div id="skills-filter" role="navigation" aria-label="Skill category filters">
+      <div class="container">
+        <div class="skills-filter-inner">
+          <button class="skill-tab active" data-cat="frontend"    aria-selected="true">Frontend</button>
+          <button class="skill-tab"        data-cat="backend"     aria-selected="false">Backend &amp; DB</button>
+          <button class="skill-tab"        data-cat="languages"   aria-selected="false">Languages</button>
+          <button class="skill-tab"        data-cat="apis"        aria-selected="false">APIs &amp; Integrations</button>
+          <button class="skill-tab"        data-cat="design"      aria-selected="false">Design</button>
+          <button class="skill-tab"        data-cat="tools"       aria-selected="false">Tools &amp; DevOps</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SKILLS GRID ============ -->
+    <section id="skills-grid">
+      <div class="container">
+
+        <!-- ─── FRONTEND ─── -->
+        <div class="skill-panel active" data-panel="frontend" role="tabpanel">
+          <div class="skill-panel-grid">
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-production-header">
+                <span class="tier-pip tier-production"></span>
+                Production
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Next.js 14 / 16</div>
+                  <div class="skill-note">App Router, server actions, middleware, i18n</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">React</div>
+                  <div class="skill-note">Hooks, context, component architecture</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">Tailwind CSS</div>
+                  <div class="skill-note">Utility-first, custom config, responsive design</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">HTML5</div>
+                  <div class="skill-note">Semantic markup, accessibility, SEO structure</div>
+                </div>
+                <div class="skill-card reveal delay-4">
+                  <div class="skill-name">CSS3</div>
+                  <div class="skill-note">Animations, grid, flexbox, custom properties</div>
+                </div>
+                <div class="skill-card reveal delay-5">
+                  <div class="skill-name">Vanilla JS</div>
+                  <div class="skill-note">DOM manipulation, ES6+, zero-dependency builds</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-proficient-header">
+                <span class="tier-pip tier-proficient"></span>
+                Proficient
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">shadcn/ui</div>
+                  <div class="skill-note">Component library on top of Radix UI</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Framer Motion</div>
+                  <div class="skill-note">Page transitions, scroll animations, gestures</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">Three.js</div>
+                  <div class="skill-note">3D scenes, orbit animations, performance tuning</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">Recharts</div>
+                  <div class="skill-note">P&amp;L charts, analytics dashboards</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-familiar-header">
+                <span class="tier-pip tier-familiar"></span>
+                Familiar
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">GSAP</div>
+                  <div class="skill-note">Page transitions and scroll-triggered animations</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">next-intl</div>
+                  <div class="skill-note">Internationalisation and RTL Arabic support</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">PWA</div>
+                  <div class="skill-note">Service workers, offline support, installable apps</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ─── BACKEND & DB ─── -->
+        <div class="skill-panel" data-panel="backend" role="tabpanel" hidden>
+          <div class="skill-panel-grid">
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-production-header">
+                <span class="tier-pip tier-production"></span>
+                Production
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Supabase</div>
+                  <div class="skill-note">PostgreSQL, RLS, real-time, auth, storage</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Firebase</div>
+                  <div class="skill-note">Realtime Database, Firestore, Auth, Hosting</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">NextAuth.js</div>
+                  <div class="skill-note">Role-based auth, session management, providers</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">Sanity.io</div>
+                  <div class="skill-note">Headless CMS, GROQ queries, schemas</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-proficient-header">
+                <span class="tier-pip tier-proficient"></span>
+                Proficient
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Prisma ORM</div>
+                  <div class="skill-note">Schema design, migrations, type-safe queries</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">REST APIs</div>
+                  <div class="skill-note">Building and consuming JSON endpoints</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-learning-header">
+                <span class="tier-pip tier-learning"></span>
+                Learning
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">MySQL</div>
+                  <div class="skill-note">Relational modelling, joins, stored procedures</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">PostgreSQL</div>
+                  <div class="skill-note">Standalone server setup, query optimisation</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">Headless WordPress</div>
+                  <div class="skill-note">WP REST API, ACF, decoupled frontend</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ─── LANGUAGES ─── -->
+        <div class="skill-panel" data-panel="languages" role="tabpanel" hidden>
+          <div class="skill-panel-grid">
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-production-header">
+                <span class="tier-pip tier-production"></span>
+                Production
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">JavaScript ES6+</div>
+                  <div class="skill-note">Async/await, modules, destructuring, closures</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">HTML</div>
+                  <div class="skill-note">Semantic markup, ARIA, forms, media elements</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">CSS</div>
+                  <div class="skill-note">Custom properties, animations, layout systems</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-proficient-header">
+                <span class="tier-pip tier-proficient"></span>
+                Proficient
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">TypeScript</div>
+                  <div class="skill-note">Generics, utility types, strict mode, interfaces</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-learning-header">
+                <span class="tier-pip tier-learning"></span>
+                Learning
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Python</div>
+                  <div class="skill-note">Scripting, data processing, backend utilities</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Java</div>
+                  <div class="skill-note">OOP fundamentals, data structures, algorithms</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ─── APIs & INTEGRATIONS ─── -->
+        <div class="skill-panel" data-panel="apis" role="tabpanel" hidden>
+          <div class="skill-panel-grid">
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-production-header">
+                <span class="tier-pip tier-production"></span>
+                Production
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Paystack</div>
+                  <div class="skill-note">Checkout, subscriptions, webhooks, NGN billing</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Claude AI API</div>
+                  <div class="skill-note">Smart summaries, admin drafting, AI features</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">CoinGecko API</div>
+                  <div class="skill-note">Live crypto prices, NGN conversion, CORS fallback</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">Twilio</div>
+                  <div class="skill-note">WhatsApp notifications, SMS alerts</div>
+                </div>
+                <div class="skill-card reveal delay-4">
+                  <div class="skill-name">EmailJS</div>
+                  <div class="skill-note">Contact forms, zero-backend email delivery</div>
+                </div>
+                <div class="skill-card reveal delay-5">
+                  <div class="skill-name">Brevo</div>
+                  <div class="skill-note">Transactional emails, order confirmations</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ─── DESIGN ─── -->
+        <div class="skill-panel" data-panel="design" role="tabpanel" hidden>
+          <div class="skill-panel-grid">
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-production-header">
+                <span class="tier-pip tier-production"></span>
+                Production
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Figma</div>
+                  <div class="skill-note">UI design, components, auto layout, prototyping</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Canva</div>
+                  <div class="skill-note">Campaign assets, social graphics, brand kits</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">UI/UX Design</div>
+                  <div class="skill-note">User flows, information architecture, usability</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-proficient-header">
+                <span class="tier-pip tier-proficient"></span>
+                Proficient
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Wireframing</div>
+                  <div class="skill-note">Low and mid-fidelity layouts before any code</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Prototyping</div>
+                  <div class="skill-note">Interactive flows, user testing, handoffs</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">Branding</div>
+                  <div class="skill-note">Identity systems, type pairings, campaign design</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">CorelDraw</div>
+                  <div class="skill-note">Vector graphics, logo design, print layouts</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-familiar-header">
+                <span class="tier-pip tier-familiar"></span>
+                Familiar
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Photoshop</div>
+                  <div class="skill-note">Image editing, compositing, asset preparation</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ─── TOOLS & DEVOPS ─── -->
+        <div class="skill-panel" data-panel="tools" role="tabpanel" hidden>
+          <div class="skill-panel-grid">
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-production-header">
+                <span class="tier-pip tier-production"></span>
+                Production
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Git</div>
+                  <div class="skill-note">Branching, rebasing, conflict resolution</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">GitHub</div>
+                  <div class="skill-note">Repos, pull requests, Actions for CI/CD</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">Vercel</div>
+                  <div class="skill-note">Deployments, environment variables, edge config</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">VS Code</div>
+                  <div class="skill-note">Extensions, workspace config, debugging</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-tier-col">
+              <div class="tier-header tier-proficient-header">
+                <span class="tier-pip tier-proficient"></span>
+                Proficient
+              </div>
+              <div class="skill-list">
+                <div class="skill-card reveal">
+                  <div class="skill-name">Netlify</div>
+                  <div class="skill-note">Static deploys, forms, redirects</div>
+                </div>
+                <div class="skill-card reveal delay-1">
+                  <div class="skill-name">Vite</div>
+                  <div class="skill-note">Fast dev server, bundling, HMR</div>
+                </div>
+                <div class="skill-card reveal delay-2">
+                  <div class="skill-name">Microsoft Word</div>
+                  <div class="skill-note">Documents, formatting, professional reports</div>
+                </div>
+                <div class="skill-card reveal delay-3">
+                  <div class="skill-name">Microsoft Excel</div>
+                  <div class="skill-note">Spreadsheets, formulas, data organisation</div>
+                </div>
+                <div class="skill-card reveal delay-4">
+                  <div class="skill-name">Microsoft PowerPoint</div>
+                  <div class="skill-note">Presentations, slide design, pitch decks</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============ STATS STRIP ============ -->
+    <div class="divider"></div>
+    <section id="skills-stats">
+      <div class="container">
+        <div class="stats-row reveal">
+          <div class="stat-item">
+            <div class="stat-val">35<span class="stat-plus">+</span></div>
+            <div class="stat-label">Technologies</div>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <div class="stat-val">10<span class="stat-plus">+</span></div>
+            <div class="stat-label">Projects shipped</div>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <div class="stat-val">4</div>
+            <div class="stat-label">Discipline areas</div>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <div class="stat-val">2<span class="stat-plus">yr</span></div>
+            <div class="stat-label">Formal training</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+
+    <!-- ============ CTA ============ -->
+    <section id="skills-cta">
+      <div class="skills-cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="skills-cta-inner reveal">
+          <h2 class="cta-title">
+            Got something<br>worth <span class="outline">building?</span>
+          </h2>
+          <p class="skills-cta-sub">
+            I am open to freelance, contract, and full-time opportunities from Lagos and remote.
+            If you have a product that needs designing or engineering, let us talk.
+          </p>
+          <div class="skills-cta-actions">
+            <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+            <button onclick="openCVModal()" class="btn btn-outline">Request CV</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <!-- END PAGE -->
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Sam<span class="dot">.</span></a>
+          <p class="footer-tagline">
+            Full-stack developer and UI/UX designer building modern digital products from Lagos, Nigeria.
+            Open to freelance, remote, and full-time opportunities.
+          </p>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            Open to Opportunities
+          </span>
+        </div>
+        <div>
+          <p class="footer-col-title">Navigate</p>
+          <ul class="footer-links" role="list">
+            <li><a href="index.html"    class="footer-link">Home</a></li>
+            <li><a href="about.html"    class="footer-link">About</a></li>
+            <li><a href="projects.html" class="footer-link">Projects</a></li>
+            <li><a href="skills.html"   class="footer-link">Skills</a></li>
+            <li><a href="blog.html"     class="footer-link">Writing</a></li>
+            <li><a href="contact.html"  class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Connect</p>
+          <ul class="footer-links" role="list">
+            <li><a href="mailto:balogunabdsamad6@gmail.com"                          class="footer-link">Email</a></li>
+            <li><a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="footer-link">WhatsApp</a></li>
+            <li><a href="https://github.com/balosam"  target="_blank" rel="noopener" class="footer-link">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/balogun-abdsamad" target="_blank" rel="noopener" class="footer-link">LinkedIn</a></li>
+            <li><a href="tel:+2349114007286"                                          class="footer-link">+234 911 400 7286</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Abd'samad Adeniyi Balogun &middot; Lagos, Nigeria</p>
+        <p class="footer-made">Built with <span>Three.js</span> &amp; precision</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/2349114007286" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- CV MODAL -->
+  <div class="cv-modal-overlay" id="cv-modal" onclick="handleModalOverlay(event)" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+    <div class="cv-modal">
+      <button class="cv-modal-close" onclick="closeCVModal()" aria-label="Close">[ esc ]</button>
+      <div class="cv-modal-eyebrow">Request CV</div>
+      <h2 class="cv-modal-title" id="cv-modal-title">How would you like to reach out?</h2>
+      <p class="cv-modal-sub">Choose your preferred channel and I'll send my CV right over.</p>
+      <div class="cv-modal-options">
+        <a href="mailto:balogunabdsamad6@gmail.com?subject=CV%20Request&body=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20request%20a%20copy%20of%20your%20CV.%0A%0AThank%20you."
+           class="cv-modal-opt email">
+          <span class="cv-opt-icon">📩</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via Email</div>
+            <div class="cv-opt-label">Send a formal request</div>
+            <div class="cv-opt-val">balogunabdsamad6@gmail.com</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+        <a href="https://wa.me/2349114007286?text=Hi%20Sam%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27d%20love%20to%20see%20your%20CV.%20Could%20you%20please%20send%20it%3F%0A%0AThanks!"
+           target="_blank" rel="noopener"
+           class="cv-modal-opt whatsapp">
+          <span class="cv-opt-icon">💬</span>
+          <div class="cv-opt-body">
+            <div class="cv-opt-type">Via WhatsApp</div>
+            <div class="cv-opt-label">Quick and direct</div>
+            <div class="cv-opt-val">+234 911 400 7286</div>
+          </div>
+          <span class="cv-opt-arrow">→</span>
+        </a>
+      </div>
+      <p class="cv-modal-note">I typically respond within a few hours &middot; Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/global.js"></script>
+  <script src="js/skills.js"></script>
+
+</body>
+</html>
